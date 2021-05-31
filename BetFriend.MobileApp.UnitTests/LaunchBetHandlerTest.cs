@@ -76,7 +76,7 @@ namespace BetFriend.MobileApp.UnitTests
         {
             //arrange
             var endDate = DateTime.UtcNow.AddDays(7);
-            var participants = new Guid[] { };
+            var participants = Array.Empty<Guid>();
             var command = new LaunchBetCommand(_description, endDate, participants);
             IBetRepository betRepository = new InMemoryBetRepository();
             var handler = new LaunchBetCommandHandler(betRepository);
