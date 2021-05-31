@@ -29,6 +29,67 @@ namespace BetFriend.MobileApp.UnitTests
 
             //assert
             Assert.Equal(expectedResult, result);
+            Assert.False(result.HasError);
+        }
+
+        [Fact]
+        public async Task ShouldReturnResultWithErrorIfEndDateNotValid()
+        {
+            //arrange
+            var description = "new bet description";
+            var endDate = DateTime.UtcNow.AddDays(-7);
+            var participants = new[] { Guid.NewGuid() };
+            var command = new LaunchBetCommand(description, endDate, participants);
+            IBetRepository betRepository = new InMemoryBetRepository();
+            var handler = new LaunchBetCommandHandler(betRepository);
+            var expectedResult = new Result<object>(null, "End date is not valid");
+
+            //act
+            Result<object> result = await handler.Handle(command);
+
+            //assert
+            Assert.Equal(expectedResult, result);
+            Assert.True(result.HasError);
+        }
+
+        [Fact]
+        public async Task ShouldReturnResultWithErrorIfDescriptionIsEmpty()
+        {
+            //arrange
+            var description = "";
+            var endDate = DateTime.UtcNow.AddDays(7);
+            var participants = new[] { Guid.NewGuid() };
+            var command = new LaunchBetCommand(description, endDate, participants);
+            IBetRepository betRepository = new InMemoryBetRepository();
+            var handler = new LaunchBetCommandHandler(betRepository);
+            var expectedResult = new Result<object>(null, "Description is not valid");
+
+            //act
+            Result<object> result = await handler.Handle(command);
+
+            //assert
+            Assert.Equal(expectedResult, result);
+            Assert.True(result.HasError);
+        }
+
+        [Fact]
+        public async Task ShouldReturnResultWithErrorIfHasNoParticipant()
+        {
+            //arrange
+            var description = "description";
+            var endDate = DateTime.UtcNow.AddDays(7);
+            var participants = new Guid[] {  };
+            var command = new LaunchBetCommand(description, endDate, participants);
+            IBetRepository betRepository = new InMemoryBetRepository();
+            var handler = new LaunchBetCommandHandler(betRepository);
+            var expectedResult = new Result<object>(null, "There is no participant");
+
+            //act
+            Result<object> result = await handler.Handle(command);
+
+            //assert
+            Assert.Equal(expectedResult, result);
+            Assert.True(result.HasError);
         }
     }
 
@@ -58,6 +119,8 @@ namespace BetFriend.MobileApp.UnitTests
             this.data = data;
             this.errorMsg = errorMsg;
         }
+
+        public bool HasError { get => !string.IsNullOrEmpty(errorMsg); }
     }
 
     internal interface IBetRepository
@@ -80,22 +143,43 @@ namespace BetFriend.MobileApp.UnitTests
 
         internal async Task<Result<object>> Handle(LaunchBetCommand command)
         {
-            await betRepository.LaunchBetAsync(command);
-            return new Result<object>(null, null);
+            try
+            {
+                ValidateCommand(command);
+
+                await betRepository.LaunchBetAsync(command);
+                return new Result<object>(null, null);
+            }
+            catch (Exception ex)
+            {
+                return new Result<object>(null, ex.Message);
+            }
+        }
+
+        private void ValidateCommand(LaunchBetCommand command)
+        {
+            if (command.EndDate <= DateTime.UtcNow)
+                throw new ArgumentException("End date is not valid");
+
+            if (string.IsNullOrEmpty(command.Description))
+                throw new ArgumentException("Description is not valid");
+
+            if (command.Participants.Length == 0)
+                throw new ArgumentException("There is no participant");
         }
     }
 
     internal class LaunchBetCommand
     {
-        private string description;
-        private DateTime endDate;
-        private Guid[] participants;
+        public DateTime EndDate { get; }
+        public string Description { get; }
+        public Guid[] Participants { get; }
 
         public LaunchBetCommand(string description, DateTime endDate, Guid[] participants)
         {
-            this.description = description;
-            this.endDate = endDate;
-            this.participants = participants;
+            Description = description;
+            EndDate = endDate;
+            Participants = participants;
         }
     }
 }
