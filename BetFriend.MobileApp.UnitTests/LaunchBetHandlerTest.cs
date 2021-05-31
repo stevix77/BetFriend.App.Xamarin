@@ -1,3 +1,6 @@
+using BetFriend.Domain.Bets;
+using BetFriend.Domain.Bets.LaunchBet;
+using BetFriend.Infrastructure.Repositories.InMemory;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -7,6 +10,8 @@ namespace BetFriend.MobileApp.UnitTests
 {
     public class LaunchBetHandlerTest
     {
+        private const string _description = "new bet description";
+
         public LaunchBetHandlerTest()
         {
 
@@ -16,170 +21,72 @@ namespace BetFriend.MobileApp.UnitTests
         public async Task ShouldReturnResultNullIfBetCreated()
         {
             //arrange
-            var description = "new bet description";
             var endDate = DateTime.UtcNow.AddDays(7);
             var participants = new[] { Guid.NewGuid() };
-            var command = new LaunchBetCommand(description, endDate, participants);
-            IBetRepository betRepository = new InMemoryBetRepository();
+            var command = new LaunchBetCommand(_description, endDate, participants);
+            InMemoryBetRepository betRepository = new();
             var handler = new LaunchBetCommandHandler(betRepository);
-            var expectedResult = new Result<object>(null, null);
 
             //act
-            Result<object> result = await handler.Handle(command);
+            await handler.Handle(command);
 
             //assert
-            Assert.Equal(expectedResult, result);
-            Assert.False(result.HasError);
+            IEnumerable<Bet> bets = betRepository.GetBets();
+            Assert.NotEmpty(bets);
         }
 
         [Fact]
-        public async Task ShouldReturnResultWithErrorIfEndDateNotValid()
+        public async Task ShouldThrowArgumentExceptionIfEndDateNotValid()
         {
             //arrange
-            var description = "new bet description";
             var endDate = DateTime.UtcNow.AddDays(-7);
             var participants = new[] { Guid.NewGuid() };
-            var command = new LaunchBetCommand(description, endDate, participants);
+            var command = new LaunchBetCommand(_description, endDate, participants);
             IBetRepository betRepository = new InMemoryBetRepository();
             var handler = new LaunchBetCommandHandler(betRepository);
-            var expectedResult = new Result<object>(null, "End date is not valid");
 
             //act
-            Result<object> result = await handler.Handle(command);
+            var record = await Record.ExceptionAsync(() => handler.Handle(command));
 
             //assert
-            Assert.Equal(expectedResult, result);
-            Assert.True(result.HasError);
+            Assert.IsType<ArgumentException>(record);
+            Assert.Equal("End date is not valid", record.Message);
         }
 
         [Fact]
-        public async Task ShouldReturnResultWithErrorIfDescriptionIsEmpty()
+        public async Task ShouldThrowArgumentExceptionIfDescriptionIsEmpty()
         {
             //arrange
-            var description = "";
             var endDate = DateTime.UtcNow.AddDays(7);
             var participants = new[] { Guid.NewGuid() };
-            var command = new LaunchBetCommand(description, endDate, participants);
+            var command = new LaunchBetCommand(null, endDate, participants);
             IBetRepository betRepository = new InMemoryBetRepository();
             var handler = new LaunchBetCommandHandler(betRepository);
-            var expectedResult = new Result<object>(null, "Description is not valid");
 
             //act
-            Result<object> result = await handler.Handle(command);
+            var record = await Record.ExceptionAsync(() => handler.Handle(command)); 
 
             //assert
-            Assert.Equal(expectedResult, result);
-            Assert.True(result.HasError);
+            Assert.IsType<ArgumentException>(record);
+            Assert.Equal("Description is not valid", record.Message);
         }
 
         [Fact]
-        public async Task ShouldReturnResultWithErrorIfHasNoParticipant()
+        public async Task ShouldThrowArgumentExceptionIfHasNoParticipant()
         {
             //arrange
-            var description = "description";
             var endDate = DateTime.UtcNow.AddDays(7);
-            var participants = new Guid[] {  };
-            var command = new LaunchBetCommand(description, endDate, participants);
+            var participants = new Guid[] { };
+            var command = new LaunchBetCommand(_description, endDate, participants);
             IBetRepository betRepository = new InMemoryBetRepository();
             var handler = new LaunchBetCommandHandler(betRepository);
-            var expectedResult = new Result<object>(null, "There is no participant");
 
             //act
-            Result<object> result = await handler.Handle(command);
+            var record = await Record.ExceptionAsync(() => handler.Handle(command));
 
             //assert
-            Assert.Equal(expectedResult, result);
-            Assert.True(result.HasError);
-        }
-    }
-
-    internal class InMemoryBetRepository : IBetRepository
-    {
-        private readonly Dictionary<Guid, LaunchBetCommand> bets;
-
-        public InMemoryBetRepository()
-        {
-            bets = new Dictionary<Guid, LaunchBetCommand>();
-        }
-
-        public Task LaunchBetAsync(LaunchBetCommand command)
-        {
-            bets.Add(Guid.NewGuid(), command);
-            return Task.CompletedTask;
-        }
-    }
-
-    internal struct Result<T>
-    {
-        private T data;
-        private string errorMsg;
-
-        public Result(T data, string errorMsg)
-        {
-            this.data = data;
-            this.errorMsg = errorMsg;
-        }
-
-        public bool HasError { get => !string.IsNullOrEmpty(errorMsg); }
-    }
-
-    internal interface IBetRepository
-    {
-        Task LaunchBetAsync(LaunchBetCommand command);
-    }
-
-    internal class LaunchBetCommandHandler
-    {
-        private IBetRepository betRepository;
-
-        public LaunchBetCommandHandler()
-        {
-        }
-
-        public LaunchBetCommandHandler(IBetRepository betRepository)
-        {
-            this.betRepository = betRepository;
-        }
-
-        internal async Task<Result<object>> Handle(LaunchBetCommand command)
-        {
-            try
-            {
-                ValidateCommand(command);
-
-                await betRepository.LaunchBetAsync(command);
-                return new Result<object>(null, null);
-            }
-            catch (Exception ex)
-            {
-                return new Result<object>(null, ex.Message);
-            }
-        }
-
-        private void ValidateCommand(LaunchBetCommand command)
-        {
-            if (command.EndDate <= DateTime.UtcNow)
-                throw new ArgumentException("End date is not valid");
-
-            if (string.IsNullOrEmpty(command.Description))
-                throw new ArgumentException("Description is not valid");
-
-            if (command.Participants.Length == 0)
-                throw new ArgumentException("There is no participant");
-        }
-    }
-
-    internal class LaunchBetCommand
-    {
-        public DateTime EndDate { get; }
-        public string Description { get; }
-        public Guid[] Participants { get; }
-
-        public LaunchBetCommand(string description, DateTime endDate, Guid[] participants)
-        {
-            Description = description;
-            EndDate = endDate;
-            Participants = participants;
+            Assert.IsType<ArgumentException>(record);
+            Assert.Equal("There is no participant", record.Message);
         }
     }
 }
