@@ -1,8 +1,6 @@
-﻿using BetFriend.MobileApp.Services;
-using BetFriend.MobileApp.Views;
-using System;
+﻿using BetFriend.Domain.Bets;
+using BetFriend.Infrastructure.Repositories.InMemory;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace BetFriend.MobileApp
 {
@@ -13,7 +11,7 @@ namespace BetFriend.MobileApp
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
+            DependencyService.Register<IBetRepository, InMemoryBetRepository>();
             MainPage = new AppShell();
         }
 
