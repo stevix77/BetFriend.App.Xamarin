@@ -4,18 +4,18 @@ namespace BetFriend.Domain.Bets
 {
     public class Bet
     {
-        public Bet(Guid betId, string description, DateTime endDate, Guid[] participants)
+        public Bet(Guid betId, string description, DateTime endDate, int tokens)
         {
             BetId = betId;
             Description = description;
             EndDate = endDate;
-            Participants = participants;
+            Tokens = tokens;
         }
 
         public Guid BetId { get; }
         public string Description { get; }
         public DateTime EndDate { get; }
-        public Guid[] Participants { get; }
+        public int Tokens { get; }
     }
 }
 

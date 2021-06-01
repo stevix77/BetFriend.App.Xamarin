@@ -18,7 +18,7 @@
 
         public Task LaunchBetAsync(LaunchBetCommand command)
         {
-            _bets.Add(new Bet(Guid.NewGuid(), command.Description, command.EndDate, command.Participants));
+            _bets.Add(new Bet(Guid.NewGuid(), command.Description, command.EndDate, command.Tokens));
             return Task.CompletedTask;
         }
 
