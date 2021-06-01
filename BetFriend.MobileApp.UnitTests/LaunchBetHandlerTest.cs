@@ -11,6 +11,7 @@ namespace BetFriend.MobileApp.UnitTests
     public class LaunchBetHandlerTest
     {
         private const string _description = "new bet description";
+        private const int _tokens = 20;
 
         public LaunchBetHandlerTest()
         {
@@ -18,12 +19,11 @@ namespace BetFriend.MobileApp.UnitTests
         }
 
         [Fact]
-        public async Task ShouldReturnResultNullIfBetCreated()
+        public async Task ShouldCreateBet()
         {
             //arrange
             var endDate = DateTime.UtcNow.AddDays(7);
-            var participants = new[] { Guid.NewGuid() };
-            var command = new LaunchBetCommand(_description, endDate, participants);
+            var command = new LaunchBetCommand(_description, endDate, _tokens);
             InMemoryBetRepository betRepository = new();
             var handler = new LaunchBetCommandHandler(betRepository);
 
@@ -40,8 +40,7 @@ namespace BetFriend.MobileApp.UnitTests
         {
             //arrange
             var endDate = DateTime.UtcNow.AddDays(-7);
-            var participants = new[] { Guid.NewGuid() };
-            var command = new LaunchBetCommand(_description, endDate, participants);
+            var command = new LaunchBetCommand(_description, endDate, 20);
             IBetRepository betRepository = new InMemoryBetRepository();
             var handler = new LaunchBetCommandHandler(betRepository);
 
@@ -58,8 +57,7 @@ namespace BetFriend.MobileApp.UnitTests
         {
             //arrange
             var endDate = DateTime.UtcNow.AddDays(7);
-            var participants = new[] { Guid.NewGuid() };
-            var command = new LaunchBetCommand(null, endDate, participants);
+            var command = new LaunchBetCommand(null, endDate, 20);
             IBetRepository betRepository = new InMemoryBetRepository();
             var handler = new LaunchBetCommandHandler(betRepository);
 
@@ -69,24 +67,6 @@ namespace BetFriend.MobileApp.UnitTests
             //assert
             Assert.IsType<ArgumentException>(record);
             Assert.Equal("Description is not valid", record.Message);
-        }
-
-        [Fact]
-        public async Task ShouldThrowArgumentExceptionIfHasNoParticipant()
-        {
-            //arrange
-            var endDate = DateTime.UtcNow.AddDays(7);
-            var participants = Array.Empty<Guid>();
-            var command = new LaunchBetCommand(_description, endDate, participants);
-            IBetRepository betRepository = new InMemoryBetRepository();
-            var handler = new LaunchBetCommandHandler(betRepository);
-
-            //act
-            var record = await Record.ExceptionAsync(() => handler.Handle(command));
-
-            //assert
-            Assert.IsType<ArgumentException>(record);
-            Assert.Equal("There is no participant", record.Message);
         }
     }
 }

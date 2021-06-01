@@ -26,9 +26,6 @@
 
             if (string.IsNullOrEmpty(command.Description))
                 throw new ArgumentException("Description is not valid");
-
-            if (command.Participants.Length == 0)
-                throw new ArgumentException("There is no participant");
         }
     }
 }

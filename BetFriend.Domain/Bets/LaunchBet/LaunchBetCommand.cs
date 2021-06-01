@@ -6,13 +6,13 @@
     {
         public DateTime EndDate { get; }
         public string Description { get; }
-        public Guid[] Participants { get; }
+        public int Tokens { get; }
 
-        public LaunchBetCommand(string description, DateTime endDate, Guid[] participants)
+        public LaunchBetCommand(string description, DateTime endDate, int tokens)
         {
             Description = description;
             EndDate = endDate;
-            Participants = participants;
+            Tokens = tokens;
         }
     }
 }
