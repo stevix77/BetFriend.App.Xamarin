@@ -10,15 +10,17 @@
     public class InMemoryBetRepository : IBetRepository
     {
         private readonly List<Bet> _bets;
+        private readonly Guid _creator;
 
-        public InMemoryBetRepository()
+        public InMemoryBetRepository(Guid creator)
         {
             _bets = new List<Bet>();
+            _creator = creator;
         }
 
         public Task LaunchBetAsync(LaunchBetCommand command)
         {
-            _bets.Add(new Bet(Guid.NewGuid(), command.Description, command.EndDate, command.Tokens));
+            _bets.Add(new Bet(command.BetId, command.Description, command.EndDate, command.Coins, _creator));
             return Task.CompletedTask;
         }
 

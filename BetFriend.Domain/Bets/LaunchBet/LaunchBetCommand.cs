@@ -6,13 +6,15 @@
     {
         public DateTime EndDate { get; }
         public string Description { get; }
-        public int Tokens { get; }
+        public int Coins { get; }
+        public Guid BetId { get; set; }
 
-        public LaunchBetCommand(string description, DateTime endDate, int tokens)
+        public LaunchBetCommand(Guid betId, string description, DateTime endDate, int coins)
         {
+            BetId = betId;
             Description = description;
             EndDate = endDate;
-            Tokens = tokens;
+            Coins = coins;
         }
     }
 }
