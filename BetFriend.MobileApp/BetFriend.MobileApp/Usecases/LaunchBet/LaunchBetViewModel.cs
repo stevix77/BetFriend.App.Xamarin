@@ -55,7 +55,7 @@ namespace BetFriend.MobileApp.Usecases.LaunchBet
             {
                 var handler = new LaunchBetCommandHandler(null);
                 await handler.Handle(new LaunchBetCommand(Guid.NewGuid(), _description, _endDate, _coins));
-                // redirection
+                await Shell.Current.GoToAsync("");
             }, () => CheckValideCommand()));
         }
 
