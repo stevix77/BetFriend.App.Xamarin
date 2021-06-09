@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddedMe" xml:space="preserve">
+    <value>Friend request</value>
+  </data>
+  <data name="AskAccount" xml:space="preserve">
+    <value>Do not have an account yet ?</value>
+  </data>
+  <data name="AskFriendSent" xml:space="preserve">
+    <value>Add request sent</value>
+  </data>
+  <data name="BadAnswerDate" xml:space="preserve">
+    <value>It's too late to answer this bet</value>
+  </data>
+  <data name="BadBetDate" xml:space="preserve">
+    <value>You can't put this end bet date</value>
+  </data>
+  <data name="BadConnectionInfo" xml:space="preserve">
+    <value>Unknown informations</value>
+  </data>
+  <data name="BadFormat" xml:space="preserve">
+    <value>Bad format</value>
+  </data>
+  <data name="BadInformations" xml:space="preserve">
+    <value>Unauthrorized</value>
+  </data>
+  <data name="BetNotFound" xml:space="preserve">
+    <value>Bet not found</value>
+  </data>
+  <data name="BetOver" xml:space="preserve">
+    <value>This bet is already finished</value>
+  </data>
+  <data name="BtnTextRegister" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change my password</value>
+  </data>
+  <data name="ChooseFriends" xml:space="preserve">
+    <value>Choose friends for this bet</value>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Confirm the new password</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Current password</value>
+  </data>
+  <data name="DateEndToBet" xml:space="preserve">
+    <value>End date to bet</value>
+  </data>
+  <data name="DateToBet" xml:space="preserve">
+    <value>Date to bet</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="EmptyField" xml:space="preserve">
+    <value>A field is empty</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>End date : </value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>An error has occurred</value>
+  </data>
+  <data name="ErrorBadConnection" xml:space="preserve">
+    <value>Bad connections info</value>
+  </data>
+  <data name="ErrorDateAnswerBet" xml:space="preserve">
+    <value>The date to respond to the bet can not be after the end date of the bet</value>
+  </data>
+  <data name="ErrorDateAnswerBetDateNow" xml:space="preserve">
+    <value>The date to answer the bet can not be lower than today's date</value>
+  </data>
+  <data name="ErrorDifferentPassword" xml:space="preserve">
+    <value>Passwords are not the same</value>
+  </data>
+  <data name="ErrorEndDateBet" xml:space="preserve">
+    <value>The end date of the bet can not be lower than today's date</value>
+  </data>
+  <data name="ErrorInvalidEmail" xml:space="preserve">
+    <value>This email address is not valid</value>
+  </data>
+  <data name="ErrorInvalidPhoneNumber" xml:space="preserve">
+    <value>This phone number is invalid</value>
+  </data>
+  <data name="ErrorLengthPassword" xml:space="preserve">
+    <value>The password must contain at least 6 characters</value>
+  </data>
+  <data name="ErrorMissingParameters" xml:space="preserve">
+    <value>All parameters are not filled</value>
+  </data>
+  <data name="Fail" xml:space="preserve">
+    <value>Fail</value>
+  </data>
+  <data name="Friends" xml:space="preserve">
+    <value>Friends</value>
+  </data>
+  <data name="Group" xml:space="preserve">
+    <value>Group</value>
+  </data>
+  <data name="GroupNotFound" xml:space="preserve">
+    <value>Group not found</value>
+  </data>
+  <data name="Groups" xml:space="preserve">
+    <value>Groups</value>
+  </data>
+  <data name="ImpossibleAnswer" xml:space="preserve">
+    <value>Impossible</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="LblActiveBet" xml:space="preserve">
+    <value>Current bets</value>
+  </data>
+  <data name="LblActiveBets" xml:space="preserve">
+    <value>current bet(s)</value>
+  </data>
+  <data name="LblAddFriends" xml:space="preserve">
+    <value>Add friends</value>
+  </data>
+  <data name="LblBetOf" xml:space="preserve">
+    <value>Bet of</value>
+  </data>
+  <data name="LblBetPageDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="LblBtnBet" xml:space="preserve">
+    <value>Bet</value>
+  </data>
+  <data name="LblBtnBetSent" xml:space="preserve">
+    <value>Sent</value>
+  </data>
+  <data name="LblBtnCloseNewBet" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="LblEndAnswerDate" xml:space="preserve">
+    <value>End for answer</value>
+  </data>
+  <data name="LblEndBetDate" xml:space="preserve">
+    <value>End of bet</value>
+  </data>
+  <data name="LblExistingBets" xml:space="preserve">
+    <value>Existing bets</value>
+  </data>
+  <data name="LblLastBet" xml:space="preserve">
+    <value>Last bet</value>
+  </data>
+  <data name="LblMyFriends" xml:space="preserve">
+    <value>My friends</value>
+  </data>
+  <data name="LblOverBet" xml:space="preserve">
+    <value>Bets completed</value>
+  </data>
+  <data name="LblTitleSearchPage" xml:space="preserve">
+    <value>Found friends</value>
+  </data>
+  <data name="LblUpdateEmail" xml:space="preserve">
+    <value>Edit my email</value>
+  </data>
+  <data name="LblUpdatePassword" xml:space="preserve">
+    <value>Modify my password</value>
+  </data>
+  <data name="LblUpdatePhone" xml:space="preserve">
+    <value>Update my phone number</value>
+  </data>
+  <data name="LblUsersAddedMe" xml:space="preserve">
+    <value>Users added me</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="LogOn" xml:space="preserve">
+    <value>Log on</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>Log out</value>
+  </data>
+  <data name="MainGroupTitle" xml:space="preserve">
+    <value>My betting groups</value>
+  </data>
+  <data name="Membres" xml:space="preserve">
+    <value>Members</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="NewBet" xml:space="preserve">
+    <value>New bet</value>
+  </data>
+  <data name="NewGroup" xml:space="preserve">
+    <value>New group</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="NoAnswer" xml:space="preserve">
+    <value>I do not participate</value>
+  </data>
+  <data name="NoResult" xml:space="preserve">
+    <value>No result</value>
+  </data>
+  <data name="Participants" xml:space="preserve">
+    <value>Participants</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="PlatformUnknown" xml:space="preserve">
+    <value>Unknown OS</value>
+  </data>
+  <data name="PossibleAnswer" xml:space="preserve">
+    <value>Possible</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="Registration" xml:space="preserve">
+    <value>Registration</value>
+  </data>
+  <data name="ResultLost" xml:space="preserve">
+    <value>Lost</value>
+  </data>
+  <data name="ResultWon" xml:space="preserve">
+    <value>Won</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="StatusEnd" xml:space="preserve">
+    <value>Status : Completed</value>
+  </data>
+  <data name="StatusPending" xml:space="preserve">
+    <value>Status : Pending</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="TextAnswerBet" xml:space="preserve">
+    <value>Answer : </value>
+  </data>
+  <data name="TextBetDescription" xml:space="preserve">
+    <value>I bet that : (description)</value>
+  </data>
+  <data name="TextLoginBet" xml:space="preserve">
+    <value>Bet that : </value>
+  </data>
+  <data name="TextNotifAcceptedFriend" xml:space="preserve">
+    <value>{0} accepted your friend request</value>
+  </data>
+  <data name="TextNotifAddFriend" xml:space="preserve">
+    <value>{0} wants to be friends with you</value>
+  </data>
+  <data name="TextNotifBetAlmostOver" xml:space="preserve">
+    <value>The bet of {0} is almost over</value>
+  </data>
+  <data name="TextNotifBetAnswer" xml:space="preserve">
+    <value>{0} gave an answer to the bet</value>
+  </data>
+  <data name="TextNotifBetFinish" xml:space="preserve">
+    <value>{0} finished the bet</value>
+  </data>
+  <data name="TextNotifNewBet" xml:space="preserve">
+    <value>{0} wants to make a new bet with you</value>
+  </data>
+  <data name="TextNotifTimeToAnswer" xml:space="preserve">
+    <value>you have few minutes to answer the bet</value>
+  </data>
+  <data name="TextNotifTimeToFinish" xml:space="preserve">
+    <value>It's time to close your bet</value>
+  </data>
+  <data name="TextResultBet" xml:space="preserve">
+    <value>Result : </value>
+  </data>
+  <data name="TimeToBet" xml:space="preserve">
+    <value>Time left to bet : </value>
+  </data>
+  <data name="TitleBetUsersPage" xml:space="preserve">
+    <value>Bet with</value>
+  </data>
+  <data name="UserExisting" xml:space="preserve">
+    <value>This user already existing</value>
+  </data>
+  <data name="Validate" xml:space="preserve">
+    <value>Validate</value>
+  </data>
+  <data name="YesAnswer" xml:space="preserve">
+    <value>I accept</value>
+  </data>
+</root>

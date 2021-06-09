@@ -7,15 +7,14 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace BetFriend.MobileApp.Usecases.LaunchBet
+namespace BetFriend.MobileApp.Views.Home
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LaunchBetView : ContentPage
+    public partial class HomeView : ContentPage
     {
-        public LaunchBetView()
+        public HomeView()
         {
             InitializeComponent();
-            //BindingContext = AppShell.
         }
     }
 }

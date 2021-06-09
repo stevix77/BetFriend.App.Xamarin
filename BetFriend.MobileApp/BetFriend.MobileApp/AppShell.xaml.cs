@@ -1,20 +1,16 @@
-﻿using BetFriend.MobileApp.Usecases.LaunchBet;
-using System;
-using Xamarin.Forms;
-
-namespace BetFriend.MobileApp
+﻿namespace BetFriend.MobileApp
 {
+    using BetFriend.MobileApp.Views.Home;
+    using BetFriend.MobileApp.Views.LaunchBet;
+    using Xamarin.Forms;
+
     public partial class AppShell : Xamarin.Forms.Shell
     {
         public AppShell()
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(LaunchBetView), typeof(LaunchBetView));
-        }
-
-        private async void OnMenuItemClicked(object sender, EventArgs e)
-        {
-            await Shell.Current.GoToAsync("//LoginPage");
+            Routing.RegisterRoute(nameof(HomeView), typeof(HomeView));
         }
     }
 }

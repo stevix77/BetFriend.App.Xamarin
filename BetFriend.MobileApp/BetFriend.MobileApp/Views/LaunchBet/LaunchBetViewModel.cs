@@ -1,18 +1,22 @@
-﻿using BetFriend.Domain.Bets.LaunchBet;
+﻿using BetFriend.Domain.Bets;
+using BetFriend.Domain.Bets.LaunchBet;
+using BetFriend.MobileApp.Views.Home;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Messaging;
 using System;
 using Xamarin.Forms;
 
-namespace BetFriend.MobileApp.Usecases.LaunchBet
+namespace BetFriend.MobileApp.Views.LaunchBet
 {
     public class LaunchBetViewModel : ViewModelBase
     {
-        private readonly IMessenger _messenger;
+        public LaunchBetViewModel()
+        {
 
+        }
         public LaunchBetViewModel(IMessenger messenger) : base(messenger)
         {
-            _messenger = messenger;
+            
         }
 
         private string _description;
@@ -21,8 +25,11 @@ namespace BetFriend.MobileApp.Usecases.LaunchBet
             get => _description;
             set
             {
-                if (Set(nameof(Description), ref _description, value))
-                    Description = value;
+                if (Set(() => Description, ref _description, value))
+                {
+                    RaisePropertyChanged(nameof(Description));
+                    ValidateCommand.ChangeCanExecute();
+                }
             }
         }
 
@@ -32,10 +39,12 @@ namespace BetFriend.MobileApp.Usecases.LaunchBet
             get => _coins;
             set
             {
-                if (Set(nameof(Coins), ref _coins, value))
-                    Coins = value;
+                if (Set(() => Coins, ref _coins, value))
+                    RaisePropertyChanged(nameof(Coins));
             }
         }
+
+        public DateTime MinimumDate { get; } = DateTime.Now;
 
         private DateTime _endDate;
         public DateTime EndDate
@@ -48,14 +57,27 @@ namespace BetFriend.MobileApp.Usecases.LaunchBet
             }
         }
 
+        private TimeSpan _endTime = DateTime.Now.TimeOfDay;
+        public TimeSpan EndTime
+        {
+            get => _endTime;
+            set
+            {
+                if (Set(() => EndTime, ref _endTime, value))
+                {
+                    RaisePropertyChanged(nameof(EndTime));
+                }
+            }
+        }
+
         private Command _validateCommand;
         public Command ValidateCommand
         {
             get => _validateCommand ?? (_validateCommand = new Command(async () =>
             {
-                var handler = new LaunchBetCommandHandler(null);
+                var handler = new LaunchBetCommandHandler(DependencyService.Get<IBetRepository>());
                 await handler.Handle(new LaunchBetCommand(Guid.NewGuid(), _description, _endDate, _coins));
-                await Shell.Current.GoToAsync("");
+                await Shell.Current.GoToAsync($"//{nameof(HomeView)}");
             }, () => CheckValideCommand()));
         }
 
