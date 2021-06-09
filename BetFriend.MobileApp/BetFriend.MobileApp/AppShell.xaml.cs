@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BetFriend.MobileApp.Usecases.LaunchBet;
+using System;
 using Xamarin.Forms;
 
 namespace BetFriend.MobileApp
@@ -8,6 +9,7 @@ namespace BetFriend.MobileApp
         public AppShell()
         {
             InitializeComponent();
+            Routing.RegisterRoute(nameof(LaunchBetView), typeof(LaunchBetView));
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)
