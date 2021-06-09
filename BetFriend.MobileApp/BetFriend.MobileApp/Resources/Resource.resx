@@ -1,0 +1,417 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddedMe" xml:space="preserve">
+    <value>Demande d'ami</value>
+  </data>
+  <data name="AskAccount" xml:space="preserve">
+    <value>Vous n'avez pas encore de compte ?</value>
+  </data>
+  <data name="AskFriendSent" xml:space="preserve">
+    <value>Demande d'ajout envoyée</value>
+  </data>
+  <data name="BadAnswerDate" xml:space="preserve">
+    <value>Réponse trop tardive pour ce pari</value>
+  </data>
+  <data name="BadBetDate" xml:space="preserve">
+    <value>Cette date de fin de pari n'est pas possible</value>
+  </data>
+  <data name="BadConnectionInfo" xml:space="preserve">
+    <value>Informations incorrectes</value>
+  </data>
+  <data name="BadFormat" xml:space="preserve">
+    <value>Mauvais format</value>
+  </data>
+  <data name="BadInformations" xml:space="preserve">
+    <value>Non autorisé</value>
+  </data>
+  <data name="BetNotFound" xml:space="preserve">
+    <value>Pari introuvable</value>
+  </data>
+  <data name="BetOver" xml:space="preserve">
+    <value>Ce pari est déjà terminé</value>
+  </data>
+  <data name="BtnTextRegister" xml:space="preserve">
+    <value>S'inscrire</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Modifier mon mot de passe</value>
+  </data>
+  <data name="ChooseFriends" xml:space="preserve">
+    <value>Choisissez des amis pour ce pari</value>
+  </data>
+  <data name="ConfirmNewPassword" xml:space="preserve">
+    <value>Confirmer le nouveau mot de passe</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirmer le mot de passe</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Mot de passe actuel</value>
+  </data>
+  <data name="DateEndToBet" xml:space="preserve">
+    <value>Date de fin du pari</value>
+  </data>
+  <data name="DateToBet" xml:space="preserve">
+    <value>Date pour parier</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="EmptyField" xml:space="preserve">
+    <value>Un champ est vide</value>
+  </data>
+  <data name="EndDate" xml:space="preserve">
+    <value>Date de fin : </value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Une erreur est survenue</value>
+  </data>
+  <data name="ErrorBadConnection" xml:space="preserve">
+    <value>Informations d'identification inconnues</value>
+  </data>
+  <data name="ErrorDateAnswerBet" xml:space="preserve">
+    <value>La date pour répondre au pari ne peut pas être après la date de fin du pari</value>
+  </data>
+  <data name="ErrorDateAnswerBetDateNow" xml:space="preserve">
+    <value>La date pour répondre au pari ne peut pas être inférieure à la date du jour</value>
+  </data>
+  <data name="ErrorDifferentPassword" xml:space="preserve">
+    <value>Les mots de passe ne sont pas identiques</value>
+  </data>
+  <data name="ErrorEndDateBet" xml:space="preserve">
+    <value>La date de fin du pari ne peut pas être inférieure à la date du jour</value>
+  </data>
+  <data name="ErrorInvalidEmail" xml:space="preserve">
+    <value>Cette adresse mail n'est pas valide</value>
+  </data>
+  <data name="ErrorInvalidPhoneNumber" xml:space="preserve">
+    <value>Ce numéro de téléphone n'est pas valide</value>
+  </data>
+  <data name="ErrorLengthPassword" xml:space="preserve">
+    <value>Le mot de passe doit contenir 6 caractères minimum</value>
+  </data>
+  <data name="ErrorMissingParameters" xml:space="preserve">
+    <value>Tous les paramètres ne sont pas renseignés</value>
+  </data>
+  <data name="Fail" xml:space="preserve">
+    <value>Échec</value>
+  </data>
+  <data name="Friends" xml:space="preserve">
+    <value>Amis</value>
+  </data>
+  <data name="Group" xml:space="preserve">
+    <value>Groupe</value>
+  </data>
+  <data name="GroupNotFound" xml:space="preserve">
+    <value>Ce groupe n'existe pas</value>
+  </data>
+  <data name="Groups" xml:space="preserve">
+    <value>Groupes</value>
+  </data>
+  <data name="ImpossibleAnswer" xml:space="preserve">
+    <value>Impossible</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Langue</value>
+  </data>
+  <data name="LblActiveBet" xml:space="preserve">
+    <value>Paris en cours</value>
+  </data>
+  <data name="LblActiveBets" xml:space="preserve">
+    <value>pari(s) en cours</value>
+  </data>
+  <data name="LblAddFriends" xml:space="preserve">
+    <value>Ajouter des amis</value>
+  </data>
+  <data name="LblBetOf" xml:space="preserve">
+    <value>Pari de</value>
+  </data>
+  <data name="LblBetPageDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="LblBtnBet" xml:space="preserve">
+    <value>Parier</value>
+  </data>
+  <data name="LblBtnBetSent" xml:space="preserve">
+    <value>Parié</value>
+  </data>
+  <data name="LblBtnCloseNewBet" xml:space="preserve">
+    <value>Terminer</value>
+  </data>
+  <data name="LblEndAnswerDate" xml:space="preserve">
+    <value>Date pour répondre</value>
+  </data>
+  <data name="LblEndBetDate" xml:space="preserve">
+    <value>Fin du pari</value>
+  </data>
+  <data name="LblExistingBets" xml:space="preserve">
+    <value>Paris existants</value>
+  </data>
+  <data name="LblLastBet" xml:space="preserve">
+    <value>Dernier pari</value>
+  </data>
+  <data name="LblMyFriends" xml:space="preserve">
+    <value>Mes amis</value>
+  </data>
+  <data name="LblOverBet" xml:space="preserve">
+    <value>Paris terminés</value>
+  </data>
+  <data name="LblTitleSearchPage" xml:space="preserve">
+    <value>Trouver des amis</value>
+  </data>
+  <data name="LblUpdateEmail" xml:space="preserve">
+    <value>Modifier mon email</value>
+  </data>
+  <data name="LblUpdatePassword" xml:space="preserve">
+    <value>Modifier mon mot de passe</value>
+  </data>
+  <data name="LblUpdatePhone" xml:space="preserve">
+    <value>Modifier mon numéro de téléphone</value>
+  </data>
+  <data name="LblUsersAddedMe" xml:space="preserve">
+    <value>Utilisateurs qui m'ont ajoutés</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Nom d'utilisateur</value>
+  </data>
+  <data name="LogOn" xml:space="preserve">
+    <value>Connexion</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>Déconnexion</value>
+  </data>
+  <data name="MainGroupTitle" xml:space="preserve">
+    <value>Mes groupes de pari</value>
+  </data>
+  <data name="Membres" xml:space="preserve">
+    <value>Membres</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>Nouveau</value>
+  </data>
+  <data name="NewBet" xml:space="preserve">
+    <value>Nouveau pari</value>
+  </data>
+  <data name="NewGroup" xml:space="preserve">
+    <value>Nouveau groupe</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Nouveau mot de passe</value>
+  </data>
+  <data name="NoAnswer" xml:space="preserve">
+    <value>Je ne participe pas</value>
+  </data>
+  <data name="NoResult" xml:space="preserve">
+    <value>Pas de résultat</value>
+  </data>
+  <data name="Participants" xml:space="preserve">
+    <value>Participants</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Mot de passe</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Téléphone</value>
+  </data>
+  <data name="PlatformUnknown" xml:space="preserve">
+    <value>OS inconnu</value>
+  </data>
+  <data name="PossibleAnswer" xml:space="preserve">
+    <value>Possible</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="Registration" xml:space="preserve">
+    <value>Inscription</value>
+  </data>
+  <data name="ResultLost" xml:space="preserve">
+    <value>Perdu</value>
+  </data>
+  <data name="ResultWon" xml:space="preserve">
+    <value>Gagné</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Recherche</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Paramètres</value>
+  </data>
+  <data name="StatusEnd" xml:space="preserve">
+    <value>Statut : Terminé</value>
+  </data>
+  <data name="StatusPending" xml:space="preserve">
+    <value>Statut : En cours</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Succès</value>
+  </data>
+  <data name="TextAnswerBet" xml:space="preserve">
+    <value>Réponse : </value>
+  </data>
+  <data name="TextBetDescription" xml:space="preserve">
+    <value>Je parie que : (description)</value>
+  </data>
+  <data name="TextLoginBet" xml:space="preserve">
+    <value>parie que : </value>
+  </data>
+  <data name="TextNotifAcceptedFriend" xml:space="preserve">
+    <value>{0} a accepté votre demande d'ami</value>
+  </data>
+  <data name="TextNotifAddFriend" xml:space="preserve">
+    <value>{0} veut vous ajouter dans sa liste d'amis</value>
+  </data>
+  <data name="TextNotifBetAlmostOver" xml:space="preserve">
+    <value>Le pari de {0} est bientôt fini</value>
+  </data>
+  <data name="TextNotifBetAnswer" xml:space="preserve">
+    <value>{0} a répondu à un pari</value>
+  </data>
+  <data name="TextNotifBetFinish" xml:space="preserve">
+    <value>{0} a terminé un pari</value>
+  </data>
+  <data name="TextNotifNewBet" xml:space="preserve">
+    <value>{0} vous a lancé un nouveau pari</value>
+  </data>
+  <data name="TextNotifTimeToAnswer" xml:space="preserve">
+    <value>Il vous reste peu de temps pour répondre à ce pari</value>
+  </data>
+  <data name="TextNotifTimeToFinish" xml:space="preserve">
+    <value>Il est temps de mettre fin à votre pari</value>
+  </data>
+  <data name="TextResultBet" xml:space="preserve">
+    <value>Résultat : </value>
+  </data>
+  <data name="TimeToBet" xml:space="preserve">
+    <value>Temps restant pour parier : </value>
+  </data>
+  <data name="TitleBetUsersPage" xml:space="preserve">
+    <value>Parier avec</value>
+  </data>
+  <data name="UserExisting" xml:space="preserve">
+    <value>Cet utilisateur existe déjà</value>
+  </data>
+  <data name="Validate" xml:space="preserve">
+    <value>Valider</value>
+  </data>
+  <data name="YesAnswer" xml:space="preserve">
+    <value>J'accepte</value>
+  </data>
+</root>

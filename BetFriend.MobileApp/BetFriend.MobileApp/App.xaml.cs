@@ -1,19 +1,19 @@
-﻿using BetFriend.Domain.Bets;
-using BetFriend.Infrastructure.Repositories.InMemory;
-using BetFriend.MobileApp.Usecases.LaunchBet;
-using GalaSoft.MvvmLight.Messaging;
-using System;
-using Xamarin.Forms;
-
-namespace BetFriend.MobileApp
+﻿namespace BetFriend.MobileApp
 {
+    using BetFriend.Domain.Bets;
+    using BetFriend.Infrastructure.Repositories.InMemory;
+    using BetFriend.MobileApp.Views.LaunchBet;
+    using GalaSoft.MvvmLight.Messaging;
+    using System;
+    using Xamarin.Forms;
+
     public partial class App : Application
     {
 
         public App()
         {
             InitializeComponent();
-            //Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MjM4MTQzQDMxMzgyZTMxMmUzMFROMlU1RTMxQVY3RFV3RmNUeGF0STdnMjliVGFlVzRnVDFIcUhvVDZadlU9");
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NDU3NTY2QDMxMzkyZTMxMmUzMFQ5a3FEem5ldkRvTzhVUndDS0ZhcXI3ZE9oaXVIRzF4UFVTeTdmcDFCV289");
             RegisterDependency();
             var appShell = new AppShell();
             appShell.GoToAsync($"//{nameof(LaunchBetView)}").Wait();
@@ -22,20 +22,9 @@ namespace BetFriend.MobileApp
 
         private void RegisterDependency()
         {
-            DependencyService.Register<IBetRepository, InMemoryBetRepository>();
+            DependencyService.RegisterSingleton<IBetRepository>(new InMemoryBetRepository(Guid.NewGuid()));
             DependencyService.Register<IMessenger, Messenger>();
-        }
-
-        protected override void OnStart()
-        {
-        }
-
-        protected override void OnSleep()
-        {
-        }
-
-        protected override void OnResume()
-        {
+            DependencyService.Register<LaunchBetViewModel>();
         }
     }
 }
