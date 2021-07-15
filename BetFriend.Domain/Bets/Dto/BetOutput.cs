@@ -5,7 +5,7 @@
 
     public class BetOutput
     {
-        public Guid CreatorId { get; set; }
+        public MemberOutput Creator { get; set; }
         public int Tokens { get; set; }
         public string Description { get; set; }
         public Guid Id { get; set; }

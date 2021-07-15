@@ -10,10 +10,6 @@ namespace BetFriend.MobileApp.Views.LaunchBet
 {
     public class LaunchBetViewModel : ViewModelBase
     {
-        public LaunchBetViewModel()
-        {
-
-        }
         public LaunchBetViewModel(IMessenger messenger) : base(messenger)
         {
             
@@ -75,9 +71,16 @@ namespace BetFriend.MobileApp.Views.LaunchBet
         {
             get => _validateCommand ?? (_validateCommand = new Command(async () =>
             {
-                var handler = new LaunchBetCommandHandler(DependencyService.Get<IBetRepository>());
-                await handler.Handle(new LaunchBetCommand(Guid.NewGuid(), _description, _endDate, _coins));
-                await Shell.Current.GoToAsync($"//{nameof(HomeView)}");
+                try
+                {
+                    var handler = new LaunchBetCommandHandler(DependencyService.Get<IBetRepository>());
+                    await handler.Handle(new LaunchBetCommand(Guid.NewGuid(), _description, _endDate, _coins));
+                    await Shell.Current.GoToAsync($"//{nameof(HomeView)}");
+                }
+                catch (Exception ex)
+                {
+
+                }
             }, () => CheckValideCommand()));
         }
 

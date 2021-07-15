@@ -18,7 +18,7 @@
 
         public async Task<IReadOnlyCollection<BetOutput>> GetBetsForMember(Guid memberId)
         {
-            var bets = _betOutputs.Where(x => x.CreatorId == memberId 
+            var bets = _betOutputs.Where(x => x.Creator.Id == memberId 
                                         || x.Participants.Any(y => y.Id == memberId))
                                   .ToList();
             return await Task.FromResult(bets);
