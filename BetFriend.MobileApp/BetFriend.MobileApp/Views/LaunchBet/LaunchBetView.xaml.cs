@@ -9,7 +9,8 @@
         public LaunchBetView()
         {
             InitializeComponent();
-            BindingContext = DependencyService.Resolve<LaunchBetViewModel>();
+            BindingContext = ViewModelLocator.Resolve<LaunchBetViewModel>();
+            //BindingContext = DependencyService.Resolve<LaunchBetViewModel>();
         }
     }
 }
