@@ -1,21 +1,20 @@
-﻿namespace BetFriend.Domain.Bets.GetBetsInProgressOrOver
+﻿namespace BetFriend.Domain.Bets.GetBetsInProgress
 {
     using BetFriend.Domain.Bets.Dto;
     using System;
     using System.Collections.Generic;
-    using System.Threading;
     using System.Threading.Tasks;
 
-    public class GetBetsInProgressOrOverQueryHandler
+    public class GetBetsInProgressQueryHandler
     {
         private readonly IQueryBetRepository _betRepository;
 
-        public GetBetsInProgressOrOverQueryHandler(IQueryBetRepository betRepository)
+        public GetBetsInProgressQueryHandler(IQueryBetRepository betRepository)
         {
             _betRepository = betRepository ?? throw new ArgumentNullException(nameof(betRepository));
         }
 
-        public async Task<IReadOnlyCollection<BetOutput>> Handle(GetBetsInProgressOrOverQuery query, CancellationToken cancellationToken)
+        public async Task<IReadOnlyCollection<BetOutput>> Handle(GetBetsInProgressQuery query)
         {
             ValidateQuery(query);
 
@@ -23,10 +22,10 @@
             return bets;
         }
 
-        private static void ValidateQuery(GetBetsInProgressOrOverQuery query)
+        private static void ValidateQuery(GetBetsInProgressQuery query)
         {
             if (query is null)
-                throw new System.ArgumentNullException(nameof(query));
+                throw new ArgumentNullException(nameof(query));
         }
     }
 }

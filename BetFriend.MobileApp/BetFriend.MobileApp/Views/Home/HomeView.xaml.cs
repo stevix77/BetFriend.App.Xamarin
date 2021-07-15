@@ -1,20 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-namespace BetFriend.MobileApp.Views.Home
+﻿namespace BetFriend.MobileApp.Views.Home
 {
+    using BetFriend.MobileApp.Views.InProgressBet;
+    using System.Threading.Tasks;
+    using Xamarin.Forms;
+    using Xamarin.Forms.Xaml;
+
+
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class HomeView : ContentPage
     {
         public HomeView()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            Task.Run(async () => await ViewModelLocator.Resolve<InProgressBetsViewModel>().LoadBets());
+            base.OnAppearing();
         }
     }
 }

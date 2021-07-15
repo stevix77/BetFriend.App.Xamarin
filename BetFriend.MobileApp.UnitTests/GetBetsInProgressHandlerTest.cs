@@ -1,6 +1,6 @@
 ﻿using BetFriend.Domain.Bets;
 using BetFriend.Domain.Bets.Dto;
-using BetFriend.Domain.Bets.GetBetsInProgressOrOver;
+using BetFriend.Domain.Bets.GetBetsInProgress;
 using BetFriend.Infrastructure.Repositories.InMemory;
 using System;
 using System.Collections.Generic;
@@ -11,9 +11,9 @@ using Xunit;
 
 namespace BetFriend.MobileApp.UnitTests
 {
-    public class GetBetsInProgressOrOverHandlerTest
+    public class GetBetsInProgressHandlerTest
     {
-        public GetBetsInProgressOrOverHandlerTest()
+        public GetBetsInProgressHandlerTest()
         {
 
         }
@@ -23,11 +23,11 @@ namespace BetFriend.MobileApp.UnitTests
         {
             //arrange
             var memberId = Guid.NewGuid();
-            var handler = new GetBetsInProgressOrOverQueryHandler(new InMemoryQueryBetRepository(null));
-            var query = new GetBetsInProgressOrOverQuery(memberId);
+            var handler = new GetBetsInProgressQueryHandler(new InMemoryQueryBetRepository(null));
+            var query = new GetBetsInProgressQuery(memberId);
 
             //act
-            IReadOnlyCollection<BetOutput> bets = await handler.Handle(query, default);
+            IReadOnlyCollection<BetOutput> bets = await handler.Handle(query);
 
             //assert
             Assert.Empty(bets);
@@ -38,27 +38,32 @@ namespace BetFriend.MobileApp.UnitTests
         {
             //arrange
             var memberId = Guid.NewGuid();
+            var creator = new MemberOutput 
+            { 
+                Id = memberId, 
+                Username = "creator1" 
+            };
             IQueryBetRepository betRepository = new InMemoryQueryBetRepository(new List<BetOutput>()
             {
                 new BetOutput
                 {
-                    CreatorId = memberId,
+                    Creator = creator,
                     Description = "desc1",
                     Tokens = 30,
                     EndDate = new DateTime(2022, 2, 2),
                     Id = Guid.NewGuid()
                 }
             });
-            var handler = new GetBetsInProgressOrOverQueryHandler(betRepository);
-            var query = new GetBetsInProgressOrOverQuery(memberId);
+            var handler = new GetBetsInProgressQueryHandler(betRepository);
+            var query = new GetBetsInProgressQuery(memberId);
 
             //act
-            IReadOnlyCollection<BetOutput> bets = await handler.Handle(query, default);
+            IReadOnlyCollection<BetOutput> bets = await handler.Handle(query);
 
             //assert
             Assert.Single(bets);
             var bet = bets.First();
-            Assert.Equal(memberId, bet.CreatorId);
+            Assert.Equal(memberId, bet.Creator.Id);
         }
 
         [Fact]
@@ -66,11 +71,16 @@ namespace BetFriend.MobileApp.UnitTests
         {
             //arrange
             var memberId = Guid.NewGuid();
+            var creator = new MemberOutput
+            {
+                Id = Guid.NewGuid(),
+                Username = "creator1"
+            };
             IQueryBetRepository betRepository = new InMemoryQueryBetRepository(new List<BetOutput>()
             {
                 new BetOutput
                 {
-                    CreatorId = Guid.NewGuid(),
+                    Creator = creator,
                     Description = "desc1",
                     Tokens = 30,
                     EndDate = new DateTime(2022, 2, 2),
@@ -85,11 +95,11 @@ namespace BetFriend.MobileApp.UnitTests
                     }
                 }
             });
-            var handler = new GetBetsInProgressOrOverQueryHandler(betRepository);
-            var query = new GetBetsInProgressOrOverQuery(memberId);
+            var handler = new GetBetsInProgressQueryHandler(betRepository);
+            var query = new GetBetsInProgressQuery(memberId);
 
             //act
-            IReadOnlyCollection<BetOutput> bets = await handler.Handle(query, default);
+            IReadOnlyCollection<BetOutput> bets = await handler.Handle(query);
 
             //assert
             Assert.Single(bets);
@@ -106,10 +116,10 @@ namespace BetFriend.MobileApp.UnitTests
         public async Task HandleShouldThrowArgumentNullExceptionIfQueryIsNull()
         {
             //arrange
-            var handler = new GetBetsInProgressOrOverQueryHandler(new InMemoryQueryBetRepository());
+            var handler = new GetBetsInProgressQueryHandler(new InMemoryQueryBetRepository());
 
             //act
-            var record = await Record.ExceptionAsync(() => handler.Handle(default, default));
+            var record = await Record.ExceptionAsync(() => handler.Handle(default));
 
             //assert
             Assert.IsType<ArgumentNullException>(record);
@@ -122,7 +132,7 @@ namespace BetFriend.MobileApp.UnitTests
             IQueryBetRepository queryBetRepository = null;
 
             //act
-            var record = Record.Exception(() => new GetBetsInProgressOrOverQueryHandler(queryBetRepository));
+            var record = Record.Exception(() => new GetBetsInProgressQueryHandler(queryBetRepository));
 
             //assert
             Assert.IsType<ArgumentNullException>(record);
