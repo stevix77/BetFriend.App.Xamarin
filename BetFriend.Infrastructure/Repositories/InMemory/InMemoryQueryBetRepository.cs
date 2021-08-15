@@ -23,5 +23,18 @@
                                   .ToList();
             return await Task.FromResult(bets);
         }
+
+        internal void AddBet(Bet bet)
+        {
+            _betOutputs.Add(new BetOutput
+            {
+                Creator = new MemberOutput { Id = bet.CreatorId },
+                Id = bet.BetId,
+                Description = bet.Description,
+                EndDate = bet.EndDate,
+                Tokens = bet.Tokens,
+                Participants = new List<MemberOutput>()
+            });
+        }
     }
 }

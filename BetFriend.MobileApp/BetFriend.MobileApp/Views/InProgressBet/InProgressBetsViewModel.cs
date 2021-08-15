@@ -5,6 +5,7 @@
     using BetFriend.Domain.Bets.GetBetsInProgress;
     using GalaSoft.MvvmLight;
     using GalaSoft.MvvmLight.Messaging;
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
@@ -15,10 +16,6 @@
     {
         private readonly GetBetsInProgressQueryHandler _handler;
 
-        public InProgressBetsViewModel() 
-        { 
-        
-        }
         public InProgressBetsViewModel(IMessenger messenger) : base(messenger)
         {
             _handler = new GetBetsInProgressQueryHandler(ViewModelLocator.Resolve<IQueryBetRepository>());
@@ -42,7 +39,15 @@
         {
             var result = await _handler.Handle(new GetBetsInProgressQuery(App.Me));
             if (result.Any())
+            {
+                ResetBets();
                 MapBets(result);
+            }
+        }
+
+        private void ResetBets()
+        {
+            Bets.Clear();
         }
 
         private void MapBets(IReadOnlyCollection<BetOutput> bets)
@@ -54,8 +59,8 @@
                     CreatorId = item.Creator.Id,
                     CreatorUsername = item.Creator.Username,
                     Tokens = item.Tokens,
-                    EndDate = item.EndDate,
-                    Description = item.Description,
+                    EndDate = item.EndDate.ToLongDateString(),
+                    Description = item.Description.Length > 50 ? $"{item.Description.Substring(0, 50)}..." : item.Description,
                     Participants = item.Participants.Count
                 };
                 Bets.Add(bet);

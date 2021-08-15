@@ -6,6 +6,6 @@
 
     public interface IBetRepository
     {
-        Task LaunchBetAsync(LaunchBetCommand command);
+        Task SaveAsync(LaunchBetCommand command);
     }
 }
