@@ -5,16 +5,25 @@
              x:Class="BetFriend.MobileApp.Views.InProgressBet.InProgressBetsView">
   <ContentView.Content>
       <StackLayout>
-            <Label Text="{Static resources:Resource.LblActiveBets}" />
-            <ListView ItemsSource="{Binding Bets}" HasUnevenRows="True">
+            <Label Text="{Static resources:Resource.LblActiveBets}" FontSize="Title" />
+            <ListView ItemsSource="{Binding Bets}" HasUnevenRows="True"
+                      SelectionMode="None" VerticalScrollBarVisibility="Never" 
+                  HorizontalScrollBarVisibility="Never"
+                  Margin="{OnIdiom Default='0,8,8,0',
+                                 Desktop='15,15,15,0'}"
+                  HorizontalOptions="FillAndExpand" BackgroundColor="Transparent" 
+                  SeparatorVisibility="{OnPlatform Default='Default',
+                                                   iOS='None'}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout>
-                            <Label Text="{Binding CreatorUsername}" Grid.Column="1" Grid.Row="0"/>
-                        </StackLayout>
-                        <!--<ViewCell>
-                            <Grid Margin="8,0,0,8">
+                        <ViewCell>
+                            <Grid Margin="8,0,0,8"
+                            ColumnSpacing="0"
+                            HorizontalOptions="FillAndExpand"
+                            RowSpacing="0"
+                            VerticalOptions="FillAndExpand">
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
@@ -24,39 +33,47 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <Label Text="{Binding Description}" Grid.Column="1" Grid.Row="0"/>
+                                <Label Margin="5"
+                                        LineBreakMode="TailTruncation"
+                                        LineHeight="1.25"
+                                        MaxLines="1"
+                                        Text="{Binding CreatorUsername}"
+                                        FontAttributes="Bold" FontSize="14" VerticalOptions="Center" />
 
-                                --><!--<Label Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2" Text="{Binding Bet.Description}" Margin="5"
-                                        FontFamily="{StaticResource Montserrat-Medium}"
+                                <Label Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2" Text="{Binding Description}" Margin="5" VerticalOptions="Center"
                                         FontSize="Subtitle"
                                         LineBreakMode="TailTruncation"
                                         LineHeight="{OnPlatform Android=1.25,
                                                                 Default=-1}"
                                         MaxLines="2" />
 
-                                <Label Grid.Row="0" Grid.Column="1" HorizontalOptions="End" 
-                                       IsVisible="{Binding Bet.IsActive}" Text="{Binding Bet.EndBetDate, Converter={StaticResource dateToString}, ConverterParameter=true}" Margin="5"
-                                        FontFamily="{StaticResource Montserrat-Medium}"
-                                        FontSize="10"
-                                        LineBreakMode="TailTruncation"
-                                        LineHeight="{OnPlatform Android=1.25,
-                                                                Default=-1}" />
+                                <Label Margin="5"
+                                        FontSize="10" 
+                                       Grid.Row="1" Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <FormattedString.Spans>
+                                                <Span Text="{Binding Tokens, StringFormat='{0} '}" />
+                                                <Span Text="{Static resources:Resource.LblTokens}" />
+                                            </FormattedString.Spans>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
 
                                 <Label Grid.Row="0" Grid.Column="1" HorizontalOptions="End" 
-                                       IsVisible="{Binding Bet.IsActive}" Text="{Binding EndTimerBet}" Margin="5"
-                                        FontFamily="{StaticResource Montserrat-Medium}"
-                                        FontSize="10"
-                                        LineBreakMode="TailTruncation"
-                                        LineHeight="{OnPlatform Android=1.25,
-                                                                Default=-1}" />
-
-                                <Image Grid.Row="0" Grid.Column="1" HorizontalOptions="End" Margin="5" IsVisible="{Binding Bet.IsActive, Converter={StaticResource inverseBool}}">
-                                    <Image.Source>
-                                        <FontImageSource FontFamily="{DynamicResource FontIcons}" Glyph="{Binding Path=., Converter={StaticResource boolToGlyphSuccessBetConverter}}" Size="20" Color="{Binding Path=., Converter={StaticResource boolToColorSuccessBet}}" />
-                                    </Image.Source>
-                                </Image>--><!--
+                                       Margin="5"
+                                        FontSize="10">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <FormattedString.Spans>
+                                                <Span Text="End : " />
+                                                <Span Text="{Binding EndDate}" />
+                                            </FormattedString.Spans>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
                             </Grid>
-                        </ViewCell>-->
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>    
             </ListView>

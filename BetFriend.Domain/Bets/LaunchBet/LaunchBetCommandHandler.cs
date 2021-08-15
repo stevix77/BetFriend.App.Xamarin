@@ -16,7 +16,7 @@
         {
             ValidateCommand(command);
 
-            await _betRepository.LaunchBetAsync(command);
+            await _betRepository.SaveAsync(command);
         }
 
         private static void ValidateCommand(LaunchBetCommand command)

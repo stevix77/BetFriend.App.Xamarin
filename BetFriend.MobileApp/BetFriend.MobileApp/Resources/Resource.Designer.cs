@@ -538,6 +538,15 @@ namespace BetFriend.MobileApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Jeton(s).
+        /// </summary>
+        public static string LblTokens {
+            get {
+                return ResourceManager.GetString("LblTokens", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Modifier mon email.
         /// </summary>
         public static string LblUpdateEmail {

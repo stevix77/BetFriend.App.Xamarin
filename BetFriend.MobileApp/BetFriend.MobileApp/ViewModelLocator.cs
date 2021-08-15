@@ -21,9 +21,7 @@ namespace BetFriend.MobileApp
 
         public static void RegisterDependencies()
         {
-            var builder = new ContainerBuilder();
-            builder.RegisterInstance(new InMemoryBetRepository(App.Me)).As<IBetRepository>().SingleInstance();
-            builder.RegisterInstance(new InMemoryQueryBetRepository(new List<BetOutput>()
+            var queryBetRepository = new InMemoryQueryBetRepository(new List<BetOutput>()
             {
                 new BetOutput
                 {
@@ -32,7 +30,7 @@ namespace BetFriend.MobileApp
                         Id = App.Me,
                         Username = "stevix"
                     },
-                    Description = "desc1",
+                    Description = "desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 ",
                     Tokens = 30,
                     EndDate = new DateTime(2022, 2, 2),
                     Id = Guid.NewGuid(),
@@ -44,8 +42,52 @@ namespace BetFriend.MobileApp
                             Username = "username1"
                         }
                     }
-                }
-            })).As<IQueryBetRepository>().SingleInstance();
+                },
+                new BetOutput
+                {
+                    Creator = new MemberOutput
+                    {
+                        Id = App.Me,
+                        Username = "stevix"
+                    },
+                    Description = "desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 ",
+                    Tokens = 30,
+                    EndDate = new DateTime(2022, 2, 2),
+                    Id = Guid.NewGuid(),
+                    Participants = new List<MemberOutput>
+                    {
+                        new MemberOutput
+                        {
+                            Id = Guid.NewGuid(),
+                            Username = "username1"
+                        }
+                    }
+                },
+                new BetOutput
+                {
+                    Creator = new MemberOutput
+                    {
+                        Id = App.Me,
+                        Username = "stevix"
+                    },
+                    Description = "desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 desc1 ",
+                    Tokens = 30,
+                    EndDate = new DateTime(2022, 2, 2),
+                    Id = Guid.NewGuid(),
+                    Participants = new List<MemberOutput>
+                    {
+                        new MemberOutput
+                        {
+                            Id = Guid.NewGuid(),
+                            Username = "username1"
+                        }
+                    }
+                },
+
+            });
+            var builder = new ContainerBuilder();
+            builder.RegisterInstance(queryBetRepository).As<IQueryBetRepository>().SingleInstance();
+            builder.RegisterInstance(new InMemoryBetRepository(App.Me, queryBetRepository)).As<IBetRepository>().SingleInstance();
             builder.RegisterType<Messenger>().As<IMessenger>().InstancePerLifetimeScope();
 
             builder.RegisterType<LaunchBetViewModel>();

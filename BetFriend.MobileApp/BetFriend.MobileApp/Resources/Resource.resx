@@ -276,6 +276,9 @@
   <data name="LblTitleSearchPage" xml:space="preserve">
     <value>Trouver des amis</value>
   </data>
+  <data name="LblTokens" xml:space="preserve">
+    <value>Jeton(s)</value>
+  </data>
   <data name="LblUpdateEmail" xml:space="preserve">
     <value>Modifier mon email</value>
   </data>
