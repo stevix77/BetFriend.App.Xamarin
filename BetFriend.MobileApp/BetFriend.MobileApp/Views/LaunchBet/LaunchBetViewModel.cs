@@ -73,7 +73,7 @@ namespace BetFriend.MobileApp.Views.LaunchBet
             {
                 try
                 {
-                    var handler = new LaunchBetCommandHandler(DependencyService.Get<IBetRepository>());
+                    var handler = new LaunchBetCommandHandler(ViewModelLocator.Resolve<IBetRepository>());
                     await handler.Handle(new LaunchBetCommand(Guid.NewGuid(), _description, _endDate, _coins));
                     await Shell.Current.GoToAsync($"//{nameof(HomeView)}");
                 }

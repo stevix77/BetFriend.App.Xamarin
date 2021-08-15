@@ -11,16 +11,20 @@
     {
         private readonly List<Bet> _bets;
         private readonly Guid _creator;
+        private readonly IQueryBetRepository _queryBetRepository;
 
-        public InMemoryBetRepository(Guid creator)
+        public InMemoryBetRepository(Guid creator, IQueryBetRepository queryBetRepository)
         {
             _bets = new List<Bet>();
             _creator = creator;
+            _queryBetRepository = queryBetRepository;
         }
 
-        public Task LaunchBetAsync(LaunchBetCommand command)
+        public Task SaveAsync(LaunchBetCommand command)
         {
-            _bets.Add(new Bet(command.BetId, command.Description, command.EndDate, command.Coins, _creator));
+            var bet = new Bet(command.BetId, command.Description, command.EndDate, command.Coins, _creator);
+            _bets.Add(bet);
+            (_queryBetRepository as InMemoryQueryBetRepository).AddBet(bet);
             return Task.CompletedTask;
         }
 
