@@ -27,7 +27,7 @@ namespace BetFriend.MobileApp.UnitTests
             //arrange
             var endDate = DateTime.UtcNow.AddDays(7);
             var command = new LaunchBetCommand(_betId, _description, endDate, _coins);
-            InMemoryBetRepository betRepository = new(_creatorId);
+            InMemoryBetRepository betRepository = new(_creatorId, new InMemoryQueryBetRepository());
             var handler = new LaunchBetCommandHandler(betRepository);
 
             //act
@@ -51,7 +51,7 @@ namespace BetFriend.MobileApp.UnitTests
             //arrange
             var endDate = DateTime.UtcNow.AddDays(-7);
             var command = new LaunchBetCommand(_betId, _description, endDate, 20);
-            IBetRepository betRepository = new InMemoryBetRepository(Guid.Empty);
+            IBetRepository betRepository = new InMemoryBetRepository(Guid.Empty, new InMemoryQueryBetRepository());
             var handler = new LaunchBetCommandHandler(betRepository);
 
             //act
@@ -68,7 +68,7 @@ namespace BetFriend.MobileApp.UnitTests
             //arrange
             var endDate = DateTime.UtcNow.AddDays(7);
             var command = new LaunchBetCommand(_betId, null, endDate, 20);
-            IBetRepository betRepository = new InMemoryBetRepository(Guid.Empty);
+            IBetRepository betRepository = new InMemoryBetRepository(Guid.Empty, new InMemoryQueryBetRepository());
             var handler = new LaunchBetCommandHandler(betRepository);
 
             //act
