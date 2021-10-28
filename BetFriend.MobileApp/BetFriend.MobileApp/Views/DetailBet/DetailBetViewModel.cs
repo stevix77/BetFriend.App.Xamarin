@@ -10,6 +10,8 @@ namespace BetFriend.MobileApp.Views.DetailBet
     public class DetailBetViewModel : ViewModelBase
     {
         private BetOutput _bet;
+        private readonly IRetrieveBetQueryHandler _handler;
+
         public BetOutput Bet
         {
             get => _bet;
@@ -19,14 +21,14 @@ namespace BetFriend.MobileApp.Views.DetailBet
                     RaisePropertyChanged(nameof(Bet));
             }
         }
-        public DetailBetViewModel()
+        public DetailBetViewModel(IRetrieveBetQueryHandler retrieveBetQueryHandler)
         {
+            _handler = retrieveBetQueryHandler;
         }
 
         internal async Task LoadBet(string value)
         {
-            var handler = new RetrieveBetQueryHandler(ViewModelLocator.Resolve<IQueryBetRepository>());
-            Bet = await handler.Handle(new RetrieveBetQuery(Guid.Parse(value)));
+            Bet = await _handler.Handle(new RetrieveBetQuery(Guid.Parse(value)));
         }
     }
 }

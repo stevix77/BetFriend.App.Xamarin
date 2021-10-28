@@ -5,7 +5,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    public class GetBetsInProgressQueryHandler
+    public class GetBetsInProgressQueryHandler : IGetBetsInProgressQueryHandler
     {
         private readonly IQueryBetRepository _betRepository;
 

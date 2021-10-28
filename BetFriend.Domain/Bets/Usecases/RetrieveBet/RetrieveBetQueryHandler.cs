@@ -5,7 +5,7 @@
     using System.Threading.Tasks;
 
 
-    public class RetrieveBetQueryHandler
+    public class RetrieveBetQueryHandler : IRetrieveBetQueryHandler
     {
         private readonly IQueryBetRepository _queryBetRepository;
 
