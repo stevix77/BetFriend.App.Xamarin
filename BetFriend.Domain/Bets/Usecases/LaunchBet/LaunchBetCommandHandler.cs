@@ -3,7 +3,7 @@
     using System;
     using System.Threading.Tasks;
 
-    public class LaunchBetCommandHandler
+    public class LaunchBetCommandHandler : ILaunchBetCommandHandler
     {
         private readonly IBetRepository _betRepository;
 

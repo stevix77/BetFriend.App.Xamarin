@@ -9,6 +9,9 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using BetFriend.MobileApp.Views.DetailBet;
+using BetFriend.Domain.Bets.RetrieveBet;
+using BetFriend.Domain.Bets.LaunchBet;
+using BetFriend.Domain.Bets.GetBetsInProgress;
 
 namespace BetFriend.MobileApp
 {
@@ -71,6 +74,9 @@ namespace BetFriend.MobileApp
             serviceCollection.AddScoped<IQueryBetRepository>(x => queryBetRepository);
             serviceCollection.AddScoped<IBetRepository>(x => new InMemoryBetRepository(App.CurrentUser, queryBetRepository));
             serviceCollection.AddScoped<IMessenger, Messenger>();
+            serviceCollection.AddScoped<IRetrieveBetQueryHandler, RetrieveBetQueryHandler>();
+            serviceCollection.AddScoped<ILaunchBetCommandHandler, LaunchBetCommandHandler>();
+            serviceCollection.AddScoped<IGetBetsInProgressQueryHandler, GetBetsInProgressQueryHandler>();
             serviceCollection.AddSingleton<LaunchBetViewModel>();
             serviceCollection.AddSingleton<InProgressBetsViewModel>();
             serviceCollection.AddSingleton<DetailBetViewModel>();

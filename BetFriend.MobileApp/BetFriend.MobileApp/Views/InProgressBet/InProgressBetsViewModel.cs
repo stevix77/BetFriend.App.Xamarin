@@ -6,7 +6,6 @@
     using BetFriend.MobileApp.Views.DetailBet;
     using GalaSoft.MvvmLight;
     using GalaSoft.MvvmLight.Messaging;
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
@@ -15,11 +14,12 @@
 
     public class InProgressBetsViewModel : ViewModelBase
     {
-        private readonly GetBetsInProgressQueryHandler _handler;
+        private readonly IGetBetsInProgressQueryHandler _handler;
 
-        public InProgressBetsViewModel(IMessenger messenger) : base(messenger)
+        public InProgressBetsViewModel(IMessenger messenger,
+                                        IGetBetsInProgressQueryHandler getBetsInProgressQueryHandler) : base(messenger)
         {
-            _handler = new GetBetsInProgressQueryHandler(ViewModelLocator.Resolve<IQueryBetRepository>());
+            _handler = getBetsInProgressQueryHandler;
         }
 
         private ObservableCollection<BetInProgressVM> _bets;
