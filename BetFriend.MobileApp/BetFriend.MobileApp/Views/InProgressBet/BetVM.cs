@@ -2,7 +2,7 @@
 
 namespace BetFriend.MobileApp.Views.InProgressBet
 {
-    public class BetInProgressVM
+    public class BetVM
     {
         public Guid CreatorId { get; set; }
         public string CreatorUsername { get; set; }

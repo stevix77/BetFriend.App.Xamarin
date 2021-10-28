@@ -6,7 +6,7 @@ using Xamarin.Forms.Xaml;
 namespace BetFriend.MobileApp.Views.DetailBet
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    [QueryProperty(nameof(BetId), "bet")]
+    [QueryProperty(nameof(BetId), "betid")]
     public partial class DetailBetView : ContentPage
     {
         public string BetId
