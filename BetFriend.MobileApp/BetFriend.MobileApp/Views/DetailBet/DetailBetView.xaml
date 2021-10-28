@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:converters="clr-namespace:BetFriend.MobileApp.Converters"
-             xmlns:icons="clr-namespace:BetFriend.App.Themes"
+             xmlns:icons="clr-namespace:BetFriend.MobileApp.Themes"
              xmlns:resources="clr-namespace:BetFriend.MobileApp.Resources"
              x:Class="BetFriend.MobileApp.Views.DetailBet.DetailBetView">
     <ContentPage.Resources>

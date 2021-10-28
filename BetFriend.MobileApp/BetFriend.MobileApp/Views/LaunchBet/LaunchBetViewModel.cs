@@ -1,23 +1,27 @@
-﻿using BetFriend.Domain.Bets;
-using BetFriend.Domain.Bets.LaunchBet;
-using BetFriend.MobileApp.Views.Home;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Messaging;
-using System;
-using Xamarin.Forms;
-
-namespace BetFriend.MobileApp.Views.LaunchBet
+﻿namespace BetFriend.MobileApp.Views.LaunchBet
 {
+    using BetFriend.Domain.Bets.LaunchBet;
+    using BetFriend.MobileApp.Navigation;
+    using BetFriend.MobileApp.Views.Home;
+    using GalaSoft.MvvmLight;
+    using GalaSoft.MvvmLight.Messaging;
+    using System;
+    using Xamarin.Forms;
+
+
     public class LaunchBetViewModel : ViewModelBase
     {
 
         private Command _validateCommand;
         private readonly ILaunchBetCommandHandler _launchBetCommandHandler;
+        private readonly INavigationService _navigationService;
 
         public LaunchBetViewModel(IMessenger messenger,
-                                  ILaunchBetCommandHandler launchBetCommandHandler) : base(messenger)
+                                  ILaunchBetCommandHandler launchBetCommandHandler,
+                                  INavigationService navigationService) : base(messenger)
         {
             _launchBetCommandHandler = launchBetCommandHandler;
+            _navigationService = navigationService;
         }
 
         private string _description;
@@ -75,15 +79,8 @@ namespace BetFriend.MobileApp.Views.LaunchBet
         {
             get => _validateCommand ?? (_validateCommand = new Command(async () =>
             {
-                try
-                {
-                    await _launchBetCommandHandler.Handle(new LaunchBetCommand(Guid.NewGuid(), _description, _endDate, _coins));
-                    await Shell.Current.GoToAsync($"//{nameof(HomeView)}");
-                }
-                catch (Exception)
-                {
-
-                }
+                await _launchBetCommandHandler.Handle(new LaunchBetCommand(Guid.NewGuid(), _description, _endDate, _coins));
+                await _navigationService.NavigateToAsync($"//{nameof(HomeView)}", null);
             }, () => CheckValideCommand()));
         }
 

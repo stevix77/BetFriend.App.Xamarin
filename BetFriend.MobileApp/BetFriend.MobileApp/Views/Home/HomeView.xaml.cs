@@ -14,9 +14,9 @@
             InitializeComponent();
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
-            Task.Run(async () => await ViewModelLocator.Resolve<InProgressBetsViewModel>().LoadBets());
+            await ViewModelLocator.Resolve<InProgressBetsViewModel>().LoadBets();
             base.OnAppearing();
         }
     }

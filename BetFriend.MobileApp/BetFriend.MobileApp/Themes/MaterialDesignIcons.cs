@@ -1,4 +1,4 @@
-﻿namespace BetFriend.App.Themes
+﻿namespace BetFriend.MobileApp.Themes
 {
 	public class MaterialDesignIcons
 	{

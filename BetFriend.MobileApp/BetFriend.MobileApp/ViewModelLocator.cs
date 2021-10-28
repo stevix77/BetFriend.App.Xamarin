@@ -1,17 +1,17 @@
 ﻿using BetFriend.Domain.Bets;
 using BetFriend.Domain.Bets.Dto;
+using BetFriend.Domain.Bets.GetBetsInProgress;
+using BetFriend.Domain.Bets.LaunchBet;
+using BetFriend.Domain.Bets.RetrieveBet;
 using BetFriend.Infrastructure.Repositories.InMemory;
+using BetFriend.MobileApp.Navigation;
+using BetFriend.MobileApp.Views.DetailBet;
 using BetFriend.MobileApp.Views.InProgressBet;
 using BetFriend.MobileApp.Views.LaunchBet;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Linq;
 using System.Collections.Generic;
-using BetFriend.MobileApp.Views.DetailBet;
-using BetFriend.Domain.Bets.RetrieveBet;
-using BetFriend.Domain.Bets.LaunchBet;
-using BetFriend.Domain.Bets.GetBetsInProgress;
 
 namespace BetFriend.MobileApp
 {
@@ -74,6 +74,7 @@ namespace BetFriend.MobileApp
             serviceCollection.AddScoped<IQueryBetRepository>(x => queryBetRepository);
             serviceCollection.AddScoped<IBetRepository>(x => new InMemoryBetRepository(App.CurrentUser, queryBetRepository));
             serviceCollection.AddScoped<IMessenger, Messenger>();
+            serviceCollection.AddScoped<INavigationService, ShellNavigationService>();
             serviceCollection.AddScoped<IRetrieveBetQueryHandler, RetrieveBetQueryHandler>();
             serviceCollection.AddScoped<ILaunchBetCommandHandler, LaunchBetCommandHandler>();
             serviceCollection.AddScoped<IGetBetsInProgressQueryHandler, GetBetsInProgressQueryHandler>();

@@ -3,6 +3,7 @@
     using BetFriend.Domain.Bets;
     using BetFriend.Domain.Bets.Dto;
     using BetFriend.Domain.Bets.GetBetsInProgress;
+    using BetFriend.MobileApp.Navigation;
     using BetFriend.MobileApp.Views.DetailBet;
     using GalaSoft.MvvmLight;
     using GalaSoft.MvvmLight.Messaging;
@@ -15,18 +16,21 @@
     public class InProgressBetsViewModel : ViewModelBase
     {
         private readonly IGetBetsInProgressQueryHandler _handler;
+        private readonly INavigationService _navigationService;
 
         public InProgressBetsViewModel(IMessenger messenger,
-                                        IGetBetsInProgressQueryHandler getBetsInProgressQueryHandler) : base(messenger)
+                                        IGetBetsInProgressQueryHandler getBetsInProgressQueryHandler,
+                                        INavigationService navigationService) : base(messenger)
         {
             _handler = getBetsInProgressQueryHandler;
+            _navigationService = navigationService;
         }
 
-        private ObservableCollection<BetInProgressVM> _bets;
+        private ObservableCollection<BetVM> _bets;
 
-        public ObservableCollection<BetInProgressVM> Bets
+        public ObservableCollection<BetVM> Bets
         {
-            get => _bets ?? (_bets = new ObservableCollection<BetInProgressVM>());
+            get => _bets ?? (_bets = new ObservableCollection<BetVM>());
             set
             {
                 if (Set(() => Bets, ref _bets, value))
@@ -43,11 +47,19 @@
             {
                 if (obj.GetType() == typeof(SelectedItemChangedEventArgs))
                 {
-                    await Shell.Current.GoToAsync($"{nameof(DetailBetView)}?bet={((SelectedItemChangedEventArgs)obj).SelectedItem as BetInProgressVM}", true);
+                    await _navigationService.NavigateToAsync(nameof(DetailBetView), 
+                                                            new Dictionary<string, object>() 
+                                                            { 
+                                                                { "betid", (((SelectedItemChangedEventArgs)obj).SelectedItem as BetVM).Id } 
+                                                            });
                 }
                 else if (obj.GetType() == typeof(ItemTappedEventArgs))
                 {
-                    await Shell.Current.GoToAsync($"{nameof(DetailBetView)}?bet={(((ItemTappedEventArgs)obj).Item as BetInProgressVM).Id}", true);
+                    await _navigationService.NavigateToAsync(nameof(DetailBetView),
+                                                            new Dictionary<string, object>()
+                                                            {
+                                                                { "betid", (((ItemTappedEventArgs)obj).Item as BetVM).Id }
+                                                            });
                 }
             }));
         }
@@ -71,7 +83,7 @@
         {
             foreach (var item in bets)
             {
-                var bet = new BetInProgressVM
+                var bet = new BetVM
                 {
                     CreatorId = item.Creator.Id,
                     CreatorUsername = item.Creator.Username,
