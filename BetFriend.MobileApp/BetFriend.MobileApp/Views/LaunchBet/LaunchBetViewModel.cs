@@ -10,9 +10,14 @@ namespace BetFriend.MobileApp.Views.LaunchBet
 {
     public class LaunchBetViewModel : ViewModelBase
     {
-        public LaunchBetViewModel(IMessenger messenger) : base(messenger)
+
+        private Command _validateCommand;
+        private readonly ILaunchBetCommandHandler _launchBetCommandHandler;
+
+        public LaunchBetViewModel(IMessenger messenger,
+                                  ILaunchBetCommandHandler launchBetCommandHandler) : base(messenger)
         {
-            
+            _launchBetCommandHandler = launchBetCommandHandler;
         }
 
         private string _description;
@@ -66,18 +71,16 @@ namespace BetFriend.MobileApp.Views.LaunchBet
             }
         }
 
-        private Command _validateCommand;
         public Command ValidateCommand
         {
             get => _validateCommand ?? (_validateCommand = new Command(async () =>
             {
                 try
                 {
-                    var handler = new LaunchBetCommandHandler(ViewModelLocator.Resolve<IBetRepository>());
-                    await handler.Handle(new LaunchBetCommand(Guid.NewGuid(), _description, _endDate, _coins));
+                    await _launchBetCommandHandler.Handle(new LaunchBetCommand(Guid.NewGuid(), _description, _endDate, _coins));
                     await Shell.Current.GoToAsync($"//{nameof(HomeView)}");
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
 
                 }
