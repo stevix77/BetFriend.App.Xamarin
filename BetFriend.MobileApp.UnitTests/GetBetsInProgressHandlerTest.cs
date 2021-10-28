@@ -49,7 +49,7 @@ namespace BetFriend.MobileApp.UnitTests
                 {
                     Creator = creator,
                     Description = "desc1",
-                    Tokens = 30,
+                    Coins = 30,
                     EndDate = new DateTime(2022, 2, 2),
                     Id = Guid.NewGuid()
                 }
@@ -82,7 +82,7 @@ namespace BetFriend.MobileApp.UnitTests
                 {
                     Creator = creator,
                     Description = "desc1",
-                    Tokens = 30,
+                    Coins = 30,
                     EndDate = new DateTime(2022, 2, 2),
                     Id = Guid.NewGuid(),
                     Participants = new List<MemberOutput>

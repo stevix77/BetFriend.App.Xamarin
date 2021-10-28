@@ -16,11 +16,6 @@ namespace BetFriend.MobileApp.UnitTests
         private readonly Guid _betId = Guid.NewGuid();
         private readonly Guid _creatorId = Guid.NewGuid();
 
-        public LaunchBetHandlerTest()
-        {
-
-        }
-
         [Fact]
         public async Task ShouldCreateBet()
         {

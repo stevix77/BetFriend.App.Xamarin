@@ -16,12 +16,15 @@
             _betOutputs = betOutputs ?? new List<BetOutput>();
         }
 
+        public Task<BetOutput> GetBetAsync(Guid betId)
+        {
+            var betOutput = _betOutputs.FirstOrDefault(x => x.Id == betId);
+            return Task.FromResult(betOutput);
+        }
+
         public async Task<IReadOnlyCollection<BetOutput>> GetBetsForMember(Guid memberId)
         {
-            var bets = _betOutputs.Where(x => x.Creator.Id == memberId 
-                                        || x.Participants.Any(y => y.Id == memberId))
-                                  .ToList();
-            return await Task.FromResult(bets);
+            return await Task.FromResult(_betOutputs);
         }
 
         internal void AddBet(Bet bet)
@@ -32,7 +35,7 @@
                 Id = bet.BetId,
                 Description = bet.Description,
                 EndDate = bet.EndDate,
-                Tokens = bet.Tokens,
+                Coins = bet.Tokens,
                 Participants = new List<MemberOutput>()
             });
         }

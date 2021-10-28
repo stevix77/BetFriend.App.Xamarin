@@ -18,8 +18,7 @@
         {
             ValidateQuery(query);
 
-            var bets = await _betRepository.GetBetsForMember(query.MemberId);
-            return bets;
+            return await _betRepository.GetBetsForMember(query.MemberId);
         }
 
         private static void ValidateQuery(GetBetsInProgressQuery query)
