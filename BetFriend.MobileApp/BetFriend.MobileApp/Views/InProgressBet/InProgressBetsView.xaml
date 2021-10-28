@@ -2,6 +2,7 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:resources="clr-namespace:BetFriend.MobileApp.Resources"
+             xmlns:local="clr-namespace:BetFriend.MobileApp.Behaviors"
              x:Class="BetFriend.MobileApp.Views.InProgressBet.InProgressBetsView">
   <ContentView.Content>
       <StackLayout>
@@ -9,11 +10,14 @@
             <ListView ItemsSource="{Binding Bets}" HasUnevenRows="True"
                       SelectionMode="None" VerticalScrollBarVisibility="Never" 
                   HorizontalScrollBarVisibility="Never"
-                  Margin="{OnIdiom Default='0,8,8,0',
-                                 Desktop='15,15,15,0'}"
+                  Margin="{OnIdiom Default='0,8,8,0'}"
                   HorizontalOptions="FillAndExpand" BackgroundColor="Transparent" 
                   SeparatorVisibility="{OnPlatform Default='Default',
                                                    iOS='None'}">
+
+                <ListView.Behaviors>
+                    <local:EventToCommandBehavior Command="{Binding ItemSelected}" />
+                </ListView.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -44,7 +48,7 @@
                                         FontSize="Subtitle"
                                         LineBreakMode="TailTruncation"
                                         LineHeight="{OnPlatform Android=1.25,
-                                                                Default=-1}"
+                                                                Default=1}"
                                         MaxLines="2" />
 
                                 <Label Margin="5"

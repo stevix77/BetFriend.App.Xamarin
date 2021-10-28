@@ -10,5 +10,6 @@ namespace BetFriend.MobileApp.Views.InProgressBet
         public string EndDate { get; set; }
         public string Description { get; set; }
         public int Participants { get; set; }
+        public Guid Id { get; internal set; }
     }
 }

@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:BetFriend.MobileApp.Converters"
+             xmlns:icons="clr-namespace:BetFriend.App.Themes"
+             xmlns:resources="clr-namespace:BetFriend.MobileApp.Resources"
+             x:Class="BetFriend.MobileApp.Views.DetailBet.DetailBetView">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:DateToStringConverter x:Key="dateToString" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never">
+            <StackLayout Spacing="5" Margin="8, 5">
+                <StackLayout Orientation="Horizontal" Margin="1, 5">
+                    <Label Style="{StaticResource LabelStyle}" TextColor="{StaticResource Gray-Black}" HorizontalOptions="CenterAndExpand" FontSize="Title">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Static resources:Resource.LblBetOf}" />
+                                <Span Text="{Binding Bet.Creator.Username, StringFormat=': {0}'}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>
+
+                <!-- dates -->
+                <StackLayout Spacing="5" >
+                    <StackLayout Orientation="Horizontal" MinimumHeightRequest="35" >
+                        <Image BackgroundColor="Transparent">
+                            <Image.Source>
+                                <FontImageSource FontFamily="{DynamicResource MaterialFontFamily}" Glyph="{Static icons:MaterialDesignIcons.ClockOutline}" Color="Black" />
+                            </Image.Source>
+                        </Image>
+                        <Label Text="{Static resources:Resource.LblEndBetDate}" />
+                        <Label Text="{Binding Bet.EndDate, Converter={StaticResource dateToString}, ConverterParameter=true}" 
+                               HorizontalTextAlignment="End" HorizontalOptions="End" 
+                               TextColor="{StaticResource Gray-700}" />
+                    </StackLayout>
+                </StackLayout>
+
+                <!-- Réponses -->
+                <StackLayout>
+                    <Label FontSize="Subtitle">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Static resources:Resource.Membres}" />
+                                <Span Text=":" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <CollectionView ItemsLayout="HorizontalList" ItemsSource="{Binding Bet.Participants}" HeightRequest="60" Margin="10, 0">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout VerticalOptions="CenterAndExpand" Spacing="3" Margin="5, 0">
+                                    <Label Text="{Binding Username}" FontSize="20" TextColor="{StaticResource GradientEndColor}" />
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+
+                <!-- Description -->
+                <StackLayout>
+                    <Label Margin="5, 0"
+                           TextColor="{StaticResource Gray-Black}"
+                           FontSize="Subtitle">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Static resources:Resource.LblBetPageDescription}" />
+                                <Span Text=":" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label Text="{Binding Bet.Description}" Margin="10, 0" TextColor="{StaticResource Gray-700}" />
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

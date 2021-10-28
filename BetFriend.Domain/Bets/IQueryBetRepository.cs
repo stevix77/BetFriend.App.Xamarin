@@ -8,5 +8,6 @@ namespace BetFriend.Domain.Bets
     public interface IQueryBetRepository
     {
         Task<IReadOnlyCollection<BetOutput>> GetBetsForMember(Guid memberId);
+        Task<BetOutput> GetBetAsync(Guid betId);
     }
 }

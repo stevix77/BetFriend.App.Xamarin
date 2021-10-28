@@ -6,7 +6,7 @@
     public class BetOutput
     {
         public MemberOutput Creator { get; set; }
-        public int Tokens { get; set; }
+        public int Coins { get; set; }
         public string Description { get; set; }
         public Guid Id { get; set; }
         public DateTime EndDate { get; set; }
