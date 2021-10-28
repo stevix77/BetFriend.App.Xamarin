@@ -3,6 +3,7 @@
     using BetFriend.Domain.Bets;
     using BetFriend.Domain.Bets.Dto;
     using BetFriend.Domain.Bets.GetBetsInProgress;
+    using BetFriend.MobileApp.Views.DetailBet;
     using GalaSoft.MvvmLight;
     using GalaSoft.MvvmLight.Messaging;
     using System;
@@ -35,9 +36,25 @@
             }
         }
 
+        private Command _itemSelected;
+        public Command ItemSelected
+        {
+            get => _itemSelected ?? (_itemSelected = new Command(async (obj) =>
+            {
+                if (obj.GetType() == typeof(SelectedItemChangedEventArgs))
+                {
+                    await Shell.Current.GoToAsync($"{nameof(DetailBetView)}?bet={((SelectedItemChangedEventArgs)obj).SelectedItem as BetInProgressVM}", true);
+                }
+                else if (obj.GetType() == typeof(ItemTappedEventArgs))
+                {
+                    await Shell.Current.GoToAsync($"{nameof(DetailBetView)}?bet={(((ItemTappedEventArgs)obj).Item as BetInProgressVM).Id}", true);
+                }
+            }));
+        }
+
         public async Task LoadBets()
         {
-            var result = await _handler.Handle(new GetBetsInProgressQuery(App.Me));
+            var result = await _handler.Handle(new GetBetsInProgressQuery(App.CurrentUser));
             if (result.Any())
             {
                 ResetBets();
@@ -58,10 +75,11 @@
                 {
                     CreatorId = item.Creator.Id,
                     CreatorUsername = item.Creator.Username,
-                    Tokens = item.Tokens,
+                    Tokens = item.Coins,
                     EndDate = item.EndDate.ToLongDateString(),
                     Description = item.Description.Length > 50 ? $"{item.Description.Substring(0, 50)}..." : item.Description,
-                    Participants = item.Participants.Count
+                    Participants = item.Participants.Count,
+                    Id = item.Id
                 };
                 Bets.Add(bet);
             }

@@ -1,5 +1,6 @@
 ﻿using BetFriend.Domain.Bets;
 using BetFriend.Domain.Bets.Dto;
+using BetFriend.Domain.Bets.Exceptions;
 using BetFriend.Domain.Bets.RetrieveBet;
 using BetFriend.Infrastructure.Repositories.InMemory;
 using System;
@@ -18,20 +19,18 @@ namespace BetFriend.MobileApp.UnitTests
         }
 
         [Fact]
-        public async Task ShouldReturnBetIfIdknown()
+        public async Task ShouldReturnBetIfIdKnown()
         {
             var betId = Guid.NewGuid();
             var creator = new MemberOutput { Id = Guid.NewGuid(), Username = "toto" };
             var betOutput = new BetOutput() { Creator = creator, Id = betId, Description = "description bet",
-                EndDate = DateTime.UtcNow.AddDays(10), Tokens = 100 };
+                EndDate = DateTime.UtcNow.AddDays(10), Coins = 100 };
             var betQuery = new RetrieveBetQuery(betId);
-            IQueryBetRepository queryBetRepository = new InMemoryQueryBetRepository(new() { betOutput });
+            var queryBetRepository = new InMemoryQueryBetRepository(new() { betOutput });
             var queryHandler = new RetrieveBetQueryHandler(queryBetRepository);
 
-            //act
-            BetOutput result = await queryHandler.Handle(betQuery);
+            var result = await queryHandler.Handle(betQuery);
 
-            //assert
             Assert.NotNull(result);
             Assert.Equal(betId, result.Id);
         }
@@ -39,7 +38,15 @@ namespace BetFriend.MobileApp.UnitTests
         [Fact]
         public async Task ShouldThrowNotFoundExceptionIfIdUnknown()
         {
+            var betId = Guid.NewGuid();
+            var betQuery = new RetrieveBetQuery(betId);
+            var queryBetRepository = new InMemoryQueryBetRepository();
+            var queryHandler = new RetrieveBetQueryHandler(queryBetRepository);
 
+            var record = await Record.ExceptionAsync(() => queryHandler.Handle(betQuery));
+
+            Assert.IsType<BetNotFoundException>(record);
+            Assert.Equal($"Bet with id '{betId}' is not found", record.Message);
         }
     }
 }

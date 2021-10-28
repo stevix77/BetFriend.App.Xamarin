@@ -277,7 +277,7 @@
     <value>Found friends</value>
   </data>
   <data name="LblTokens" xml:space="preserve">
-    <value>Token(s)</value>
+    <value>Coin(s)</value>
   </data>
   <data name="LblUpdateEmail" xml:space="preserve">
     <value>Edit my email</value>

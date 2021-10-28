@@ -1,5 +1,6 @@
 ﻿namespace BetFriend.MobileApp
 {
+    using BetFriend.MobileApp.Views.DetailBet;
     using BetFriend.MobileApp.Views.Home;
     using BetFriend.MobileApp.Views.LaunchBet;
     using Xamarin.Forms;
@@ -11,6 +12,7 @@
             InitializeComponent();
             Routing.RegisterRoute(nameof(LaunchBetView), typeof(LaunchBetView));
             Routing.RegisterRoute(nameof(HomeView), typeof(HomeView));
+            Routing.RegisterRoute(nameof(DetailBetView), typeof(DetailBetView));
         }
     }
 }
