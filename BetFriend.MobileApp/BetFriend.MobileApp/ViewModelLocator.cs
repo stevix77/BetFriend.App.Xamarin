@@ -26,14 +26,19 @@ namespace BetFriend.MobileApp
 
         public static void RegisterDependencies()
         {
-            var queryBetRepository = new InMemoryQueryBetRepository(new List<BetOutput>()
+            var queryBetRepository = new InMemoryQueryBetRepository(new MemberOutput 
+            { 
+                Id = App.CurrentUser, 
+                Username = App.CurrentUsername 
+            }, 
+            new List<BetOutput>()
             {
                 new BetOutput
                 {
                     Creator = new MemberOutput
                     {
                         Id = App.CurrentUser,
-                        Username = "stevix"
+                        Username = App.CurrentUsername
                     },
                     Description = "Description bet 1",
                     Coins = 30,
@@ -53,7 +58,7 @@ namespace BetFriend.MobileApp
                     Creator = new MemberOutput
                     {
                         Id = App.CurrentUser,
-                        Username = "stevix"
+                        Username = App.CurrentUsername
                     },
                     Description = "Description bet 2",
                     Coins = 30,
@@ -65,6 +70,11 @@ namespace BetFriend.MobileApp
                         {
                             Id = Guid.NewGuid(),
                             Username = "username1"
+                        },
+                        new MemberOutput
+                        {
+                            Id = Guid.NewGuid(),
+                            Username = "username2"
                         }
                     }
                 }
@@ -72,7 +82,7 @@ namespace BetFriend.MobileApp
 
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddScoped<IQueryBetRepository>(x => queryBetRepository);
-            serviceCollection.AddScoped<IBetRepository>(x => new InMemoryBetRepository(App.CurrentUser, queryBetRepository));
+            serviceCollection.AddScoped<IBetRepository>(x => new InMemoryBetRepository(queryBetRepository));
             serviceCollection.AddScoped<IMessenger, Messenger>();
             serviceCollection.AddScoped<INavigationService, ShellNavigationService>();
             serviceCollection.AddScoped<IRetrieveBetQueryHandler, RetrieveBetQueryHandler>();

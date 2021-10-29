@@ -43,7 +43,7 @@ namespace BetFriend.MobileApp.UnitTests
                 Id = memberId, 
                 Username = "creator1" 
             };
-            IQueryBetRepository betRepository = new InMemoryQueryBetRepository(new List<BetOutput>()
+            IQueryBetRepository betRepository = new InMemoryQueryBetRepository(creator, new List<BetOutput>()
             {
                 new BetOutput
                 {
@@ -76,7 +76,7 @@ namespace BetFriend.MobileApp.UnitTests
                 Id = Guid.NewGuid(),
                 Username = "creator1"
             };
-            IQueryBetRepository betRepository = new InMemoryQueryBetRepository(new List<BetOutput>()
+            IQueryBetRepository betRepository = new InMemoryQueryBetRepository(creator, new List<BetOutput>()
             {
                 new BetOutput
                 {
@@ -116,7 +116,7 @@ namespace BetFriend.MobileApp.UnitTests
         public async Task HandleShouldThrowArgumentNullExceptionIfQueryIsNull()
         {
             //arrange
-            var handler = new GetBetsInProgressQueryHandler(new InMemoryQueryBetRepository());
+            var handler = new GetBetsInProgressQueryHandler(new InMemoryQueryBetRepository(default));
 
             //act
             var record = await Record.ExceptionAsync(() => handler.Handle(default));
