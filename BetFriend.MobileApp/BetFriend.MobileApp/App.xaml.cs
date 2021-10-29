@@ -11,6 +11,8 @@
         private static readonly string _currentUsername = "Toto";
         public static Guid CurrentUser { get => _currentUser; }
         public static string CurrentUsername { get => _currentUsername; }
+        public static object Token { get; internal set; }
+
         public App()
         {
             InitializeComponent();
