@@ -8,6 +8,7 @@ using BetFriend.MobileApp.Navigation;
 using BetFriend.MobileApp.Views.DetailBet;
 using BetFriend.MobileApp.Views.InProgressBet;
 using BetFriend.MobileApp.Views.LaunchBet;
+using BetFriend.MobileApp.Views.Register;
 using GalaSoft.MvvmLight.Messaging;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -91,6 +92,7 @@ namespace BetFriend.MobileApp
             serviceCollection.AddSingleton<LaunchBetViewModel>();
             serviceCollection.AddSingleton<InProgressBetsViewModel>();
             serviceCollection.AddSingleton<DetailBetViewModel>();
+            serviceCollection.AddSingleton<RegisterViewModel>();
             _serviceProvider = serviceCollection.BuildServiceProvider();
         }
     }
