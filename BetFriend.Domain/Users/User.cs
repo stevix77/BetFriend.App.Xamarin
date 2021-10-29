@@ -15,5 +15,6 @@
 
         public string Username { get => _username; }
         public string Email { get => _email; }
+        public string Password { get => _password; }
     }
 }
