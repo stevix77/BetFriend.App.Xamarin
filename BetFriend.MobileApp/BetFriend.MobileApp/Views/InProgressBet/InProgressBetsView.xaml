@@ -57,8 +57,21 @@
                                     <Label.FormattedText>
                                         <FormattedString>
                                             <FormattedString.Spans>
-                                                <Span Text="{Binding Tokens, StringFormat='{0} '}" />
+                                                <Span Text="{Binding Coins, StringFormat='{0} '}" />
                                                 <Span Text="{Static resources:Resource.LblTokens}" />
+                                            </FormattedString.Spans>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <Label Margin="5"
+                                        FontSize="10" 
+                                       Grid.Row="2" Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <FormattedString.Spans>
+                                                <Span Text="{Binding Participants, StringFormat='{0} '}" />
+                                                <Span Text="{Static resources:Resource.Participants}" />
                                             </FormattedString.Spans>
                                         </FormattedString>
                                     </Label.FormattedText>

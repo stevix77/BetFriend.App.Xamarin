@@ -10,9 +10,11 @@
     public class InMemoryQueryBetRepository : IQueryBetRepository
     {
         private readonly List<BetOutput> _betOutputs;
+        private readonly MemberOutput _currentUser;
 
-        public InMemoryQueryBetRepository(List<BetOutput> betOutputs = null)
+        public InMemoryQueryBetRepository(MemberOutput currentUser, List<BetOutput> betOutputs = null)
         {
+            _currentUser = currentUser;
             _betOutputs = betOutputs ?? new List<BetOutput>();
         }
 
@@ -31,11 +33,11 @@
         {
             _betOutputs.Add(new BetOutput
             {
-                Creator = new MemberOutput { Id = bet.CreatorId },
+                Creator = _currentUser,
                 Id = bet.BetId,
                 Description = bet.Description,
                 EndDate = bet.EndDate,
-                Coins = bet.Tokens,
+                Coins = bet.Coins,
                 Participants = new List<MemberOutput>()
             });
         }

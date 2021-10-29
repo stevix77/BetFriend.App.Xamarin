@@ -682,7 +682,7 @@ namespace BetFriend.MobileApp.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Participants.
+        ///   Recherche une chaîne localisée semblable à Participant(s).
         /// </summary>
         public static string Participants {
             get {
