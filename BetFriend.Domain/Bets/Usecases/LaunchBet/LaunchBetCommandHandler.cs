@@ -15,8 +15,8 @@
         public async Task Handle(LaunchBetCommand command)
         {
             ValidateCommand(command);
-
-            await _betRepository.SaveAsync(command);
+            var bet = new Bet(command.BetId, command.Description, command.EndDate, command.Coins);
+            await _betRepository.SaveAsync(bet);
         }
 
         private static void ValidateCommand(LaunchBetCommand command)

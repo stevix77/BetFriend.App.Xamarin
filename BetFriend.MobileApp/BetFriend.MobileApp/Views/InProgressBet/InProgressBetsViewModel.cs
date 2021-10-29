@@ -87,7 +87,7 @@
                 {
                     CreatorId = item.Creator.Id,
                     CreatorUsername = item.Creator.Username,
-                    Tokens = item.Coins,
+                    Coins = item.Coins,
                     EndDate = item.EndDate.ToLongDateString(),
                     Description = item.Description.Length > 50 ? $"{item.Description.Substring(0, 50)}..." : item.Description,
                     Participants = item.Participants.Count,

@@ -6,8 +6,10 @@
 
     public partial class App : Application
     {
-        private static Guid _currentUser = Guid.NewGuid();
+        private static readonly Guid _currentUser = Guid.NewGuid();
+        private static readonly string _currentUsername = "Toto";
         public static Guid CurrentUser { get => _currentUser; }
+        public static string CurrentUsername { get => _currentUsername; }
         public App()
         {
             InitializeComponent();

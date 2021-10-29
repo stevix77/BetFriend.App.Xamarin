@@ -1,5 +1,4 @@
-﻿using BetFriend.Domain.Bets;
-using BetFriend.Domain.Bets.Dto;
+﻿using BetFriend.Domain.Bets.Dto;
 using BetFriend.Domain.Bets.RetrieveBet;
 using GalaSoft.MvvmLight;
 using System;
@@ -21,6 +20,7 @@ namespace BetFriend.MobileApp.Views.DetailBet
                     RaisePropertyChanged(nameof(Bet));
             }
         }
+
         public DetailBetViewModel(IRetrieveBetQueryHandler retrieveBetQueryHandler)
         {
             _handler = retrieveBetQueryHandler;
