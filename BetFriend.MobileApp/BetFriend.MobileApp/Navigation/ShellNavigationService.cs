@@ -29,5 +29,12 @@
                 builder.Append($"&{item.Key}={item.Value}");
             return builder.ToString();
         }
+
+        public Page Init(string pageName)
+        {
+            var appShell = new AppShell();
+            appShell.GoToAsync($"//{pageName}").Wait();
+            return appShell;
+        }
     }
 }
