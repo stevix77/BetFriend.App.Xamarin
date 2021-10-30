@@ -87,9 +87,8 @@ namespace BetFriend.MobileApp.Views.Register
                 {
                     var command = new RegisterCommand(_username, _email, _password);
                     await _handler.Handle(command);
-                    var appShell = new AppShell();
-                    appShell.GoToAsync($"//{nameof(HomeView)}").Wait();
-                    App.Current.MainPage = appShell;
+                    var page = _navigationService.Init(nameof(HomeView));
+                    App.Current.MainPage = page;
                 }
                 catch
                 {
@@ -108,7 +107,6 @@ namespace BetFriend.MobileApp.Views.Register
             if (!_confirmPassword.Equals(_password))
                 return false;
             return true;
-
         }
     }
 }
