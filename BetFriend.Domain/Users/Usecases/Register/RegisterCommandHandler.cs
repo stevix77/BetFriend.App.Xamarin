@@ -19,7 +19,7 @@ namespace BetFriend.Domain.Users.Usecases.Register
 
         public async Task Handle(RegisterCommand command)
         {
-            string password = _hashPassword.Hash(command.Password);
+            var password = _hashPassword.Hash(command.Password);
             var user = new User(command.Username, command.Email, password);
             var token = await _userRepository.SaveAsync(user);
             if (string.IsNullOrEmpty(token))

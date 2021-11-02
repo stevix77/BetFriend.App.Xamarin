@@ -4,6 +4,7 @@
        Title="BetFriend.MobileApp"
        x:Class="BetFriend.MobileApp.AppShell"
        xmlns:launchBet="clr-namespace:BetFriend.MobileApp.Views.LaunchBet"
+       xmlns:resources="clr-namespace:BetFriend.MobileApp.Resources"
        xmlns:home="clr-namespace:BetFriend.MobileApp.Views.Home">
 
     <!--
@@ -79,8 +80,8 @@
         FlyoutDisplayOptions="AsMultipleItems" will create a separate flyout item for each child element    
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
-    <ShellContent Route="HomeView" Title="Home"  ContentTemplate="{DataTemplate home:HomeView}" />
-    <ShellContent Route="LaunchBetView" Title="Pari"  ContentTemplate="{DataTemplate launchBet:LaunchBetView}" />
+    <ShellContent Route="HomeView" Title="{Static resources:Resource.LblActiveBets}"  ContentTemplate="{DataTemplate home:HomeView}" />
+    <ShellContent Route="LaunchBetView" Title="{Static resources:Resource.NewBet}"  ContentTemplate="{DataTemplate launchBet:LaunchBetView}" />
     <!--
         TabBar lets you define content that won't show up in a flyout menu. When this content is active
         the flyout menu won't be available. This is useful for creating areas of the application where 

@@ -126,6 +126,9 @@
   <data name="AskFriendSent" xml:space="preserve">
     <value>Add request sent</value>
   </data>
+  <data name="AskSignIn" xml:space="preserve">
+    <value>You already have an account ?</value>
+  </data>
   <data name="BadAnswerDate" xml:space="preserve">
     <value>It's too late to answer this bet</value>
   </data>

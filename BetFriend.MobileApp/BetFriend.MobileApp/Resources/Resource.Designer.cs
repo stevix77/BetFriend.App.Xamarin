@@ -88,6 +88,15 @@ namespace BetFriend.MobileApp.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Vous avez déjà un compte ?.
+        /// </summary>
+        public static string AskSignIn {
+            get {
+                return ResourceManager.GetString("AskSignIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Réponse trop tardive pour ce pari.
         /// </summary>
         public static string BadAnswerDate {
