@@ -4,6 +4,7 @@ using BetFriend.Domain.Bets.GetBetsInProgress;
 using BetFriend.Domain.Bets.LaunchBet;
 using BetFriend.Domain.Bets.RetrieveBet;
 using BetFriend.Domain.Users;
+using BetFriend.Domain.Users.Usecases;
 using BetFriend.Domain.Users.Usecases.Register;
 using BetFriend.Domain.Users.Usecases.SignIn;
 using BetFriend.Infrastructure;
@@ -109,7 +110,7 @@ namespace BetFriend.MobileApp
             serviceCollection.AddScoped<IHashPassword, Sha256HashPassword>();
             serviceCollection.AddScoped<IHttpService, HttpService>();
             serviceCollection.AddScoped<IAuthenticationService, AuthenticationService>();
-            serviceCollection.AddScoped<IAuthenticationGateway, InMemoryAuthenticationGateway>();
+            serviceCollection.AddScoped<IAuthenticationGateway>(x => new InMemoryAuthenticationGateway(new Authentication("username", "passwordpassword", "token")));
             serviceCollection.AddScoped<IRestClient, RestClient>();
             serviceCollection.AddSingleton<LaunchBetViewModel>();
             serviceCollection.AddSingleton<InProgressBetsViewModel>();
