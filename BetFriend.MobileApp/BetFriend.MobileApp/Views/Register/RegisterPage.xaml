@@ -114,6 +114,29 @@
                         CornerRadius="20"
                         Style="{StaticResource SfButtonStyle}"
                         Text="{Static resources:Resource.BtnTextRegister}" />
+
+                    <StackLayout
+                    HorizontalOptions="Center"
+                    Orientation="Horizontal"
+                    Spacing="1"
+                    VerticalOptions="End">
+
+                        <Label
+                        HorizontalOptions="CenterAndExpand"
+                        HorizontalTextAlignment="Center"
+                        Style="{StaticResource LabelStyle}"
+                        Text="{Static resources:Resource.AskSignIn}"
+                        TextColor="{DynamicResource Gray-Black}"
+                        VerticalTextAlignment="Center" />
+
+                        <!-- Sign-up button  -->
+                        <buttons:SfButton
+                        Command="{Binding SignInCommand}"
+                        CornerRadius="4"
+                        Style="{StaticResource SfFlatButtonStyle}"
+                        Text="{Static resources:Resource.LogOn}" />
+
+                    </StackLayout>
                 </StackLayout>
             </StackLayout>
         </ScrollView>

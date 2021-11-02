@@ -11,13 +11,16 @@
         private static readonly string _currentUsername = "Toto";
         public static Guid CurrentUser { get => _currentUser; }
         public static string CurrentUsername { get => _currentUsername; }
-        public static object Token { get; internal set; }
 
         public App()
         {
             InitializeComponent();
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NDU3NTY2QDMxMzkyZTMxMmUzMFQ5a3FEem5ldkRvTzhVUndDS0ZhcXI3ZE9oaXVIRzF4UFVTeTdmcDFCV289");
+#if DEBUG
+            ViewModelLocator.RegisterInMemoryDependencies();
+#else
             ViewModelLocator.RegisterDependencies();
+#endif
             //var appShell = new AppShell();
             //appShell.GoToAsync($"{nameof(SignInPage)}").Wait();
             MainPage = new SignInPage();

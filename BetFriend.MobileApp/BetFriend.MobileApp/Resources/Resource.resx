@@ -126,6 +126,9 @@
   <data name="AskFriendSent" xml:space="preserve">
     <value>Demande d'ajout envoyée</value>
   </data>
+  <data name="AskSignIn" xml:space="preserve">
+    <value>Vous avez déjà un compte ?</value>
+  </data>
   <data name="BadAnswerDate" xml:space="preserve">
     <value>Réponse trop tardive pour ce pari</value>
   </data>

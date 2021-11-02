@@ -2,5 +2,7 @@
 {
     public interface ISignInPresenter
     {
+        void Present(string token);
+        void Fail(string errorMessage);
     }
 }

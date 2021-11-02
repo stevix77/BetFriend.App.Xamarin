@@ -1,6 +1,7 @@
 ﻿using BetFriend.Domain.Users.Usecases.Register;
 using BetFriend.MobileApp.Navigation;
 using BetFriend.MobileApp.Views.Home;
+using BetFriend.MobileApp.Views.SignIn;
 using GalaSoft.MvvmLight;
 using System;
 using Xamarin.Forms;
@@ -95,6 +96,15 @@ namespace BetFriend.MobileApp.Views.Register
 
                 }
             }, () => CanValidate()));
+        }
+
+        private Command _signInCommand;
+        public Command SignInCommand
+        {
+            get => _signInCommand ?? (_signInCommand = new Command(async () =>
+            {
+                await App.Current.MainPage.Navigation.PushModalAsync(new SignInPage());
+            }));
         }
 
         private bool CanValidate()
