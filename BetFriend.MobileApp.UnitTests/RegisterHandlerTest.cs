@@ -1,15 +1,14 @@
-﻿using BetFriend.Domain.Users;
-using BetFriend.Domain.Users.Usecases.Register;
-using BetFriend.Infrastructure.Repositories.InMemory;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
-
-namespace BetFriend.MobileApp.UnitTests
+﻿namespace BetFriend.MobileApp.UnitTests
 {
+    using BetFriend.Domain.Users;
+    using BetFriend.Domain.Users.Usecases.Register;
+    using BetFriend.Infrastructure.Repositories.InMemory;
+    using BetFriend.MobileApp.UnitTests.Implems;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using Xunit;
+
+
     public class RegisterHandlerTest
     {
         [Fact]
@@ -28,7 +27,7 @@ namespace BetFriend.MobileApp.UnitTests
         }
 
         [Fact]
-        public async Task ShouldNotCreateUserIfUsernameOrEmailAlreadyExists()
+        public async Task ShouldNotCreateUserIfUsernameAlreadyExists()
         {
             var command = new RegisterCommand("username", "username@test.fr", "passwordUsername");
             var presenter = new RegisterTestPresenter();
@@ -40,31 +39,21 @@ namespace BetFriend.MobileApp.UnitTests
 
             Assert.Null(presenter.Token);
         }
-    }
 
-    internal class FakeHashPassword : IHashPassword
-    {
-        public FakeHashPassword()
+        [Fact]
+        public async Task ShouldNotCreateUserIfEmailAlreadyExists()
         {
-        }
+            var command = new RegisterCommand("username", "username@test.fr", "passwordUsername");
+            var presenter = new RegisterTestPresenter();
+            var userRepository = new InMemoryUserRepository("token", new List<User> { new User("login", command.Email, command.Password) });
+            var hashPassword = new FakeHashPassword();
+            var handler = new RegisterCommandHandler(presenter, userRepository, hashPassword);
 
-        public string Hash(string password)
-        {
-            return password + password;
-        }
-    }
+            await handler.Handle(command);
 
-    internal class RegisterTestPresenter : IRegisterPresenter
-    {
-        public RegisterTestPresenter()
-        {
-        }
-
-        public string Token { get; private set; }
-
-        public void Present(RegisterResponse response)
-        {
-            Token = response.Token;
+            Assert.Null(presenter.Token);
         }
     }
+
+
 }

@@ -2,13 +2,13 @@
 {
     public class SignInCommand
     {
-        public SignInCommand(string v1, string v2)
+        public SignInCommand(string login, string password)
         {
-            V1 = v1;
-            V2 = v2;
+            Login = login;
+            Password = password;
         }
 
-        public string V1 { get; }
-        public string V2 { get; }
+        public string Login { get; }
+        public string Password { get; }
     }
 }

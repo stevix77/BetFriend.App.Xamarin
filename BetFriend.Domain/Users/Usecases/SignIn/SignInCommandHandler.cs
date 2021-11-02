@@ -4,18 +4,27 @@ namespace BetFriend.Domain.Users.Usecases.SignIn
 {
     public class SignInCommandHandler : ISignInCommandHandler
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IAuthenticationGateway _authenticationGateway;
         private readonly ISignInPresenter _signInPresenter;
+        private readonly IHashPassword _hashPassword;
 
-        public SignInCommandHandler(IUserRepository repository, ISignInPresenter signInPresenter)
+        public SignInCommandHandler(IAuthenticationGateway authenticationGateway,
+                                    ISignInPresenter signInPresenter,
+                                      IHashPassword hashPassword)
         {
-            _userRepository = repository;
+            _authenticationGateway = authenticationGateway;
             _signInPresenter = signInPresenter;
+            _hashPassword = hashPassword;
         }
 
-        public Task Handle(SignInCommand command)
+        public async Task Handle(SignInCommand command)
         {
-            throw new System.NotImplementedException();
+            var password = _hashPassword.Hash(command.Password);
+            var token = await _authenticationGateway.GetTokenAsync(command.Login, password).ConfigureAwait(false);
+            if (!string.IsNullOrEmpty(token))
+                _signInPresenter.Present(token);
+            else
+                _signInPresenter.Fail("Identification failed");
         }
     }
 }
