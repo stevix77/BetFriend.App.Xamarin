@@ -10,6 +10,7 @@ using BetFriend.Domain.Users.Usecases.Register;
 using BetFriend.Domain.Users.Usecases.SignIn;
 using BetFriend.Infrastructure;
 using BetFriend.Infrastructure.Abstractions;
+using BetFriend.Infrastructure.DateTime;
 using BetFriend.Infrastructure.Gateways;
 using BetFriend.Infrastructure.Hash;
 using BetFriend.Infrastructure.Repositories.Http;
@@ -112,6 +113,7 @@ namespace BetFriend.MobileApp
             serviceCollection.AddSingleton<RegisterViewModel>();
             serviceCollection.AddSingleton<SignInViewModel>();
             serviceCollection.AddSingleton<IDataStorage, EssentialsSecureStorage>();
+            serviceCollection.AddSingleton<IDateTimeProvider, DateTimeProvider>();
             _serviceProvider = serviceCollection.BuildServiceProvider();
         }
 
@@ -149,6 +151,7 @@ namespace BetFriend.MobileApp
             serviceCollection.AddSingleton<RegisterViewModel>();
             serviceCollection.AddSingleton<SignInViewModel>();
             serviceCollection.AddSingleton<IDataStorage, EssentialsSecureStorage>();
+            serviceCollection.AddScoped<IDateTimeProvider, DateTimeProvider>();
             _serviceProvider = serviceCollection.BuildServiceProvider();
         }
     }
