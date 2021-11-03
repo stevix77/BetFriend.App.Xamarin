@@ -26,6 +26,7 @@
         public void Present(string token)
         {
             _authenticationService.SetToken(token);
+            _errors.Clear();
         }
 
         internal string GetError()

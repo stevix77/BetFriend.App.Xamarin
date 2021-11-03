@@ -1,15 +1,13 @@
-using BetFriend.Domain.Bets;
-using BetFriend.Domain.Bets.Dto;
-using BetFriend.Domain.Bets.LaunchBet;
-using BetFriend.Infrastructure.DateTime;
-using BetFriend.Infrastructure.Repositories.InMemory;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Xunit;
-
 namespace BetFriend.MobileApp.UnitTests
 {
+    using BetFriend.Domain.Bets.LaunchBet;
+    using BetFriend.Infrastructure.DateTime;
+    using BetFriend.Infrastructure.Repositories.InMemory;
+    using System;
+    using System.Threading.Tasks;
+    using Xunit;
+
+
     public class LaunchBetHandlerTest
     {
         private const string _description = "new bet description";
@@ -22,14 +20,14 @@ namespace BetFriend.MobileApp.UnitTests
             //arrange
             var endDate = new DateTime(2021, 12, 31);
             var command = new LaunchBetCommand(_betId, _description, endDate, _coins);
-            InMemoryBetRepository betRepository = new();
+            var betRepository = new InMemoryBetRepository();
             var handler = new LaunchBetCommandHandler(betRepository, new FakeDateTimeProvider(new DateTime(2021, 10, 10)));
 
             //act
             await handler.Handle(command);
 
             //assert
-            IEnumerable<Bet> bets = betRepository.GetBets();
+            var bets = betRepository.GetBets();
             Assert.Collection(bets, (bet) =>
             {
                 Assert.Equal(command.Description, bet.Description);
@@ -45,7 +43,7 @@ namespace BetFriend.MobileApp.UnitTests
             //arrange
             var endDate = new DateTime(2020, 12, 12);
             var command = new LaunchBetCommand(_betId, _description, endDate, 20);
-            IBetRepository betRepository = new InMemoryBetRepository();
+            var betRepository = new InMemoryBetRepository();
             var handler = new LaunchBetCommandHandler(betRepository, new FakeDateTimeProvider(new DateTime(2021, 3, 3)));
 
             //act
@@ -62,7 +60,7 @@ namespace BetFriend.MobileApp.UnitTests
             //arrange
             var endDate = new DateTime(2021, 12, 31);
             var command = new LaunchBetCommand(_betId, null, endDate, 20);
-            IBetRepository betRepository = new InMemoryBetRepository();
+            var betRepository = new InMemoryBetRepository();
             var handler = new LaunchBetCommandHandler(betRepository, new FakeDateTimeProvider(new DateTime(2021, 8, 3)));
 
             //act
