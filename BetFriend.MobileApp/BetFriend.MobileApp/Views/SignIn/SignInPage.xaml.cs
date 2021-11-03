@@ -11,5 +11,11 @@
             InitializeComponent();
             BindingContext = ViewModelLocator.Resolve<SignInViewModel>();
         }
+
+        protected override void OnDisappearing()
+        {
+            ViewModelLocator.Resolve<SignInViewModel>().Cleanup();
+            base.OnDisappearing();
+        }
     }
 }

@@ -82,5 +82,12 @@ namespace BetFriend.MobileApp.Views.SignIn
                 return false;
             return true;
         }
+
+        public override void Cleanup()
+        {
+            Login = null;
+            Password = null;
+            base.Cleanup();
+        }
     }
 }
