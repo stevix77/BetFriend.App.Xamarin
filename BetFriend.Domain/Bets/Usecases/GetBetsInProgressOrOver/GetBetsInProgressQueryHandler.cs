@@ -7,24 +7,16 @@
 
     public class GetBetsInProgressQueryHandler : IGetBetsInProgressQueryHandler
     {
-        private readonly IQueryBetRepository _betRepository;
+        private readonly IBetRepository _betRepository;
 
-        public GetBetsInProgressQueryHandler(IQueryBetRepository betRepository)
+        public GetBetsInProgressQueryHandler(IBetRepository betRepository)
         {
             _betRepository = betRepository ?? throw new ArgumentNullException(nameof(betRepository));
         }
 
-        public async Task<IReadOnlyCollection<BetOutput>> Handle(GetBetsInProgressQuery query)
+        public async Task<IReadOnlyCollection<BetOutput>> Handle()
         {
-            ValidateQuery(query);
-
-            return await _betRepository.GetBetsForMember(query.MemberId);
-        }
-
-        private static void ValidateQuery(GetBetsInProgressQuery query)
-        {
-            if (query is null)
-                throw new ArgumentNullException(nameof(query));
+            return await _betRepository.GetBetsAsync();
         }
     }
 }

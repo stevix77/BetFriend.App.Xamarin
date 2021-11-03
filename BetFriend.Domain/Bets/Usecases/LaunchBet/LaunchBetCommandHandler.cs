@@ -1,15 +1,18 @@
 ﻿namespace BetFriend.Domain.Bets.LaunchBet
 {
+    using BetFriend.Domain.Abstractions;
     using System;
     using System.Threading.Tasks;
 
     public class LaunchBetCommandHandler : ILaunchBetCommandHandler
     {
         private readonly IBetRepository _betRepository;
+        private readonly IDateTimeProvider _dateTimeProvider;
 
-        public LaunchBetCommandHandler(IBetRepository betRepository)
+        public LaunchBetCommandHandler(IBetRepository betRepository, IDateTimeProvider dateTimeProvider)
         {
             _betRepository = betRepository;
+            _dateTimeProvider = dateTimeProvider;
         }
 
         public async Task Handle(LaunchBetCommand command)
@@ -19,9 +22,9 @@
             await _betRepository.SaveAsync(bet);
         }
 
-        private static void ValidateCommand(LaunchBetCommand command)
+        private void ValidateCommand(LaunchBetCommand command)
         {
-            if (command.EndDate <= DateTime.UtcNow)
+            if (command.EndDate <= _dateTimeProvider.Now())
                 throw new ArgumentException("End date is not valid");
 
             if (string.IsNullOrEmpty(command.Description))

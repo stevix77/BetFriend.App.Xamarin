@@ -2,6 +2,7 @@
 {
     using BetFriend.Domain.Users;
     using BetFriend.Domain.Users.Usecases.Register;
+    using BetFriend.Infrastructure.Hash;
     using BetFriend.Infrastructure.Repositories.InMemory;
     using BetFriend.MobileApp.UnitTests.Implems;
     using System.Collections.Generic;

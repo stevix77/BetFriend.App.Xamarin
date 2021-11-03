@@ -58,7 +58,7 @@
             set
             {
                 if (Set(nameof(EndDate), ref _endDate, value))
-                    EndDate = value;
+                    RaisePropertyChanged(nameof(EndDate));
             }
         }
 

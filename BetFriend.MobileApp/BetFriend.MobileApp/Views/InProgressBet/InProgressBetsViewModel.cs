@@ -66,7 +66,7 @@
 
         public async Task LoadBets()
         {
-            var result = await _handler.Handle(new GetBetsInProgressQuery(App.CurrentUser));
+            var result = await _handler.Handle();
             if (result.Any())
             {
                 ResetBets();

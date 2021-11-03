@@ -7,16 +7,16 @@
 
     public class RetrieveBetQueryHandler : IRetrieveBetQueryHandler
     {
-        private readonly IQueryBetRepository _queryBetRepository;
+        private readonly IBetRepository _betRepository;
 
-        public RetrieveBetQueryHandler(IQueryBetRepository queryBetRepository)
+        public RetrieveBetQueryHandler(IBetRepository betRepository)
         {
-            _queryBetRepository = queryBetRepository;
+            _betRepository = betRepository;
         }
 
         public async Task<BetOutput> Handle(RetrieveBetQuery betQuery)
         {
-            var betOutput = await _queryBetRepository.GetBetAsync(betQuery.BetId)
+            var betOutput = await _betRepository.GetBetAsync(betQuery.BetId)
                   ?? throw new BetNotFoundException(betQuery.BetId);
             return betOutput;
         }
