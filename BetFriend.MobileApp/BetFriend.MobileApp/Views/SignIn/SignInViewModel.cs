@@ -63,7 +63,7 @@ namespace BetFriend.MobileApp.Views.SignIn
                     return;
                 }
                 var page = _navigationService.Init(nameof(HomeView));
-                App.Current.MainPage = page;
+                App.Current.Dispatcher.BeginInvokeOnMainThread(() => App.Current.MainPage = page);
             }, () => CanValidate()));
         }
 

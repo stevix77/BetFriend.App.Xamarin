@@ -1,5 +1,6 @@
 ﻿using BetFriend.Domain.Users;
 using BetFriend.Infrastructure.Abstractions;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Threading.Tasks;
@@ -9,11 +10,13 @@ namespace BetFriend.Infrastructure.Gateways
     public class HttpAuthenticationGateway : IAuthenticationGateway
     {
         private readonly IHttpService _httpService;
-        private const string SIGNIN_URL = "https://betfriend-dev.azurewebsites.net/api/users/signin";
+        private readonly string _host;
+        private const string SIGNIN_URL = "api/users/signin";
 
-        public HttpAuthenticationGateway(IHttpService httpService)
+        public HttpAuthenticationGateway(IHttpService httpService, IConfiguration configuration)
         {
             _httpService = httpService;
+            _host = configuration["ApiHost"];
         }
 
         public async Task<string> GetTokenAsync(string login, string password)
@@ -25,7 +28,7 @@ namespace BetFriend.Infrastructure.Gateways
                     {
                         ContractResolver = new CamelCasePropertyNamesContractResolver()
                     });
-            var token = await _httpService.PostAsync<string>(SIGNIN_URL, json).ConfigureAwait(false);
+            var token = await _httpService.PostAsync<string>($"{_host}{SIGNIN_URL}", json).ConfigureAwait(false);
             return token;
         }
     }

@@ -2,6 +2,7 @@
 {
     using BetFriend.Domain.Users;
     using BetFriend.Infrastructure.Abstractions;
+    using Microsoft.Extensions.Configuration;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
     using System.Threading.Tasks;
@@ -9,11 +10,13 @@
     public class UserRepository : IUserRepository
     {
         private readonly IHttpService _httpService;
-        private const string REGISTER_URL = "https://betfriend-dev.azurewebsites.net/api/users/register";
+        private const string REGISTER_URL = "api/users/register";
+        private readonly string _host;
 
-        public UserRepository(IHttpService httpService)
+        public UserRepository(IHttpService httpService, IConfiguration configuration)
         {
             _httpService = httpService;
+            _host = configuration["ApiHost"];
         }
 
         public async Task<string> SaveAsync(User user)
@@ -22,7 +25,7 @@
             {
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
             });
-            var token = await _httpService.PostAsync<string>(REGISTER_URL, jsonUser).ConfigureAwait(false);
+            var token = await _httpService.PostAsync<string>($"{_host}{REGISTER_URL}", jsonUser).ConfigureAwait(false);
             return token;
         }
     }

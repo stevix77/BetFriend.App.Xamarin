@@ -84,17 +84,10 @@ namespace BetFriend.MobileApp.Views.Register
         {
             get => _signUpCommand ?? (_signUpCommand = new Command(async() =>
             {
-                try
-                {
-                    var command = new RegisterCommand(_username, _email, _password);
-                    await _handler.Handle(command);
-                    var page = _navigationService.Init(nameof(HomeView));
-                    App.Current.MainPage = page;
-                }
-                catch
-                {
-
-                }
+                var command = new RegisterCommand(_username, _email, _password);
+                await _handler.Handle(command);
+                var page = _navigationService.Init(nameof(HomeView));
+                App.Current.MainPage = page;
             }, () => CanValidate()));
         }
 
@@ -117,6 +110,15 @@ namespace BetFriend.MobileApp.Views.Register
             if (!_confirmPassword.Equals(_password))
                 return false;
             return true;
+        }
+
+        public override void Cleanup()
+        {
+            Username = null;
+            Password = null;
+            ConfirmPassword = null;
+            Email = null;
+            base.Cleanup();
         }
     }
 }

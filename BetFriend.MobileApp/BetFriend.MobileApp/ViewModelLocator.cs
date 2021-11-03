@@ -22,10 +22,12 @@ using BetFriend.MobileApp.Views.LaunchBet;
 using BetFriend.MobileApp.Views.Register;
 using BetFriend.MobileApp.Views.SignIn;
 using GalaSoft.MvvmLight.Messaging;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace BetFriend.MobileApp
 {
@@ -116,7 +118,14 @@ namespace BetFriend.MobileApp
         public static void RegisterDependencies()
         {
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddScoped<IBetRepository>();
+            var configuration = new ConfigurationBuilder()
+#if RELEASE
+                .AddJsonStream(Assembly.GetAssembly(typeof(App)).GetManifestResourceStream("BetFriend.MobileApp.appsettings.release.json"))
+#endif
+                .Build();
+
+            serviceCollection.AddSingleton<IConfiguration>(configuration);
+            serviceCollection.AddScoped<IBetRepository, BetRepository>();
             serviceCollection.AddScoped<IUserRepository, UserRepository>();
             serviceCollection.AddScoped<IMessenger, Messenger>();
             serviceCollection.AddScoped<INavigationService, ShellNavigationService>();
@@ -139,6 +148,7 @@ namespace BetFriend.MobileApp
             serviceCollection.AddSingleton<DetailBetViewModel>();
             serviceCollection.AddSingleton<RegisterViewModel>();
             serviceCollection.AddSingleton<SignInViewModel>();
+            serviceCollection.AddSingleton<IDataStorage, EssentialsSecureStorage>();
             _serviceProvider = serviceCollection.BuildServiceProvider();
         }
     }
