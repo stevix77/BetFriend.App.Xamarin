@@ -7,7 +7,6 @@
     using Microsoft.AppCenter;
     using Microsoft.AppCenter.Analytics;
     using Microsoft.AppCenter.Crashes;
-    using System;
     using Xamarin.Forms;
 
     public partial class App : Application
@@ -36,7 +35,7 @@
 
         protected override void OnStart()
         {
-            AppCenter.Start("android=9c1f0d79-06fb-4b2d-9a61-20e167f6ae66;" +
+            AppCenter.Start("android=79efb9b7-36d4-45e4-be57-728e1df644a7;" +
                   "uwp=a2494c59-4149-4a03-b0b7-95d3a5f5191b;" +
                   "ios=4761a9e1-abf2-4ba2-9820-73ad7c950e29",
                   typeof(Analytics), typeof(Crashes));
