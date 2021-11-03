@@ -88,5 +88,14 @@
         {
             return !string.IsNullOrEmpty(_description);
         }
+
+        public override void Cleanup()
+        {
+            Description = default;
+            EndDate = default;
+            EndTime = default;
+            Coins = default;
+            base.Cleanup();
+        }
     }
 }

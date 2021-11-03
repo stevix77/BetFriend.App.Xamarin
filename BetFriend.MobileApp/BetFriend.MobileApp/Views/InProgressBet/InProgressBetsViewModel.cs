@@ -67,7 +67,7 @@
         public async Task LoadBets()
         {
             var result = await _handler.Handle();
-            if (result.Any())
+            if (result?.Any() == true)
             {
                 ResetBets();
                 MapBets(result);

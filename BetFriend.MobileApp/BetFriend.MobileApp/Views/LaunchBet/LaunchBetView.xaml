@@ -60,7 +60,7 @@
                             PlaceholderColor="{StaticResource Gray-700}"
                             Style="{StaticResource EditorStyle}"
                             Text="{Binding Description}"
-                            TextColor="Black" Keyboard="Default"  />
+                            TextColor="Black" Keyboard="Default" Completed="Entry_Completed" />
                         </border:SfBorder>
                     </StackLayout>
                     <StackLayout>

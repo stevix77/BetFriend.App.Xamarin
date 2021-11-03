@@ -6,16 +6,24 @@
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SignInPage : ContentPage
     {
+        private readonly SignInViewModel _vm;
         public SignInPage()
         {
             InitializeComponent();
-            BindingContext = ViewModelLocator.Resolve<SignInViewModel>();
+            _vm = ViewModelLocator.Resolve<SignInViewModel>();
+            BindingContext = _vm;
         }
 
         protected override void OnDisappearing()
         {
-            ViewModelLocator.Resolve<SignInViewModel>().Cleanup();
+            _vm.Cleanup();
             base.OnDisappearing();
+        }
+
+        private void Entry_Completed(object sender, System.EventArgs e)
+        {
+            if (_vm.LoginCommand.CanExecute(null))
+                _vm.LoginCommand.Execute(null);
         }
     }
 }

@@ -58,7 +58,7 @@
                             PlaceholderColor="{DynamicResource Gray-700}"
                             Style="{StaticResource EntryStyle}"
                             Text="{Binding Login}"
-                            TextColor="{DynamicResource Gray-900}" />
+                            TextColor="{DynamicResource Gray-900}" Completed="Entry_Completed"/>
                     </border:SfBorder>
 
 
@@ -73,7 +73,7 @@
                             PlaceholderColor="{DynamicResource Gray-700}"
                             Style="{StaticResource EntryStyle}"
                             Text="{Binding Password}"
-                            TextColor="{DynamicResource Gray-900}" />
+                            TextColor="{DynamicResource Gray-900}" Completed="Entry_Completed" />
                     </border:SfBorder>
 
                     <!-- Login button  -->
