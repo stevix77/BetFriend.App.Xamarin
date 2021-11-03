@@ -1,13 +1,10 @@
-﻿namespace BetFriend.MobileApp.UnitTests.Implems
+﻿namespace BetFriend.Infrastructure.Hash
 {
     using BetFriend.Domain.Users;
 
 
-    internal class FakeHashPassword : IHashPassword
+    public class FakeHashPassword : IHashPassword
     {
-        public FakeHashPassword()
-        {
-        }
 
         public string Hash(string password)
         {

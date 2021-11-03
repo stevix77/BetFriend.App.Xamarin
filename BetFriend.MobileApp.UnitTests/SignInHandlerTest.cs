@@ -3,6 +3,7 @@
     using BetFriend.Domain.Users.Usecases;
     using BetFriend.Domain.Users.Usecases.SignIn;
     using BetFriend.Infrastructure.Gateways;
+    using BetFriend.Infrastructure.Hash;
     using BetFriend.MobileApp.UnitTests.Implems;
     using System.Threading.Tasks;
     using Xunit;

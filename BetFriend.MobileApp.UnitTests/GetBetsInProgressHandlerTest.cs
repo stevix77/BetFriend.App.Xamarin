@@ -1,11 +1,11 @@
 ﻿using BetFriend.Domain.Bets;
 using BetFriend.Domain.Bets.Dto;
 using BetFriend.Domain.Bets.GetBetsInProgress;
+using BetFriend.Domain.Users;
 using BetFriend.Infrastructure.Repositories.InMemory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -13,21 +13,14 @@ namespace BetFriend.MobileApp.UnitTests
 {
     public class GetBetsInProgressHandlerTest
     {
-        public GetBetsInProgressHandlerTest()
-        {
-
-        }
-
         [Fact]
         public async Task HandleShouldReturnEmptyListBetIfMemberHasNeverBet()
         {
             //arrange
-            var memberId = Guid.NewGuid();
-            var handler = new GetBetsInProgressQueryHandler(new InMemoryQueryBetRepository(null));
-            var query = new GetBetsInProgressQuery(memberId);
+            var handler = new GetBetsInProgressQueryHandler(new InMemoryBetRepository());
 
             //act
-            IReadOnlyCollection<BetOutput> bets = await handler.Handle(query);
+            var bets = await handler.Handle();
 
             //assert
             Assert.Empty(bets);
@@ -38,12 +31,12 @@ namespace BetFriend.MobileApp.UnitTests
         {
             //arrange
             var memberId = Guid.NewGuid();
-            var creator = new MemberOutput 
-            { 
-                Id = memberId, 
-                Username = "creator1" 
+            var creator = new MemberOutput
+            {
+                Id = memberId,
+                Username = "creator1"
             };
-            IQueryBetRepository betRepository = new InMemoryQueryBetRepository(creator, new List<BetOutput>()
+            var betRepository = new InMemoryBetRepository(new List<BetOutput>()
             {
                 new BetOutput
                 {
@@ -55,10 +48,9 @@ namespace BetFriend.MobileApp.UnitTests
                 }
             });
             var handler = new GetBetsInProgressQueryHandler(betRepository);
-            var query = new GetBetsInProgressQuery(memberId);
 
             //act
-            IReadOnlyCollection<BetOutput> bets = await handler.Handle(query);
+            var bets = await handler.Handle();
 
             //assert
             Assert.Single(bets);
@@ -76,7 +68,7 @@ namespace BetFriend.MobileApp.UnitTests
                 Id = Guid.NewGuid(),
                 Username = "creator1"
             };
-            IQueryBetRepository betRepository = new InMemoryQueryBetRepository(creator, new List<BetOutput>()
+            var betRepository = new InMemoryBetRepository(new List<BetOutput>()
             {
                 new BetOutput
                 {
@@ -96,10 +88,9 @@ namespace BetFriend.MobileApp.UnitTests
                 }
             });
             var handler = new GetBetsInProgressQueryHandler(betRepository);
-            var query = new GetBetsInProgressQuery(memberId);
 
             //act
-            IReadOnlyCollection<BetOutput> bets = await handler.Handle(query);
+            IReadOnlyCollection<BetOutput> bets = await handler.Handle();
 
             //assert
             Assert.Single(bets);
@@ -113,26 +104,13 @@ namespace BetFriend.MobileApp.UnitTests
         }
 
         [Fact]
-        public async Task HandleShouldThrowArgumentNullExceptionIfQueryIsNull()
-        {
-            //arrange
-            var handler = new GetBetsInProgressQueryHandler(new InMemoryQueryBetRepository(default));
-
-            //act
-            var record = await Record.ExceptionAsync(() => handler.Handle(default));
-
-            //assert
-            Assert.IsType<ArgumentNullException>(record);
-        }
-
-        [Fact]
         public void CtorShouldThrowArgumentNullExceptionIfParamsNull()
         {
             //arrange
-            IQueryBetRepository queryBetRepository = null;
+            IBetRepository betRepository = null;
 
             //act
-            var record = Record.Exception(() => new GetBetsInProgressQueryHandler(queryBetRepository));
+            var record = Record.Exception(() => new GetBetsInProgressQueryHandler(betRepository));
 
             //assert
             Assert.IsType<ArgumentNullException>(record);

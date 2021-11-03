@@ -6,6 +6,6 @@
 
     public interface IGetBetsInProgressQueryHandler
     {
-        Task<IReadOnlyCollection<BetOutput>> Handle(GetBetsInProgressQuery query);
+        Task<IReadOnlyCollection<BetOutput>> Handle();
     }
 }

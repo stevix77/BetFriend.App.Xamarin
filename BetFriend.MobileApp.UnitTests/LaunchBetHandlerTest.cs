@@ -1,6 +1,7 @@
 using BetFriend.Domain.Bets;
 using BetFriend.Domain.Bets.Dto;
 using BetFriend.Domain.Bets.LaunchBet;
+using BetFriend.Infrastructure.DateTime;
 using BetFriend.Infrastructure.Repositories.InMemory;
 using System;
 using System.Collections.Generic;
@@ -14,16 +15,15 @@ namespace BetFriend.MobileApp.UnitTests
         private const string _description = "new bet description";
         private const int _coins = 20;
         private readonly Guid _betId = Guid.NewGuid();
-        private readonly MemberOutput _member = new() { Id = Guid.NewGuid(), Username = "currentUser" };
 
         [Fact]
         public async Task ShouldCreateBet()
         {
             //arrange
-            var endDate = DateTime.UtcNow.AddDays(7);
+            var endDate = new DateTime(2021, 12, 31);
             var command = new LaunchBetCommand(_betId, _description, endDate, _coins);
-            InMemoryBetRepository betRepository = new(new InMemoryQueryBetRepository(_member));
-            var handler = new LaunchBetCommandHandler(betRepository);
+            InMemoryBetRepository betRepository = new();
+            var handler = new LaunchBetCommandHandler(betRepository, new FakeDateTimeProvider(new DateTime(2021, 10, 10)));
 
             //act
             await handler.Handle(command);
@@ -43,10 +43,10 @@ namespace BetFriend.MobileApp.UnitTests
         public async Task ShouldThrowArgumentExceptionIfEndDateNotValid()
         {
             //arrange
-            var endDate = DateTime.UtcNow.AddDays(-7);
+            var endDate = new DateTime(2020, 12, 12);
             var command = new LaunchBetCommand(_betId, _description, endDate, 20);
-            IBetRepository betRepository = new InMemoryBetRepository(new InMemoryQueryBetRepository(_member));
-            var handler = new LaunchBetCommandHandler(betRepository);
+            IBetRepository betRepository = new InMemoryBetRepository();
+            var handler = new LaunchBetCommandHandler(betRepository, new FakeDateTimeProvider(new DateTime(2021, 3, 3)));
 
             //act
             var record = await Record.ExceptionAsync(() => handler.Handle(command));
@@ -60,10 +60,10 @@ namespace BetFriend.MobileApp.UnitTests
         public async Task ShouldThrowArgumentExceptionIfDescriptionIsEmpty()
         {
             //arrange
-            var endDate = DateTime.UtcNow.AddDays(7);
+            var endDate = new DateTime(2021, 12, 31);
             var command = new LaunchBetCommand(_betId, null, endDate, 20);
-            IBetRepository betRepository = new InMemoryBetRepository(new InMemoryQueryBetRepository(_member));
-            var handler = new LaunchBetCommandHandler(betRepository);
+            IBetRepository betRepository = new InMemoryBetRepository();
+            var handler = new LaunchBetCommandHandler(betRepository, new FakeDateTimeProvider(new DateTime(2021, 8, 3)));
 
             //act
             var record = await Record.ExceptionAsync(() => handler.Handle(command));
