@@ -16,9 +16,8 @@
 
         public async Task<BetOutput> Handle(RetrieveBetQuery betQuery)
         {
-            var betOutput = await _betRepository.GetBetAsync(betQuery.BetId)
+            return await _betRepository.GetBetAsync(betQuery.BetId)
                   ?? throw new BetNotFoundException(betQuery.BetId);
-            return betOutput;
         }
     }
 }

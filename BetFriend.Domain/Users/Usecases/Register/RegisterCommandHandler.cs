@@ -24,7 +24,7 @@ namespace BetFriend.Domain.Users.Usecases.Register
             var token = await _userRepository.SaveAsync(user);
             if (string.IsNullOrEmpty(token))
                 return;
-            _presenter.Present(new RegisterResponse { Token = token });
+            _presenter.Present(new RegisterResponse(token, user));
         }
     }
 }

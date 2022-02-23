@@ -2,6 +2,13 @@
 {
     public class RegisterResponse
     {
-        public string Token { get; set; }
+        public RegisterResponse(string token, User user)
+        {
+            Token = token;
+            User = user;
+        }
+
+        public string Token { get; }
+        public User User { get; }
     }
 }

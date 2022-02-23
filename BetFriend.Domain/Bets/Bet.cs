@@ -1,5 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using BetFriend.Domain.Abstractions;
+using BetFriend.Domain.Bets.LaunchBet;
+using System;
 
 namespace BetFriend.Domain.Bets
 {
@@ -17,6 +18,17 @@ namespace BetFriend.Domain.Bets
         public string Description { get; }
         public DateTime EndDate { get; }
         public int Coins { get; }
+
+        internal static Bet Create(LaunchBetCommand command, IDateTimeProvider dateTimeProvider)
+        {
+            if (command.EndDate <= dateTimeProvider.Now())
+                throw new ArgumentException("End date is not valid");
+
+            if (string.IsNullOrEmpty(command.Description))
+                throw new ArgumentException("Description is not valid");
+
+            return new Bet(command.BetId, command.Description, command.EndDate, command.Coins);
+        }
     }
 }
 
