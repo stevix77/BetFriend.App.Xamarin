@@ -26,7 +26,7 @@ namespace BetFriend.MobileApp.UnitTests
             var betOutput = new BetOutput() { Creator = creator, Id = betId, Description = "description bet",
                 EndDate = DateTime.UtcNow.AddDays(10), Coins = 100 };
             var betQuery = new RetrieveBetQuery(betId);
-            var queryHandler = new RetrieveBetQueryHandler(new InMemoryBetRepository(new() { betOutput }));
+            var queryHandler = new RetrieveBetQueryHandler(new InMemoryBetRepository(new List<BetOutput>() { betOutput }));
 
             var result = await queryHandler.Handle(betQuery);
 

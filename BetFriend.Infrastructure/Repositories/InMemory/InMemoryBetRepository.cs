@@ -2,6 +2,7 @@
 {
     using BetFriend.Domain.Bets;
     using BetFriend.Domain.Bets.Dto;
+    using BetFriend.Domain.Users;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -12,11 +13,20 @@
     {
         private readonly List<Bet> _bets;
         private readonly List<BetOutput> _betOutputs;
+        private readonly IAuthenticationService _authenticationService;
 
-        public InMemoryBetRepository(List<BetOutput> betOutputs = null)
+        public InMemoryBetRepository(List<BetOutput> betOutputs = null, IAuthenticationService authenticationService = null)
         {
             _bets = new List<Bet>();
             _betOutputs = betOutputs ?? new List<BetOutput>();
+            _authenticationService = authenticationService;
+        }
+
+        public InMemoryBetRepository(Bet bet)
+        {
+            _bets = new List<Bet>();
+            _betOutputs = new List<BetOutput>();
+            SaveAsync(bet);
         }
 
         public Task SaveAsync(Bet bet)
@@ -47,6 +57,13 @@
         public IReadOnlyCollection<Bet> GetBets()
         {
             return _bets;
+        }
+
+        public Task AnswerBetAsync(Guid betId, bool answer)
+        {
+            var bet = _betOutputs.First(x => x.Id == betId);
+            bet.Participants = new List<MemberOutput>(bet.Participants) { new MemberOutput { Id = Guid.Parse(_authenticationService.UserId) } };
+            return Task.CompletedTask;
         }
     }
 }

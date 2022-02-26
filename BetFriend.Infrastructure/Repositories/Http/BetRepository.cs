@@ -53,5 +53,10 @@ namespace BetFriend.Infrastructure.Repositories.Http
             await _httpService.PostAsync<object>($"{_host}{CREATE_BET_URL}", jsonUser)
                               .ConfigureAwait(false);
         }
+
+        public Task AnswerBetAsync(Guid guid, bool answer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
