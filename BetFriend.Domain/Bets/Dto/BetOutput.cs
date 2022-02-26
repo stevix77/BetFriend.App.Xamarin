@@ -10,6 +10,6 @@
         public string Description { get; set; }
         public Guid Id { get; set; }
         public DateTime EndDate { get; set; }
-        public IReadOnlyCollection<MemberOutput> Participants { get; set; }
+        public IReadOnlyCollection<MemberOutput> Participants { get; set; } = new List<MemberOutput>();
     }
 }
