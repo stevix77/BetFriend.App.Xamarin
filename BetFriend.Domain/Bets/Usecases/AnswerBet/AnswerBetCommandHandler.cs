@@ -1,15 +1,14 @@
 ﻿namespace BetFriend.Domain.Bets.Usecases.AnswerBet
 {
-    using BetFriend.Domain.Users;
     using System;
     using System.Threading.Tasks;
 
 
-    public class AnswerBetHandler
+    public class AnswerBetCommandHandler : IAnswerBetCommandHandler
     {
         private readonly IBetRepository _betRepository;
 
-        public AnswerBetHandler(IBetRepository betRepository)
+        public AnswerBetCommandHandler(IBetRepository betRepository)
         {
             _betRepository = betRepository;
         }
