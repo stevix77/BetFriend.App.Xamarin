@@ -62,7 +62,8 @@
         public Task AnswerBetAsync(Guid betId, bool answer)
         {
             var bet = _betOutputs.First(x => x.Id == betId);
-            bet.Participants = new List<MemberOutput>(bet.Participants) { new MemberOutput { Id = Guid.Parse(_authenticationService.UserId) } };
+            if(!bet.Participants.Any(x => x.Id == Guid.Parse(_authenticationService.UserId)))
+                bet.Participants = new List<MemberOutput>(bet.Participants) { new MemberOutput { Id = Guid.Parse(_authenticationService.UserId) } };
             return Task.CompletedTask;
         }
     }
