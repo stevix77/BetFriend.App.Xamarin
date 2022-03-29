@@ -150,6 +150,7 @@
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.13" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.1" />
+	<PackageReference Include="Syncfusion.Xamarin.Cards" Version="19.1.0.54" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BetFriend.MobileApp\BetFriend.MobileApp.csproj">

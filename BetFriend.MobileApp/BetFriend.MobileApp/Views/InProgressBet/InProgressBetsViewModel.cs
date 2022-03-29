@@ -91,7 +91,7 @@
                     EndDate = item.EndDate.ToLongDateString(),
                     Description = item.Description.Length > 50 ? $"{item.Description.Substring(0, 50)}..." : item.Description,
                     Participants = item.Participants.Count,
-                    Id = item.Id
+                    Id = item.Id,
                 };
                 Bets.Add(bet);
             }

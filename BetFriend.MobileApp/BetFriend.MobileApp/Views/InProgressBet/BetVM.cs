@@ -1,4 +1,5 @@
 ﻿using System;
+using Xamarin.Forms;
 
 namespace BetFriend.MobileApp.Views.InProgressBet
 {
@@ -11,5 +12,7 @@ namespace BetFriend.MobileApp.Views.InProgressBet
         public string Description { get; set; }
         public int Participants { get; set; }
         public Guid Id { get; internal set; }
+
+        public Color Color { get => Color.FromUint((uint)new Random(int.MaxValue).Next(0, 255)); }
     }
 }
