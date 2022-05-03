@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31229.75
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetFriend.MobileApp.UWP", "BetFriend.MobileApp\BetFriend.MobileApp.UWP\BetFriend.MobileApp.UWP.csproj", "{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetFriend.MobileApp.Android", "BetFriend.MobileApp\BetFriend.MobileApp.Android\BetFriend.MobileApp.Android.csproj", "{E0CBAFCF-BFFC-46C9-B7A3-12E2FD61D242}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetFriend.MobileApp.iOS", "BetFriend.MobileApp\BetFriend.MobileApp.iOS\BetFriend.MobileApp.iOS.csproj", "{9921780F-FD68-405B-BD9D-001EB38DD516}"
@@ -37,42 +35,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Debug|Any CPU.Build.0 = Debug|x86
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Debug|Any CPU.Deploy.0 = Debug|x86
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Debug|ARM.ActiveCfg = Debug|ARM
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Debug|ARM.Build.0 = Debug|ARM
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Debug|ARM.Deploy.0 = Debug|ARM
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Debug|iPhone.ActiveCfg = Debug|x86
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Debug|iPhone.Build.0 = Debug|x86
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Debug|iPhone.Deploy.0 = Debug|x86
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Debug|iPhoneSimulator.ActiveCfg = Debug|x86
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Debug|iPhoneSimulator.Build.0 = Debug|x86
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Debug|iPhoneSimulator.Deploy.0 = Debug|x86
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Debug|x64.ActiveCfg = Debug|x64
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Debug|x64.Build.0 = Debug|x64
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Debug|x64.Deploy.0 = Debug|x64
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Debug|x86.ActiveCfg = Debug|x86
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Debug|x86.Build.0 = Debug|x86
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Debug|x86.Deploy.0 = Debug|x86
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Release|Any CPU.ActiveCfg = Release|x86
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Release|Any CPU.Build.0 = Release|x86
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Release|Any CPU.Deploy.0 = Release|x86
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Release|ARM.ActiveCfg = Release|ARM
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Release|ARM.Build.0 = Release|ARM
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Release|ARM.Deploy.0 = Release|ARM
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Release|iPhone.ActiveCfg = Release|x86
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Release|iPhone.Build.0 = Release|x86
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Release|iPhone.Deploy.0 = Release|x86
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Release|iPhoneSimulator.ActiveCfg = Release|x86
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Release|iPhoneSimulator.Build.0 = Release|x86
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Release|iPhoneSimulator.Deploy.0 = Release|x86
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Release|x64.ActiveCfg = Release|x64
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Release|x64.Build.0 = Release|x64
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Release|x64.Deploy.0 = Release|x64
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Release|x86.ActiveCfg = Release|x86
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Release|x86.Build.0 = Release|x86
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602}.Release|x86.Deploy.0 = Release|x86
 		{E0CBAFCF-BFFC-46C9-B7A3-12E2FD61D242}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E0CBAFCF-BFFC-46C9-B7A3-12E2FD61D242}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0CBAFCF-BFFC-46C9-B7A3-12E2FD61D242}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
@@ -258,7 +220,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{C5BE6280-73C0-4486-B3F7-9FFEC47E6602} = {E02A390E-9E5A-47FF-B6B7-26680638CD04}
 		{E0CBAFCF-BFFC-46C9-B7A3-12E2FD61D242} = {E02A390E-9E5A-47FF-B6B7-26680638CD04}
 		{9921780F-FD68-405B-BD9D-001EB38DD516} = {E02A390E-9E5A-47FF-B6B7-26680638CD04}
 		{709B1A1F-25DA-4820-A06D-B149193DA696} = {E02A390E-9E5A-47FF-B6B7-26680638CD04}
