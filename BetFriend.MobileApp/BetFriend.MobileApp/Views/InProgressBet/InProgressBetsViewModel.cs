@@ -67,7 +67,7 @@
         public async Task LoadBets()
         {
             var result = await _handler.Handle();
-            if (result?.Any() == true)
+            if (result.Any())
             {
                 ResetBets();
                 MapBets(result);
@@ -86,11 +86,11 @@
                 var bet = new BetVM
                 {
                     CreatorId = item.Creator.Id,
-                    CreatorUsername = item.Creator.Username,
-                    Coins = item.Coins,
-                    EndDate = item.EndDate.ToLongDateString(),
+                    CreatorUsername = item.Creator?.Username,
+                    Coins = $"{item.Coins} {Resources.Resource.LblTokens}",
+                    EndDate = item.EndDate.ToShortDateString(),
                     Description = item.Description.Length > 50 ? $"{item.Description.Substring(0, 50)}..." : item.Description,
-                    Participants = item.Participants.Count,
+                    Participants = $"{item.Participants.Count} {Resources.Resource.Participants}",
                     Id = item.Id,
                 };
                 Bets.Add(bet);

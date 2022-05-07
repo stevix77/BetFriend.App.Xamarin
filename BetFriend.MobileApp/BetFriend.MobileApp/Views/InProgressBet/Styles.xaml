@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    x:Class="BetFriend.MobileApp.Views.InProgressBet.Styles"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:control="clr-namespace:BetFriend.MobileApp.Controls"
+    xmlns:gradient="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms"
+    xmlns:graphics="clr-namespace:Syncfusion.XForms.Graphics;assembly=Syncfusion.Core.XForms">
+
+    <Color x:Key="EntryPlaceholderColor">#A0FFFFFF</Color>
+    <Color x:Key="BorderBackgroundColor">#20FFFFFF</Color>
+    <Color x:Key="GradientStartColor">#012E8B</Color>
+    <Color x:Key="GradientEndColor">#3F0041</Color>
+
+    <Color x:Key="Gray-100">#f6f7f8</Color>
+    <Color x:Key="Gray-200">#ebecef</Color>
+    <Color x:Key="Gray-300">#ced2d9</Color>
+    <Color x:Key="Gray-400">#b2b8c2</Color>
+    <Color x:Key="Gray-500">#959eac</Color>
+    <Color x:Key="Gray-600">#788396</Color>
+    <Color x:Key="Gray-700">#606a7b</Color>
+    <Color x:Key="Gray-800">#4a515e</Color>
+    <Color x:Key="Gray-900">#333942</Color>
+    <Color x:Key="Gray-Black">#000000</Color>
+    <Color x:Key="Gray-White">#ffffff</Color>
+
+    <!--  Common style for content pages  -->
+    <Style x:Key="ContentPageStyle" TargetType="ContentPage">
+        <Setter Property="BackgroundImageSource">
+            <OnPlatform
+                x:TypeArguments="ImageSource"
+                Android="LoginBackground.png"
+                WinPhone="LoginBackground.png" />
+        </Setter>
+    </Style>
+
+    <!--  Common style for labels  -->
+    <Style x:Key="LabelStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Gray-White}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="LineHeight" Value="1.25" />
+    </Style>
+
+    <Style x:Key="ChatSearchEntryStyle" TargetType="control:BorderlessEntry">
+        <Setter Property="PlaceholderColor" Value="{DynamicResource Gray-700}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="TextColor" Value="{DynamicResource Gray-900}" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+        <Setter Property="ReturnType" Value="Done" />
+    </Style>
+
+    <!--  Common style for entries  -->
+    <Style x:Key="EntryStyle" TargetType="control:BorderlessEntry">
+        <Setter Property="PlaceholderColor" Value="{StaticResource EntryPlaceholderColor}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="TextColor" Value="{DynamicResource Gray-White}" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Margin" Value="15,0" />
+        <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+        <Setter Property="ReturnType" Value="Done" />
+    </Style>
+
+    <Style x:Key="EditorStyle" TargetType="control:BorderlessEntry">
+        <Setter Property="PlaceholderColor" Value="{StaticResource EntryPlaceholderColor}" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="TextColor" Value="{DynamicResource Gray-White}" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Margin" Value="15,0" />
+        <Setter Property="HeightRequest" Value="150" />
+        <Setter Property="VerticalOptions" Value="StartAndExpand" />
+        <Setter Property="ReturnType" Value="Done" />
+    </Style>
+
+    <!--  Common style for buttons  -->
+    <Style x:Key="SfButtonStyle" TargetType="buttons:SfButton">
+        <Setter Property="BackgroundGradient">
+            <Setter.Value>
+                <graphics:SfLinearGradientBrush>
+                    <graphics:SfLinearGradientBrush.GradientStops>
+                        <graphics:SfGradientStop Offset="0" Color="{DynamicResource PrimaryColor}" />
+                        <graphics:SfGradientStop Offset="1" Color="{DynamicResource PrimaryGradient}" />
+                    </graphics:SfLinearGradientBrush.GradientStops>
+                </graphics:SfLinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="TextColor" Value="{DynamicResource Gray-White}" />
+        <Setter Property="BorderWidth" Value="0" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="SfButtonListStyle" TargetType="buttons:SfButton">
+        <Setter Property="BackgroundGradient">
+            <Setter.Value>
+                <graphics:SfLinearGradientBrush>
+                    <graphics:SfLinearGradientBrush.GradientStops>
+                        <graphics:SfGradientStop Offset="0" Color="{DynamicResource PrimaryColor}" />
+                        <graphics:SfGradientStop Offset="1" Color="{DynamicResource PrimaryGradient}" />
+                    </graphics:SfLinearGradientBrush.GradientStops>
+                </graphics:SfLinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="TextColor" Value="{DynamicResource Gray-White}" />
+        <Setter Property="BorderWidth" Value="0" />
+        <Setter Property="FontSize" Value="6" />
+        <Setter Property="HeightRequest" Value="25" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+
+    <!--  Common style for flat buttons  -->
+    <Style x:Key="SfFlatButtonStyle" TargetType="buttons:SfButton">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryColor}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="SfButtonDeleteFriendStyle" TargetType="buttons:SfButton">
+        <Setter Property="BackgroundGradient">
+            <Setter.Value>
+                <graphics:SfLinearGradientBrush>
+                    <graphics:SfLinearGradientBrush.GradientStops>
+                        <graphics:SfGradientStop Offset="0" Color="{DynamicResource PrimaryColor}" />
+                        <graphics:SfGradientStop Offset="1" Color="{DynamicResource PrimaryGradient}" />
+                    </graphics:SfLinearGradientBrush.GradientStops>
+                </graphics:SfLinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="TextColor" Value="{DynamicResource Gray-White}" />
+        <Setter Property="BorderWidth" Value="0" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="SfButtonAddFriendStyle" TargetType="buttons:SfButton">
+        <Setter Property="BackgroundGradient">
+            <Setter.Value>
+                <graphics:SfLinearGradientBrush>
+                    <graphics:SfLinearGradientBrush.GradientStops>
+                        <graphics:SfGradientStop Offset="0" Color="{DynamicResource PrimaryColor}" />
+                        <graphics:SfGradientStop Offset="1" Color="{DynamicResource PrimaryGradient}" />
+                    </graphics:SfLinearGradientBrush.GradientStops>
+                </graphics:SfLinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="TextColor" Value="{DynamicResource Gray-White}" />
+        <Setter Property="BorderWidth" Value="0" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+
+    <!--  Common style for borders  -->
+    <Style x:Key="SfBorderStyle" TargetType="border:SfBorder">
+        <Setter Property="BackgroundColor" Value="{StaticResource BorderBackgroundColor}" />
+        <Setter Property="BorderColor" Value="Transparent" />
+        <Setter Property="CornerRadius" Value="20" />
+        <Setter Property="BorderWidth" Value="1" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="Margin" Value="8,0" />
+    </Style>
+
+    <!--  Common style for gradient view  -->
+    <Style x:Key="SfGradientViewStyle" TargetType="gradient:SfGradientView">
+        <Setter Property="Opacity" Value="0.82" />
+        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="BackgroundBrush">
+            <Setter.Value>
+                <graphics:SfLinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <graphics:SfLinearGradientBrush.GradientStops>
+                        <graphics:SfGradientStop Offset="0.0" Color="{StaticResource GradientEndColor}" />
+                        <graphics:SfGradientStop Offset="1.0" Color="{StaticResource GradientStartColor}" />
+                    </graphics:SfLinearGradientBrush.GradientStops>
+                </graphics:SfLinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

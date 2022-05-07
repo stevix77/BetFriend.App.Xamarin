@@ -6,6 +6,13 @@
              x:Class="BetFriend.MobileApp.Views.InProgressBet.InProgressBetsView"
              xmlns:sfavatar="clr-namespace:Syncfusion.XForms.AvatarView;assembly=Syncfusion.Core.XForms"
              xmlns:cards="clr-namespace:Syncfusion.XForms.Cards;assembly=Syncfusion.Cards.XForms">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
   <ContentView.Content>
       <StackLayout>
             <Label Text="{Static resources:Resource.LblActiveBets}" FontSize="Title" />
@@ -53,32 +60,28 @@
                                    WidthRequest="50" />
 
                                         <Label Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2" Text="{Binding Description}" Margin="5" VerticalOptions="Center"
-                                        FontSize="12"
+                                        FontSize="Body" TextColor="{StaticResource Gray-700}"
                                         LineBreakMode="TailTruncation"
                                         LineHeight="{OnPlatform Android=1.25,
                                                                 Default=1}"
                                         MaxLines="2" />
 
                                         <StackLayout Grid.Row="0" Grid.Column="1" HorizontalOptions="End" Spacing="1">
-                                            <Label FontSize="10" Text="{Binding EndDate}" HorizontalOptions="End" />
-                                            <Label FontSize="10" HorizontalOptions="End" >
+                                            <Label Text="{Binding EndDate}" HorizontalOptions="End" TextColor="{StaticResource Gray-700}" />
+                                            <Label HorizontalOptions="End" TextColor="{StaticResource Gray-700}">
                                                 <Label.FormattedText>
                                                     <FormattedString>
                                                         <FormattedString.Spans>
-                                                            <Span Text="{Binding Coins, StringFormat='{0} '}" />
-                                                            <Span Text=" " />
-                                                            <Span Text="{Static resources:Resource.LblTokens}" />
+                                                            <Span Text="{Binding Coins}" />
                                                         </FormattedString.Spans>
                                                     </FormattedString>
                                                 </Label.FormattedText>
                                             </Label>
-                                            <Label FontSize="10" HorizontalOptions="End" >
+                                            <Label HorizontalOptions="End" TextColor="{StaticResource Gray-700}">
                                                 <Label.FormattedText>
                                                     <FormattedString>
                                                         <FormattedString.Spans>
-                                                            <Span Text="{Binding Participants, StringFormat='{0} '}" />
-                                                            <Span Text=" " />
-                                                            <Span Text="{Static resources:Resource.Participants}" />
+                                                            <Span Text="{Binding Participants}" />
                                                         </FormattedString.Spans>
                                                     </FormattedString>
                                                 </Label.FormattedText>

@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              xmlns:converters="clr-namespace:BetFriend.MobileApp.Converters"
              xmlns:icons="clr-namespace:BetFriend.MobileApp.Themes"
              xmlns:resources="clr-namespace:BetFriend.MobileApp.Resources"
+             xmlns:sfavatar="clr-namespace:Syncfusion.XForms.AvatarView;assembly=Syncfusion.Core.XForms"
              x:Class="BetFriend.MobileApp.Views.DetailBet.DetailBetView">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -35,7 +37,7 @@
                                 <FontImageSource FontFamily="{DynamicResource MaterialFontFamily}" Glyph="{Static icons:MaterialDesignIcons.ClockOutline}" Color="Black" />
                             </Image.Source>
                         </Image>
-                        <Label Text="{Static resources:Resource.LblEndBetDate}" />
+                        <Label Text="{Static resources:Resource.LblEndBetDate}" TextColor="{StaticResource Gray-700}"/>
                         <Label Text="{Binding Bet.EndDate, Converter={StaticResource dateToString}, ConverterParameter=true}" 
                                HorizontalTextAlignment="End" HorizontalOptions="End" 
                                TextColor="{StaticResource Gray-700}" />
@@ -44,7 +46,7 @@
 
                 <!-- Réponses -->
                 <StackLayout>
-                    <Label FontSize="Subtitle">
+                    <Label FontSize="Subtitle"  TextColor="{StaticResource Gray-Black}">
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Text="{Static resources:Resource.Membres}" />
@@ -52,15 +54,36 @@
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
-                    <CollectionView ItemsLayout="HorizontalList" ItemsSource="{Binding Bet.Participants}" HeightRequest="60" Margin="10, 0">
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <StackLayout VerticalOptions="CenterAndExpand" Spacing="3" Margin="5, 0">
-                                    <Label Text="{Binding Username}" FontSize="20" TextColor="{StaticResource GradientEndColor}" />
-                                </StackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                    <StackLayout Orientation="Horizontal">
+                        <buttons:SfButton
+                            BackgroundColor="{DynamicResource Gray-200}"
+                            CornerRadius="32"
+                            FontSize="30"
+                            HeightRequest="50"
+                            FontFamily="{DynamicResource MaterialFontFamily}"
+                            Text="{Static icons:MaterialDesignIcons.Plus}"
+                            TextColor="{DynamicResource Gray-700}"
+                            VerticalOptions="StartAndExpand"
+                            WidthRequest="50" />
+                        <CollectionView ItemsLayout="HorizontalList" ItemsSource="{Binding Bet.Participants}" HeightRequest="60" Margin="10, 0">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout VerticalOptions="CenterAndExpand" Spacing="3" Margin="5, 0">
+                                        <sfavatar:SfAvatarView ContentType="Initials"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Center"   
+                                           HeightRequest="50"
+                                           InitialsType="DoubleCharacter"
+                                           AvatarName="{Binding Username}"
+                                           AvatarShape="Circle"
+                                           CornerRadius="25"
+                                           WidthRequest="50" />
+                                        <Label Text="{Binding Username}" HorizontalTextAlignment="Center" FontSize="Small" TextColor="{StaticResource GradientEndColor}" />
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
                 </StackLayout>
 
                 <!-- Description -->
