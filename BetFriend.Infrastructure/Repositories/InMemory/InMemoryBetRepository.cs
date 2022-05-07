@@ -38,7 +38,8 @@
                 Description = bet.Description,
                 EndDate = bet.EndDate,
                 Id = bet.BetId,
-                Participants = new List<MemberOutput>()
+                Participants = new List<MemberOutput>(),
+                Creator = new MemberOutput { Id = _authenticationService.UserId}
             });
             return Task.CompletedTask;
         }

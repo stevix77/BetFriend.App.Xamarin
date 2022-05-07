@@ -42,6 +42,9 @@
     <Compile Update="Views\DetailBet\Styles.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
+    <Compile Update="Views\InProgressBet\Styles.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
     <Compile Update="Views\Register\Styles.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
@@ -69,6 +72,9 @@
     </EmbeddedResource>
     <EmbeddedResource Update="Views\InProgressBet\InProgressBetsView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\InProgressBet\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\LaunchBet\LaunchBetView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
