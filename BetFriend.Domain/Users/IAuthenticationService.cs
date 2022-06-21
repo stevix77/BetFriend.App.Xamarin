@@ -2,8 +2,8 @@
 {
     public interface IAuthenticationService
     {
-        void SetToken(string token);
         string Token { get; }
         string UserId { get; }
+        void SetToken(string token);
     }
 }

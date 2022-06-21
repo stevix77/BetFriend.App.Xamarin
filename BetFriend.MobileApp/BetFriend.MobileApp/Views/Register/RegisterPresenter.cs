@@ -11,9 +11,9 @@ namespace BetFriend.MobileApp.Views.Register
             _authenticationService = authenticationService;
         }
 
-        public void Present(RegisterResponse response)
+        public void Present(string token)
         {
-            _authenticationService.SetToken(response.Token);
+            _authenticationService.SetToken(token);
         }
     }
 }

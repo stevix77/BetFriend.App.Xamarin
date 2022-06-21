@@ -6,11 +6,12 @@
     {
         public string Token { get; private set; }
 
-        public string UserId => throw new System.NotImplementedException();
+        public string UserId { get; private set; }
+        public string Username { get; private set; }
 
         public void SetToken(string token)
         {
-            Token = token;
+            throw new System.NotImplementedException();
         }
     }
 }

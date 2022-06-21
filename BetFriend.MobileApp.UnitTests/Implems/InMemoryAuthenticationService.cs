@@ -22,5 +22,10 @@ namespace BetFriend.MobileApp.UnitTests.Implems
         {
             throw new System.NotImplementedException();
         }
+
+        public void SetUser(string username, string token, string userid)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
