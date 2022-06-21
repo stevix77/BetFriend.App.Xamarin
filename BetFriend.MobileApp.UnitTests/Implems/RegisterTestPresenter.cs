@@ -1,18 +1,15 @@
 ﻿using BetFriend.Domain.Users.Usecases.Register;
+using System.Collections.Generic;
 
 namespace BetFriend.MobileApp.UnitTests.Implems
 {
     internal class RegisterTestPresenter : IRegisterPresenter
     {
-        public RegisterTestPresenter()
-        {
-        }
-
         public string Token { get; private set; }
 
-        public void Present(RegisterResponse response)
+        public void Present(string token)
         {
-            Token = response.Token;
+            Token = token;
         }
     }
 }

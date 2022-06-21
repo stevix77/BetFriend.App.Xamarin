@@ -2,6 +2,6 @@
 {
     public interface IRegisterPresenter
     {
-        void Present(RegisterResponse response);
+        void Present(string token);
     }
 }

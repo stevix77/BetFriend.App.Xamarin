@@ -3,7 +3,7 @@
     using BetFriend.Domain.Users;
     using BetFriend.Domain.Users.Usecases.SignIn;
     using System.Collections.Generic;
-
+    using System.Linq;
 
     public class SignInPresenter : ISignInPresenter
     {
@@ -16,7 +16,7 @@
             _authenticationService = authenticationService;
         }
 
-        public bool HasError { get => _errors.Count > 0; }
+        public bool HasError { get => _errors.Any(); }
 
         public void Fail(string errorMessage)
         {
