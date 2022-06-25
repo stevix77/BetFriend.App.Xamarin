@@ -36,5 +36,16 @@
             await Record.ExceptionAsync(() => handler.Handle(command));
             Assert.Single(bet.Participants);
         }
+
+        [Fact]
+        public async Task ShouldRemoveMemberFromMembersBetWhenLeave()
+        {
+            var command = new AnswerBetCommand(_betId.ToString(), false);
+            var bet = new BetOutput { Id = _betId, Participants = new List<MemberOutput> { new MemberOutput { Id = _memberId } } };
+            var repository = new InMemoryBetRepository(new List<BetOutput>() { bet }, new InMemoryAuthenticationService(_memberId.ToString(), "username"));
+            var handler = new AnswerBetCommandHandler(repository);
+            await handler.Handle(command);
+            Assert.Empty(bet.Participants);
+        }
     }
 }

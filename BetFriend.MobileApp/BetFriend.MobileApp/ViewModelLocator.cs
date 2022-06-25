@@ -92,7 +92,7 @@ namespace BetFriend.MobileApp
                         }
                     }
                 }
-            }));
+            }, x.GetRequiredService<IAuthenticationService>()));
             serviceCollection.AddScoped<IUserRepository>(x => new InMemoryUserRepository("token"));
             serviceCollection.AddScoped<IMessenger, Messenger>();
             serviceCollection.AddScoped<INavigationService, ShellNavigationService>();

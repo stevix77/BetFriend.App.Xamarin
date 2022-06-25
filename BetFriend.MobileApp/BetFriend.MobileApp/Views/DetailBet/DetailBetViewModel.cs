@@ -1,9 +1,11 @@
-﻿using BetFriend.Domain.Bets.Dto;
-using BetFriend.Domain.Bets.RetrieveBet;
+﻿using BetFriend.Domain.Bets.RetrieveBet;
 using BetFriend.Domain.Bets.Usecases.AnswerBet;
 using BetFriend.Domain.Users;
+using BetFriend.MobileApp.Models;
+using BetFriend.MobileApp.Themes;
 using GalaSoft.MvvmLight;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -11,12 +13,12 @@ namespace BetFriend.MobileApp.Views.DetailBet
 {
     public class DetailBetViewModel : ViewModelBase
     {
-        private BetOutput _bet;
+        private BetViewModel _bet;
         private readonly IRetrieveBetQueryHandler _retrieveBetQueryHandler;
         private readonly IAnswerBetCommandHandler _answerBetCommandHandler;
         private readonly IAuthenticationService _authenticationService;
         private Command _joinBetCommand;
-
+        private Command _leaveBetCommand;
 
         public DetailBetViewModel(IRetrieveBetQueryHandler retrieveBetQueryHandler,
                                   IAnswerBetCommandHandler answerBetCommandHandler,
@@ -27,13 +29,36 @@ namespace BetFriend.MobileApp.Views.DetailBet
             _authenticationService = authenticationService;
         }
 
-        public BetOutput Bet
+        public bool IsJoinCommandVisible
+        {
+            get => IsNotBetCreator() && IsNotMember();
+        }
+
+        public bool IsLeaveCommandVisible
+        {
+            get => IsNotBetCreator() && !IsNotMember();
+        }
+
+        public string IconJoinCommand
+        {
+            get => MaterialDesignIcons.Plus;
+        }
+
+        public string IconLeaveCommand
+        {
+            get => MaterialDesignIcons.Minus;
+        }
+
+        public BetViewModel Bet
         {
             get => _bet;
-            set
+            private set
             {
                 if (Set(() => Bet, ref _bet, value))
+                {
                     RaisePropertyChanged(nameof(Bet));
+                    UpdateProperties();
+                }
             }
         }
 
@@ -41,14 +66,75 @@ namespace BetFriend.MobileApp.Views.DetailBet
         {
             get => _joinBetCommand ?? (_joinBetCommand = new Command(async () =>
             {
-                var command = new AnswerBetCommand(_bet.Id.ToString(), true);
-                await _answerBetCommandHandler.Handle(command);
-            }, () => _bet.Creator.Id != Guid.Parse(_authenticationService.UserId)));
+                await Join();
+            }, () => CanJoinBet()));
         }
 
-        internal async Task LoadBet(string value)
+        public Command LeaveBetCommand
         {
-            Bet = await _retrieveBetQueryHandler.Handle(new RetrieveBetQuery(Guid.Parse(value)));
+            get => _leaveBetCommand ?? (_leaveBetCommand = new Command(async () =>
+            {
+                await Leave();
+            }, () => CanLeaveBet()));
+        }
+
+        private async Task Leave()
+        {
+            var command = new AnswerBetCommand(_bet.Id, false);
+            await _answerBetCommandHandler.Handle(command);
+            Bet.Members.Remove(Bet.Members.FirstOrDefault(x => x.Id == Guid.Parse(_authenticationService.UserId)));
+            UpdateProperties();
+        }
+
+        private async Task Join()
+        {
+            var command = new AnswerBetCommand(_bet.Id, true);
+            await _answerBetCommandHandler.Handle(command);
+            Bet.Members.Insert(0, new MemberViewModel(Guid.Parse(_authenticationService.UserId),
+                                                            _authenticationService.Username));
+            UpdateProperties();
+        }
+
+        private void UpdateProperties()
+        {
+            RaisePropertyChanged(nameof(IconJoinCommand));
+            RaisePropertyChanged(nameof(IsJoinCommandVisible));
+            RaisePropertyChanged(nameof(IconLeaveCommand));
+            RaisePropertyChanged(nameof(IsLeaveCommandVisible));
+            JoinBetCommand.ChangeCanExecute();
+            LeaveBetCommand.ChangeCanExecute();
+        }
+
+        private bool CanJoinBet()
+        {
+            return _bet != null &&
+                IsNotBetCreator() &&
+                IsNotMember();
+        }
+
+        private bool CanLeaveBet()
+        {
+            return _bet != null &&
+                IsNotBetCreator() &&
+                !IsNotMember();
+        }
+
+        private bool IsNotMember()
+        {
+            return _bet != null &&
+                   !_bet.Members.Any(x => x.Id == Guid.Parse(_authenticationService.UserId));
+        }
+
+        private bool IsNotBetCreator()
+        {
+            return _bet != null &&
+                _bet.CreatorId != Guid.Parse(_authenticationService.UserId);
+        }
+
+        internal async void LoadBet(string value)
+        {
+            var bet = await _retrieveBetQueryHandler.Handle(new RetrieveBetQuery(Guid.Parse(value)));
+            Bet = new BetViewModel(bet);
         }
 
 

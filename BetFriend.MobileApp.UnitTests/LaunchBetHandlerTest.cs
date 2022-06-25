@@ -3,6 +3,7 @@ namespace BetFriend.MobileApp.UnitTests
     using BetFriend.Domain.Bets.LaunchBet;
     using BetFriend.Infrastructure.DateTime;
     using BetFriend.Infrastructure.Repositories.InMemory;
+    using BetFriend.MobileApp.UnitTests.Implems;
     using System;
     using System.Threading.Tasks;
     using Xunit;
@@ -20,7 +21,7 @@ namespace BetFriend.MobileApp.UnitTests
             //arrange
             var endDate = new DateTime(2021, 12, 31);
             var command = new LaunchBetCommand(_betId, _description, endDate, _coins);
-            var betRepository = new InMemoryBetRepository();
+            var betRepository = new InMemoryBetRepository(authenticationService: new InMemoryAuthenticationService(Guid.NewGuid().ToString(), "username"));
             var handler = new LaunchBetCommandHandler(betRepository, new FakeDateTimeProvider(new DateTime(2021, 10, 10)));
 
             //act

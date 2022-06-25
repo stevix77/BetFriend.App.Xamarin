@@ -23,7 +23,7 @@
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Text="{Static resources:Resource.LblBetOf}" />
-                                <Span Text="{Binding Bet.Creator.Username, StringFormat=': {0}'}" />
+                                <Span Text="{Binding Bet.CreatorUsername, StringFormat=': {0}'}" />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
@@ -38,8 +38,7 @@
                             </Image.Source>
                         </Image>
                         <Label Text="{Static resources:Resource.LblEndBetDate}" TextColor="{StaticResource Gray-700}"/>
-                        <Label Text="{Binding Bet.EndDate, Converter={StaticResource dateToString}, ConverterParameter=true}" 
-                               HorizontalTextAlignment="End" HorizontalOptions="End" 
+                        <Label Text="{Binding Bet.EndDate}" HorizontalTextAlignment="End" HorizontalOptions="End" 
                                TextColor="{StaticResource Gray-700}" />
                     </StackLayout>
                 </StackLayout>
@@ -58,14 +57,29 @@
                         <buttons:SfButton
                             BackgroundColor="{DynamicResource Gray-200}"
                             CornerRadius="32"
+                            Command="{Binding JoinBetCommand}"
                             FontSize="30"
                             HeightRequest="50"
                             FontFamily="{DynamicResource MaterialFontFamily}"
-                            Text="{Static icons:MaterialDesignIcons.Plus}"
+                            Text="{Binding IconJoinCommand}"
                             TextColor="{DynamicResource Gray-700}"
                             VerticalOptions="StartAndExpand"
-                            WidthRequest="50" />
-                        <CollectionView ItemsLayout="HorizontalList" ItemsSource="{Binding Bet.Participants}" HeightRequest="60" Margin="10, 0">
+                            WidthRequest="50"
+                            IsVisible="{Binding IsJoinCommandVisible}"/>
+
+                        <buttons:SfButton
+                            BackgroundColor="{DynamicResource Gray-200}"
+                            CornerRadius="32"
+                            Command="{Binding LeaveBetCommand}"
+                            FontSize="30"
+                            HeightRequest="50"
+                            FontFamily="{DynamicResource MaterialFontFamily}"
+                            Text="{Binding IconLeaveCommand}"
+                            TextColor="{DynamicResource Gray-700}"
+                            VerticalOptions="StartAndExpand"
+                            WidthRequest="50"
+                            IsVisible="{Binding IsLeaveCommandVisible}"/>
+                        <CollectionView ItemsLayout="HorizontalList" ItemsSource="{Binding Bet.Members}" HeightRequest="60" Margin="10, 0">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <StackLayout VerticalOptions="CenterAndExpand" Spacing="3" Margin="5, 0">

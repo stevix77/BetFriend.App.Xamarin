@@ -22,13 +22,6 @@
             _authenticationService = authenticationService;
         }
 
-        public InMemoryBetRepository(Bet bet)
-        {
-            _bets = new List<Bet>();
-            _betOutputs = new List<BetOutput>();
-            SaveAsync(bet);
-        }
-
         public Task SaveAsync(Bet bet)
         {
             _bets.Add(bet);
@@ -38,7 +31,8 @@
                 Description = bet.Description,
                 EndDate = bet.EndDate,
                 Id = bet.BetId,
-                Participants = new List<MemberOutput>()
+                Participants = new List<MemberOutput>(),
+                Creator = new MemberOutput { Id = Guid.Parse(_authenticationService.UserId), Username = _authenticationService.Username }
             });
             return Task.CompletedTask;
         }
@@ -62,9 +56,19 @@
         public Task AnswerBetAsync(Guid betId, bool answer)
         {
             var bet = _betOutputs.First(x => x.Id == betId);
-            if(!bet.Participants.Any(x => x.Id == Guid.Parse(_authenticationService.UserId)))
-                bet.Participants = new List<MemberOutput>(bet.Participants) { new MemberOutput { Id = Guid.Parse(_authenticationService.UserId) } };
+            if (!answer && !CanJoin(bet))
+                bet.Participants = new List<MemberOutput>(bet.Participants.Where(x => x.Id != Guid.Parse(_authenticationService.UserId)));
+            else
+            {
+                if(CanJoin(bet))
+                    bet.Participants = new List<MemberOutput>(bet.Participants) { new MemberOutput { Id = Guid.Parse(_authenticationService.UserId), Username = _authenticationService.Username } };
+            }
             return Task.CompletedTask;
+        }
+
+        private bool CanJoin(BetOutput bet)
+        {
+            return !bet.Participants.Any(x => x.Id == Guid.Parse(_authenticationService.UserId));
         }
     }
 }
