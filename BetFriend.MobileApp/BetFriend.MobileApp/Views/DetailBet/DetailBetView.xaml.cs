@@ -1,6 +1,4 @@
-﻿
-using System.Threading.Tasks;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace BetFriend.MobileApp.Views.DetailBet
@@ -11,7 +9,7 @@ namespace BetFriend.MobileApp.Views.DetailBet
     {
         public string BetId
         {
-            set => Task.Run(() => (BindingContext as DetailBetViewModel).LoadBet(value));
+            set => (BindingContext as DetailBetViewModel).LoadBet(value);
         }
         public DetailBetView()
         {

@@ -1,6 +1,5 @@
 ﻿namespace BetFriend.MobileApp.Views.InProgressBet
 {
-    using BetFriend.Domain.Bets;
     using BetFriend.Domain.Bets.Dto;
     using BetFriend.Domain.Bets.GetBetsInProgress;
     using BetFriend.MobileApp.Navigation;
@@ -47,10 +46,10 @@
             {
                 if (obj.GetType() == typeof(SelectedItemChangedEventArgs))
                 {
-                    await _navigationService.NavigateToAsync(nameof(DetailBetView), 
-                                                            new Dictionary<string, object>() 
-                                                            { 
-                                                                { "betid", (((SelectedItemChangedEventArgs)obj).SelectedItem as BetVM).Id } 
+                    await _navigationService.NavigateToAsync(nameof(DetailBetView),
+                                                            new Dictionary<string, object>()
+                                                            {
+                                                                { "betid", (((SelectedItemChangedEventArgs)obj).SelectedItem as BetVM).Id }
                                                             });
                 }
                 else if (obj.GetType() == typeof(ItemTappedEventArgs))
@@ -86,7 +85,7 @@
                 var bet = new BetVM
                 {
                     CreatorId = item.Creator.Id,
-                    CreatorUsername = item.Creator?.Username,
+                    CreatorUsername = item.Creator.Username,
                     Coins = $"{item.Coins} {Resources.Resource.LblTokens}",
                     EndDate = item.EndDate.ToShortDateString(),
                     Description = item.Description.Length > 50 ? $"{item.Description.Substring(0, 50)}..." : item.Description,

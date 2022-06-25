@@ -4,6 +4,7 @@
     {
         string Token { get; }
         string UserId { get; }
+        string Username { get; }
         void SetToken(string token);
     }
 }
