@@ -15,7 +15,7 @@
 
         public async Task Handle(AnswerBetCommand command)
         {
-            await _betRepository.AnswerBetAsync(Guid.Parse(command.BetId), command.Answer);
+            await _betRepository.AnswerBetAsync(command.Bet.BetId, command.Answer);
         }
     }
 }

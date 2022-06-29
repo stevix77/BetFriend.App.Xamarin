@@ -2,13 +2,13 @@
 {
     public class AnswerBetCommand
     {
-        public AnswerBetCommand(string betId, bool answer)
+        public AnswerBetCommand(Bet bet, bool answer)
         {
-            BetId = betId;
+            Bet = bet;
             Answer = answer;
         }
 
-        public string BetId { get; }
+        public Bet Bet { get; }
         public bool Answer { get; }
     }
 }

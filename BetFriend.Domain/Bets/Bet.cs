@@ -6,7 +6,10 @@ namespace BetFriend.Domain.Bets
 {
     public class Bet
     {
-        public Bet(Guid betId, string description, DateTime endDate, int coins)
+        private Bet(Guid betId,
+                    string description,
+                    DateTime endDate,
+                    int coins)
         {
             BetId = betId;
             Description = description;
