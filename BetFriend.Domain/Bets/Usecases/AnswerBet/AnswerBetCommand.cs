@@ -1,14 +1,16 @@
-﻿namespace BetFriend.Domain.Bets.Usecases.AnswerBet
+﻿using BetFriend.Domain.Bets.Dto;
+
+namespace BetFriend.Domain.Bets.Usecases.AnswerBet
 {
     public class AnswerBetCommand
     {
-        public AnswerBetCommand(Bet bet, bool answer)
+        public AnswerBetCommand(BetOutput bet, bool answer)
         {
             Bet = bet;
             Answer = answer;
         }
 
-        public Bet Bet { get; }
+        public BetOutput Bet { get; }
         public bool Answer { get; }
     }
 }

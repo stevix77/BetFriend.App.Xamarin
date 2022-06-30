@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     public class BetOutput
     {
@@ -10,6 +11,11 @@
         public string Description { get; set; }
         public Guid Id { get; set; }
         public DateTime EndDate { get; set; }
-        public IReadOnlyCollection<MemberOutput> Participants { get; set; } = new List<MemberOutput>();
+        public IReadOnlyCollection<MemberOutput> Members { get; set; } = new List<MemberOutput>();
+
+        internal Bet ToBet()
+        {
+            return Bet.Create(Id, Description, EndDate, Coins, Members.Select(x => new Answer(true, x.Id)));
+        }
     }
 }

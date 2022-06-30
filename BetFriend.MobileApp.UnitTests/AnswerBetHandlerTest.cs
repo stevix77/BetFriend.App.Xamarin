@@ -1,7 +1,9 @@
 ﻿namespace BetFriend.MobileApp.UnitTests
 {
+    using BetFriend.Domain.Bets;
     using BetFriend.Domain.Bets.Dto;
     using BetFriend.Domain.Bets.Usecases.AnswerBet;
+    using BetFriend.Infrastructure.DateTime;
     using BetFriend.Infrastructure.Repositories.InMemory;
     using BetFriend.MobileApp.UnitTests.Implems;
     using System;
@@ -18,34 +20,40 @@
         [Fact]
         public async Task ShouldAcceptMemberToParticipate()
         {
-            var command = new AnswerBetCommand(_betId.ToString(), true);
-            var bet = new BetOutput { Id = _betId };
-            var repository = new InMemoryBetRepository(new List<BetOutput> { bet }, new InMemoryAuthenticationService(_memberId.ToString(), "username"));
-            var handler = new AnswerBetCommandHandler(repository);
+            var authenticationService = new InMemoryAuthenticationService(_memberId.ToString(), "username");
+            var bet = new BetOutput
+            {
+                Id = _betId,
+                Description = "description",
+                EndDate = new DateTime(2022, 12, 30),
+                Coins = 10,
+                Creator = new MemberOutput { Id = Guid.Parse(authenticationService.UserId), Username = authenticationService.Username },
+                Members = new List<MemberOutput>()
+            };
+            var repository = new InMemoryBetRepository(new() { bet }, authenticationService: authenticationService);
+            var command = new AnswerBetCommand(bet, true);
+            var handler = new AnswerBetCommandHandler(repository, authenticationService);
             await handler.Handle(command);
-            Assert.Contains(bet.Participants, x => x.Id == _memberId);
+            Assert.Contains(bet.Members, x => x.Id == _memberId);
         }
 
         [Fact]
         public async Task ShouldRejectMemberToParticipateMoreThatOneTime()
         {
-            var command = new AnswerBetCommand(_betId.ToString(), true);
-            var bet = new BetOutput { Id = _betId, Participants = new List<MemberOutput> { new MemberOutput { Id = _memberId } } };
-            var repository = new InMemoryBetRepository(new List<BetOutput>() { bet }, new InMemoryAuthenticationService(_memberId.ToString(), "username"));
-            var handler = new AnswerBetCommandHandler(repository);
+            var authenticationService = new InMemoryAuthenticationService(_memberId.ToString(), "username");
+            var bet = new BetOutput
+            {
+                Id = _betId,
+                Description = "description",
+                EndDate = new DateTime(2022, 12, 30),
+                Coins = 10,
+                Members = new List<MemberOutput> { new MemberOutput { Id = Guid.Parse(authenticationService.UserId) } }
+            };
+            var command = new AnswerBetCommand(bet, true);
+            var repository = new InMemoryBetRepository(new List<BetOutput>() { bet }, authenticationService);
+            var handler = new AnswerBetCommandHandler(repository, authenticationService);
             await Record.ExceptionAsync(() => handler.Handle(command));
-            Assert.Single(bet.Participants);
-        }
-
-        [Fact]
-        public async Task ShouldRemoveMemberFromMembersBetWhenLeave()
-        {
-            var command = new AnswerBetCommand(_betId.ToString(), false);
-            var bet = new BetOutput { Id = _betId, Participants = new List<MemberOutput> { new MemberOutput { Id = _memberId } } };
-            var repository = new InMemoryBetRepository(new List<BetOutput>() { bet }, new InMemoryAuthenticationService(_memberId.ToString(), "username"));
-            var handler = new AnswerBetCommandHandler(repository);
-            await handler.Handle(command);
-            Assert.Empty(bet.Participants);
+            Assert.Single(bet.Members);
         }
     }
 }

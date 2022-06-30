@@ -34,7 +34,7 @@ namespace BetFriend.MobileApp.UnitTests
                 Assert.Equal(command.Description, bet.Description);
                 Assert.Equal(command.EndDate, bet.EndDate);
                 Assert.Equal(command.Coins, bet.Coins);
-                Assert.Equal(command.BetId, bet.BetId);
+                Assert.Equal(command.BetId, bet.Id);
             });
         }
 
@@ -51,8 +51,7 @@ namespace BetFriend.MobileApp.UnitTests
             var record = await Record.ExceptionAsync(() => handler.Handle(command));
 
             //assert
-            Assert.IsType<ArgumentException>(record);
-            Assert.Equal("End date is not valid", record.Message);
+            Assert.Empty(betRepository.GetBets());
         }
 
         [Fact]
@@ -68,8 +67,7 @@ namespace BetFriend.MobileApp.UnitTests
             var record = await Record.ExceptionAsync(() => handler.Handle(command));
 
             //assert
-            Assert.IsType<ArgumentException>(record);
-            Assert.Equal("Description is not valid", record.Message);
+            Assert.Empty(betRepository.GetBets());
         }
     }
 }
