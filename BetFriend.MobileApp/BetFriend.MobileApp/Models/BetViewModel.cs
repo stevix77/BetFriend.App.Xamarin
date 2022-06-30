@@ -1,5 +1,6 @@
 ﻿using BetFriend.Domain.Bets.Dto;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -12,8 +13,8 @@ namespace BetFriend.MobileApp.Models
         {
             Id = bet.Id.ToString();
             CreatorId = bet.Creator.Id;
-            Members = bet.Participants.Any() ? 
-                    new ObservableCollection<MemberViewModel>(bet.Participants.Select(x => new MemberViewModel(x.Id, x.Username))) : 
+            Members = bet.Members.Any() ? 
+                    new ObservableCollection<MemberViewModel>(bet.Members.Select(x => new MemberViewModel(x.Id, x.Username))) : 
                     new ObservableCollection<MemberViewModel>();
             Coins = bet.Coins;
             Description = bet.Description;
@@ -28,5 +29,18 @@ namespace BetFriend.MobileApp.Models
         public string Description { get; }
         public string EndDate { get; }
         public string CreatorUsername { get; }
+
+        internal BetOutput ToBetOutput()
+        {
+            return new BetOutput
+            {
+                Coins = Coins,
+                Description = Description,
+                Id = Guid.Parse(Id),
+                EndDate = DateTime.Parse(EndDate),
+                Members = new List<MemberOutput>(Members.Select(x => new MemberOutput { Id = x.Id })),
+                Creator = new MemberOutput { Id = CreatorId, Username = CreatorUsername }
+            };
+        }
     }
 }

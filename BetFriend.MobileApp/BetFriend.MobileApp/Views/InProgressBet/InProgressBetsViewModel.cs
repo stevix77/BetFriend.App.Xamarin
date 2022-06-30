@@ -89,7 +89,7 @@
                     Coins = $"{item.Coins} {Resources.Resource.LblTokens}",
                     EndDate = item.EndDate.ToShortDateString(),
                     Description = item.Description.Length > 50 ? $"{item.Description.Substring(0, 50)}..." : item.Description,
-                    Participants = $"{item.Participants.Count} {Resources.Resource.Participants}",
+                    Participants = $"{item.Members.Count} {Resources.Resource.Participants}",
                     Id = item.Id,
                 };
                 Bets.Add(bet);

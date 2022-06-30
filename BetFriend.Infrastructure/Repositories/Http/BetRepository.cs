@@ -54,7 +54,7 @@ namespace BetFriend.Infrastructure.Repositories.Http
                               .ConfigureAwait(false);
         }
 
-        public Task AnswerBetAsync(Guid betId, bool answer)
+        public Task AnswerBetAsync(Bet bet)
         {
             throw new NotImplementedException();
         }

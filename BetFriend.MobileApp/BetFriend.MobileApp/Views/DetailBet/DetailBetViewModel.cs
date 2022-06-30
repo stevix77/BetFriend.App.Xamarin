@@ -80,7 +80,7 @@ namespace BetFriend.MobileApp.Views.DetailBet
 
         private async Task Leave()
         {
-            var command = new AnswerBetCommand(_bet.Id, false);
+            var command = new AnswerBetCommand(_bet.ToBetOutput(), false);
             await _answerBetCommandHandler.Handle(command);
             Bet.Members.Remove(Bet.Members.FirstOrDefault(x => x.Id == Guid.Parse(_authenticationService.UserId)));
             UpdateProperties();
@@ -88,7 +88,7 @@ namespace BetFriend.MobileApp.Views.DetailBet
 
         private async Task Join()
         {
-            var command = new AnswerBetCommand(_bet.Id, true);
+            var command = new AnswerBetCommand(_bet.ToBetOutput(), true);
             await _answerBetCommandHandler.Handle(command);
             Bet.Members.Insert(0, new MemberViewModel(Guid.Parse(_authenticationService.UserId),
                                                             _authenticationService.Username));

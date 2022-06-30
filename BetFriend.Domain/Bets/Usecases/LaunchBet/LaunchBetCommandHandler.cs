@@ -1,6 +1,7 @@
 ﻿namespace BetFriend.Domain.Bets.LaunchBet
 {
     using BetFriend.Domain.Abstractions;
+    using System;
     using System.Threading.Tasks;
 
     public class LaunchBetCommandHandler : ILaunchBetCommandHandler
@@ -16,7 +17,10 @@
 
         public async Task Handle(LaunchBetCommand command)
         {
-            var bet = Bet.Create(command, _dateTimeProvider);
+            if (command.EndDate <= _dateTimeProvider.Now())
+                throw new ArgumentException("End date is not valid");
+
+            var bet = Bet.Create(command.BetId, command.Description, command.EndDate, command.Coins);
             await _betRepository.SaveAsync(bet);
         }
     }

@@ -11,6 +11,6 @@
         Task SaveAsync(Bet bet);
         Task<IReadOnlyCollection<BetOutput>> GetBetsAsync();
         Task<BetOutput> GetBetAsync(Guid betId);
-        Task AnswerBetAsync(Guid betId, bool answer);
+        Task AnswerBetAsync(Bet bet);
     }
 }

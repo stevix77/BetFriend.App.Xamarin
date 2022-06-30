@@ -77,7 +77,7 @@ namespace BetFriend.MobileApp.UnitTests
                     Coins = 30,
                     EndDate = new DateTime(2022, 2, 2),
                     Id = Guid.NewGuid(),
-                    Participants = new List<MemberOutput>
+                    Members = new List<MemberOutput>
                     {
                         new MemberOutput
                         {
@@ -95,8 +95,8 @@ namespace BetFriend.MobileApp.UnitTests
             //assert
             Assert.Single(bets);
             var bet = bets.First();
-            Assert.NotEmpty(bet.Participants);
-            Assert.Collection(bet.Participants, x =>
+            Assert.NotEmpty(bet.Members);
+            Assert.Collection(bet.Members, x =>
             {
                 Assert.Equal(memberId, x.Id);
                 Assert.Equal("username1", x.Username);

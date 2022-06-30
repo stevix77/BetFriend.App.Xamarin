@@ -58,7 +58,7 @@ namespace BetFriend.MobileApp
                     Coins = 30,
                     EndDate = new DateTime(2022, 2, 2),
                     Id = Guid.NewGuid(),
-                    Participants = new List<MemberOutput>
+                    Members = new List<MemberOutput>
                     {
                         new MemberOutput
                         {
@@ -78,7 +78,7 @@ namespace BetFriend.MobileApp
                     Coins = 30,
                     EndDate = new DateTime(2022, 2, 2),
                     Id = Guid.NewGuid(),
-                    Participants = new List<MemberOutput>
+                    Members = new List<MemberOutput>
                     {
                         new MemberOutput
                         {

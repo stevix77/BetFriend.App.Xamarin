@@ -11,27 +11,26 @@
 
     public class InMemoryBetRepository : IBetRepository
     {
-        private readonly List<Bet> _bets;
-        private readonly List<BetOutput> _betOutputs;
+        private readonly Dictionary<Guid, BetOutput> _betOutputs = new Dictionary<Guid, BetOutput>();
         private readonly IAuthenticationService _authenticationService;
 
         public InMemoryBetRepository(List<BetOutput> betOutputs = null, IAuthenticationService authenticationService = null)
         {
-            _bets = new List<Bet>();
-            _betOutputs = betOutputs ?? new List<BetOutput>();
+            if(betOutputs != null)
+                betOutputs.ForEach(x => _betOutputs.Add(x.Id, x));
+
             _authenticationService = authenticationService;
         }
 
         public Task SaveAsync(Bet bet)
         {
-            _bets.Add(bet);
-            _betOutputs.Add(new BetOutput
+            _betOutputs.Add(bet.BetId, new BetOutput
             {
                 Coins = bet.Coins,
                 Description = bet.Description,
                 EndDate = bet.EndDate,
                 Id = bet.BetId,
-                Participants = new List<MemberOutput>(),
+                Members = new List<MemberOutput>(),
                 Creator = new MemberOutput { Id = Guid.Parse(_authenticationService.UserId), Username = _authenticationService.Username }
             });
             return Task.CompletedTask;
@@ -39,36 +38,35 @@
 
         public Task<BetOutput> GetBetAsync(Guid betId)
         {
-            var betOutput = _betOutputs.FirstOrDefault(x => x.Id == betId);
-            return Task.FromResult(betOutput);
+            if(_betOutputs.ContainsKey(betId))
+                return Task.FromResult(_betOutputs[betId]);
+
+            return Task.FromResult<BetOutput>(default);
         }
 
         public async Task<IReadOnlyCollection<BetOutput>> GetBetsAsync()
         {
-            return await Task.FromResult(_betOutputs);
+            return await Task.FromResult(_betOutputs.Values);
         }
 
-        public IReadOnlyCollection<Bet> GetBets()
+        public IReadOnlyCollection<BetOutput> GetBets()
         {
-            return _bets;
+            return _betOutputs.Values;
         }
 
-        public Task AnswerBetAsync(Guid betId, bool answer)
+        public Task AnswerBetAsync(Bet bet)
         {
-            var bet = _betOutputs.First(x => x.Id == betId);
-            if (!answer && !CanJoin(bet))
-                bet.Participants = new List<MemberOutput>(bet.Participants.Where(x => x.Id != Guid.Parse(_authenticationService.UserId)));
-            else
-            {
-                if(CanJoin(bet))
-                    bet.Participants = new List<MemberOutput>(bet.Participants) { new MemberOutput { Id = Guid.Parse(_authenticationService.UserId), Username = _authenticationService.Username } };
-            }
+            var betOutput = _betOutputs[bet.BetId];
+            betOutput.Members = new List<MemberOutput>(betOutput.Members) 
+            { 
+                new MemberOutput
+                {
+                    Id = Guid.Parse(_authenticationService.UserId),
+                    Username = _authenticationService.Username
+                } 
+            };
+
             return Task.CompletedTask;
-        }
-
-        private bool CanJoin(BetOutput bet)
-        {
-            return !bet.Participants.Any(x => x.Id == Guid.Parse(_authenticationService.UserId));
         }
     }
 }
