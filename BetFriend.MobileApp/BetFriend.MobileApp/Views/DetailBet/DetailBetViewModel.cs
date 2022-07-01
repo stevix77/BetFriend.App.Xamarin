@@ -64,18 +64,18 @@ namespace BetFriend.MobileApp.Views.DetailBet
 
         public Command JoinBetCommand
         {
-            get => _joinBetCommand ?? (_joinBetCommand = new Command(async () =>
+            get => _joinBetCommand ??= new Command(async () =>
             {
                 await Join();
-            }, () => CanJoinBet()));
+            }, () => CanJoinBet());
         }
 
         public Command LeaveBetCommand
         {
-            get => _leaveBetCommand ?? (_leaveBetCommand = new Command(async () =>
+            get => _leaveBetCommand ??= new Command(async () =>
             {
                 await Leave();
-            }, () => CanLeaveBet()));
+            }, () => CanLeaveBet());
         }
 
         private async Task Leave()

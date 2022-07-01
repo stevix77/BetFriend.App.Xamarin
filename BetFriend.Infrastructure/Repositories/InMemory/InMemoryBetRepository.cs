@@ -57,14 +57,20 @@
         public Task AnswerBetAsync(Bet bet)
         {
             var betOutput = _betOutputs[bet.BetId];
-            betOutput.Members = new List<MemberOutput>(betOutput.Members) 
-            { 
-                new MemberOutput
+            var member = betOutput.Members.FirstOrDefault(x => x.Id == Guid.Parse(_authenticationService.UserId));
+            if(member == null)
+            {
+                betOutput.Members = new List<MemberOutput>(betOutput.Members)
                 {
-                    Id = Guid.Parse(_authenticationService.UserId),
-                    Username = _authenticationService.Username
-                } 
-            };
+                    new MemberOutput
+                    {
+                        Id = Guid.Parse(_authenticationService.UserId),
+                        Username = _authenticationService.Username
+                    }
+                };
+            }
+            else
+                betOutput.Members = new List<MemberOutput>(betOutput.Members.Where(x => x.Id != member.Id));
 
             return Task.CompletedTask;
         }

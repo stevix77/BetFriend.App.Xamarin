@@ -41,10 +41,15 @@ namespace BetFriend.Domain.Bets
 
         internal void AddAnswer(Answer answer)
         {
-            if (_answers.ContainsKey(answer.MemberId))
+            if (_answers.ContainsKey(answer.MemberId) && HasSameAnswer(answer))
                 throw new BetAlreadyAnsweredException();
 
-            _answers.Add(answer.MemberId, answer.GetAnswer());
+            _answers[answer.MemberId] = answer.GetAnswer();
+        }
+
+        private bool HasSameAnswer(Answer answer)
+        {
+            return _answers[answer.MemberId] == answer.GetAnswer();
         }
     }
 }
