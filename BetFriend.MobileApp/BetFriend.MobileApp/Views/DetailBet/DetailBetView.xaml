@@ -114,6 +114,20 @@
                     </Label>
                     <Label Text="{Binding Bet.Description}" Margin="10, 0" TextColor="{StaticResource Gray-700}" />
                 </StackLayout>
+                <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand">
+                    <buttons:SfButton
+                            BackgroundColor="{DynamicResource Gray-200}"
+                            CornerRadius="32"
+                            Command="{Binding EditCommand}"
+                            FontSize="30"
+                            HeightRequest="50"
+                            FontFamily="{DynamicResource MaterialFontFamily}"
+                            Text="{Static icons:MaterialDesignIcons.CommentEdit}"
+                            TextColor="{DynamicResource Orange}"
+                            VerticalOptions="StartAndExpand"
+                            WidthRequest="50"
+                            IsVisible="{Binding IsEditCommandVisible}"/>
+                </StackLayout>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
