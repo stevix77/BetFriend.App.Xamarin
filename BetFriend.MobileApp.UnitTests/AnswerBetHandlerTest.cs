@@ -55,5 +55,19 @@
             await Record.ExceptionAsync(() => handler.Handle(command));
             Assert.Single(bet.Members);
         }
+
+        [Fact]
+        public async Task ShouldUpdateAnswerWhenChangeResponse()
+        {
+            var authenticationService = new InMemoryAuthenticationService(_memberId.ToString(), "username");
+            var bet = new BetOutput { Id = _betId,
+                Description = "description",
+                Members = new List<MemberOutput> { new MemberOutput { Id = _memberId } } };
+            var repository = new InMemoryBetRepository(new List<BetOutput>() { bet }, authenticationService);
+            var command = new AnswerBetCommand(bet, false);
+            var handler = new AnswerBetCommandHandler(repository, authenticationService);
+            await handler.Handle(command);
+            Assert.Empty(bet.Members);
+        }
     }
 }
