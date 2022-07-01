@@ -2,9 +2,12 @@
 using BetFriend.Domain.Bets.Usecases.AnswerBet;
 using BetFriend.Domain.Users;
 using BetFriend.MobileApp.Models;
+using BetFriend.MobileApp.Navigation;
 using BetFriend.MobileApp.Themes;
+using BetFriend.MobileApp.Views.EditBet;
 using GalaSoft.MvvmLight;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -17,16 +20,19 @@ namespace BetFriend.MobileApp.Views.DetailBet
         private readonly IRetrieveBetQueryHandler _retrieveBetQueryHandler;
         private readonly IAnswerBetCommandHandler _answerBetCommandHandler;
         private readonly IAuthenticationService _authenticationService;
+        private readonly INavigationService _navigationService;
         private Command _joinBetCommand;
         private Command _leaveBetCommand;
 
         public DetailBetViewModel(IRetrieveBetQueryHandler retrieveBetQueryHandler,
                                   IAnswerBetCommandHandler answerBetCommandHandler,
-                                  IAuthenticationService authenticationService)
+                                  IAuthenticationService authenticationService,
+                                  INavigationService navigationService)
         {
             _retrieveBetQueryHandler = retrieveBetQueryHandler;
             _answerBetCommandHandler = answerBetCommandHandler;
             _authenticationService = authenticationService;
+            _navigationService = navigationService;
         }
 
         public bool IsJoinCommandVisible
@@ -38,6 +44,8 @@ namespace BetFriend.MobileApp.Views.DetailBet
         {
             get => IsNotBetCreator() && !IsNotMember();
         }
+
+        public bool IsEditCommandVisible => !IsNotBetCreator();
 
         public string IconJoinCommand
         {
@@ -78,11 +86,26 @@ namespace BetFriend.MobileApp.Views.DetailBet
             }, () => CanLeaveBet());
         }
 
+        public Command EditCommand
+        {
+            get => new Command(async () =>
+            {
+                await _navigationService.NavigateToAsync(nameof(EditBetView),
+                                                            new Dictionary<string, object>()
+                                                            {
+                                                                { "betid", _bet.Id },
+                                                                { "description", _bet.Description },
+                                                                { "enddate", _bet.EndDate },
+                                                                { "coins", _bet.Coins },
+                                                            });
+            });
+        }
+
         private async Task Leave()
         {
             var command = new AnswerBetCommand(_bet.ToBetOutput(), false);
             await _answerBetCommandHandler.Handle(command);
-            Bet.Members.Remove(Bet.Members.FirstOrDefault(x => x.Id == Guid.Parse(_authenticationService.UserId)));
+            _ = Bet.Members.Remove(Bet.Members.FirstOrDefault(x => x.Id == Guid.Parse(_authenticationService.UserId)));
             UpdateProperties();
         }
 

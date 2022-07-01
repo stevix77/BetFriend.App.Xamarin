@@ -2,6 +2,7 @@
 {
     using BetFriend.Domain.Bets;
     using BetFriend.Domain.Bets.Dto;
+    using BetFriend.Domain.Bets.Usecases.UpdateBet;
     using BetFriend.Domain.Users;
     using System;
     using System.Collections.Generic;
@@ -72,6 +73,15 @@
             else
                 betOutput.Members = new List<MemberOutput>(betOutput.Members.Where(x => x.Id != member.Id));
 
+            return Task.CompletedTask;
+        }
+
+        public Task UpdateAsync(Bet bet)
+        {
+            var betOutput = _betOutputs[bet.BetId];
+            betOutput.Coins = bet.Coins;
+            betOutput.Description = bet.Description;
+            betOutput.EndDate = bet.EndDate;
             return Task.CompletedTask;
         }
     }

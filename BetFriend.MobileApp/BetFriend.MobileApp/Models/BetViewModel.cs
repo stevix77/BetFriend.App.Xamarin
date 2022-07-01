@@ -32,7 +32,7 @@ namespace BetFriend.MobileApp.Models
 
         internal BetOutput ToBetOutput()
         {
-            return new BetOutput
+            var bet = new BetOutput
             {
                 Coins = Coins,
                 Description = Description,
@@ -41,6 +41,7 @@ namespace BetFriend.MobileApp.Models
                 Members = new List<MemberOutput>(Members.Select(x => new MemberOutput { Id = x.Id })),
                 Creator = new MemberOutput { Id = CreatorId, Username = CreatorUsername }
             };
+            return bet;
         }
     }
 }

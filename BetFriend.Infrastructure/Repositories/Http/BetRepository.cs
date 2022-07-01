@@ -1,5 +1,6 @@
 ﻿using BetFriend.Domain.Bets;
 using BetFriend.Domain.Bets.Dto;
+using BetFriend.Domain.Bets.Usecases.UpdateBet;
 using BetFriend.Domain.Users;
 using BetFriend.Infrastructure.Abstractions;
 using Microsoft.Extensions.Configuration;
@@ -55,6 +56,11 @@ namespace BetFriend.Infrastructure.Repositories.Http
         }
 
         public Task AnswerBetAsync(Bet bet)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateAsync(Bet bet)
         {
             throw new NotImplementedException();
         }
