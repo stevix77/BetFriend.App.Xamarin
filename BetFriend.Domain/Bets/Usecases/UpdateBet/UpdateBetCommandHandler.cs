@@ -1,15 +1,14 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace BetFriend.Domain.Bets.Usecases.UpdateBet
 {
-    public class UpdateBetCommandHandler
+    public class UpdateBetCommandHandler : IUpdateBetCommandHandler
     {
         private readonly IBetRepository _betRepository;
 
         public UpdateBetCommandHandler(IBetRepository betRepository)
         {
-            this._betRepository = betRepository;
+            _betRepository = betRepository;
         }
 
         public async Task Handle(UpdateBetCommand command)

@@ -5,6 +5,7 @@ using BetFriend.Domain.Bets.GetBetsInProgress;
 using BetFriend.Domain.Bets.LaunchBet;
 using BetFriend.Domain.Bets.RetrieveBet;
 using BetFriend.Domain.Bets.Usecases.AnswerBet;
+using BetFriend.Domain.Bets.Usecases.UpdateBet;
 using BetFriend.Domain.Users;
 using BetFriend.Domain.Users.Usecases;
 using BetFriend.Domain.Users.Usecases.Register;
@@ -101,6 +102,7 @@ namespace BetFriend.MobileApp
             serviceCollection.AddScoped<ILaunchBetCommandHandler, LaunchBetCommandHandler>();
             serviceCollection.AddScoped<IGetBetsInProgressQueryHandler, GetBetsInProgressQueryHandler>();
             serviceCollection.AddScoped<IAnswerBetCommandHandler, AnswerBetCommandHandler>();
+            serviceCollection.AddScoped<IUpdateBetCommandHandler, UpdateBetCommandHandler>();
             serviceCollection.AddScoped<IRegisterCommandHandler, RegisterCommandHandler>();
             serviceCollection.AddScoped<ISignInCommandHandler, SignInCommandHandler>();
             serviceCollection.AddScoped<RegisterPresenter>();

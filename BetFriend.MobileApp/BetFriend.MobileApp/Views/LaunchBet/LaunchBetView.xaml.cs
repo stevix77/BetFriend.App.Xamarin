@@ -19,11 +19,5 @@
             _vm.Cleanup();
             base.OnDisappearing();
         }
-
-        private void Entry_Completed(object sender, System.EventArgs e)
-        {
-            if (_vm.ValidateCommand.CanExecute(null))
-                _vm.ValidateCommand.Execute(null);
-        }
     }
 }
