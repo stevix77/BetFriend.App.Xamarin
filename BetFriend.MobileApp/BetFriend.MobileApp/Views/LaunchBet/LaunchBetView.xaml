@@ -1,12 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms" 
-             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
-             xmlns:control="clr-namespace:BetFriend.MobileApp.Controls" 
-             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
-             xmlns:resources="clr-namespace:BetFriend.MobileApp.Resources" 
-             xmlns:converter="clr-namespace:BetFriend.MobileApp.Converters"
+             xmlns:controls="clr-namespace:BetFriend.MobileApp.Views"
              x:Class="BetFriend.MobileApp.Views.LaunchBet.LaunchBetView">
 
     <NavigationPage.TitleView>
@@ -17,9 +12,6 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <converter:BooleanToColorConverter x:Key="ColorConverter" />
-            <!--<converter:ArrayToBoolConverter x:Key="arrayToBoolConverter" />
-            <converter:ObjectToBoolConverter x:Key="objectToBoolConverter" />-->
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
@@ -34,70 +26,7 @@
                          Phone="FillAndExpand"/>
             </ScrollView.VerticalOptions>
 
-            <StackLayout
-                Margin="{core:OnPlatformOrientationThickness PhonePortrait='20,32',
-                                                             PhoneLandscape='150,32',
-                                                             TabletPortrait='200,50',
-                                                             TabletLandscape='300,50',
-                                                             Desktop='30'}"
-                Spacing="0"
-                VerticalOptions="Start">
-
-                <StackLayout
-                    HorizontalOptions="Center"
-                    VerticalOptions="Start" WidthRequest="{OnPlatform Default='-1',
-                                          UWP='350'}">
-
-
-                    <StackLayout>
-                        <border:SfBorder
-                        BackgroundColor="{DynamicResource Gray-White}"
-                        BorderColor="{Binding Source={x:Reference DescriptionEntry}, Path=IsFocused,  Converter={StaticResource ColorConverter}, ConverterParameter=3}"
-                        Style="{StaticResource SfBorderStyle}">
-                            <control:BorderlessEntry
-                            x:Name="DescriptionEntry"
-                            Placeholder="{Static resources:Resource.TextBetDescription}"
-                            PlaceholderColor="{StaticResource Gray-700}"
-                            Style="{StaticResource EditorStyle}"
-                            Text="{Binding Description}"
-                            TextColor="Black" Keyboard="Default" Completed="Entry_Completed" />
-                        </border:SfBorder>
-                    </StackLayout>
-                    <StackLayout>
-                        <Label
-                        FontSize="14"
-                        HorizontalOptions="Center"
-                        Style="{StaticResource LabelStyle}"
-                        Text="{Static resources:Resource.DateEndToBet}"
-                        TextColor="{StaticResource Gray-Black}" />
-                        <DatePicker Date="{Binding EndDate}" MinimumDate="{Binding MinimumDate}" />
-                        <TimePicker Time="{Binding EndTime}" />
-                    </StackLayout>
-
-                    <StackLayout>
-                        <Slider Maximum="360" Value="{Binding Coins}" />
-                        <Label>
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="Jetons : " />
-                                    <Span Text="{Binding Coins}" />
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                    </StackLayout>
-
-                    <StackLayout>
-                        <buttons:SfButton
-                        HorizontalTextAlignment="Center"
-                        Margin="0,16"
-                        Command="{Binding ValidateCommand}"
-                        Style="{StaticResource SfButtonStyle}"
-                        Text="{Static resources:Resource.Validate}" />
-                    </StackLayout>
-
-                </StackLayout>
-
-            </StackLayout>
+            <controls:FormBetView />
 
         </ScrollView>
     </ContentPage.Content>

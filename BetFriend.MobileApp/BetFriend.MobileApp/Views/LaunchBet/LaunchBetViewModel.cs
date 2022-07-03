@@ -1,5 +1,6 @@
 ﻿namespace BetFriend.MobileApp.Views.LaunchBet
 {
+    using BetFriend.Domain.Abstractions;
     using BetFriend.Domain.Bets.LaunchBet;
     using BetFriend.MobileApp.Navigation;
     using BetFriend.MobileApp.Views.Home;
@@ -15,13 +16,16 @@
         private Command _validateCommand;
         private readonly ILaunchBetCommandHandler _launchBetCommandHandler;
         private readonly INavigationService _navigationService;
+        private readonly IDateTimeProvider _dateTimeProvider;
 
         public LaunchBetViewModel(IMessenger messenger,
                                   ILaunchBetCommandHandler launchBetCommandHandler,
-                                  INavigationService navigationService) : base(messenger)
+                                  INavigationService navigationService,
+                                  IDateTimeProvider dateTimeProvider) : base(messenger)
         {
             _launchBetCommandHandler = launchBetCommandHandler;
             _navigationService = navigationService;
+            _dateTimeProvider = dateTimeProvider;
         }
 
         private string _description;
@@ -71,22 +75,24 @@
                 if (Set(() => EndTime, ref _endTime, value))
                 {
                     RaisePropertyChanged(nameof(EndTime));
+                    EndDate = EndDate.Add(value);
                 }
             }
         }
 
         public Command ValidateCommand
         {
-            get => _validateCommand ?? (_validateCommand = new Command(async () =>
+            get => _validateCommand ??= _validateCommand = new Command(async () =>
             {
-                await _launchBetCommandHandler.Handle(new LaunchBetCommand(Guid.NewGuid(), _description, _endDate, _coins));
+                await _launchBetCommandHandler.Handle(new LaunchBetCommand(Guid.NewGuid(), _description, _endDate.Add(_endTime), _coins));
                 await _navigationService.NavigateToAsync($"//{nameof(HomeView)}", null);
-            }, () => CheckValideCommand()));
+            }, () => CheckValideCommand());
         }
 
         private bool CheckValideCommand()
         {
-            return !string.IsNullOrEmpty(_description);
+            return !string.IsNullOrEmpty(_description) &&
+                    EndDate > _dateTimeProvider.Now();
         }
 
         public override void Cleanup()

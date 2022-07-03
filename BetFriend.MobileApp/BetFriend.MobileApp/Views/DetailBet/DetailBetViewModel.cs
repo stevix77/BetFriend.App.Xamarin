@@ -93,10 +93,7 @@ namespace BetFriend.MobileApp.Views.DetailBet
                 await _navigationService.NavigateToAsync(nameof(EditBetView),
                                                             new Dictionary<string, object>()
                                                             {
-                                                                { "betid", _bet.Id },
-                                                                { "description", _bet.Description },
-                                                                { "enddate", _bet.EndDate },
-                                                                { "coins", _bet.Coins },
+                                                                { "bet", Newtonsoft.Json.JsonConvert.SerializeObject(_bet) }
                                                             });
             });
         }
