@@ -10,7 +10,7 @@
     {
         public async Task GoBack()
         {
-            await Shell.Current.Navigation.PopAsync();
+            await Shell.Current.GoToAsync("..", true);
         }
 
         public async Task NavigateToAsync(string pageName, Dictionary<string, object> data)

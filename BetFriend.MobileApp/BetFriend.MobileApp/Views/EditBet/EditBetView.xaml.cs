@@ -1,4 +1,5 @@
-﻿using BetFriend.MobileApp.Models;
+﻿using BetFriend.Domain.Bets.Dto;
+using BetFriend.MobileApp.Models;
 using Newtonsoft.Json;
 
 using Xamarin.Forms;
@@ -12,7 +13,11 @@ namespace BetFriend.MobileApp.Views.EditBet
     {
         public string Bet
         {
-            set => (BindingContext as EditBetViewModel).Bet = JsonConvert.DeserializeObject<BetViewModel>(value);
+            set
+            {
+                var betOutput = JsonConvert.DeserializeObject<BetOutput>(value);
+                (BindingContext as EditBetViewModel).Bet = new BetViewModel(betOutput);
+            }
         }
 
         public EditBetView()

@@ -62,7 +62,10 @@
             set
             {
                 if (Set(nameof(EndDate), ref _endDate, value))
+                {
                     RaisePropertyChanged(nameof(EndDate));
+                    ValidateCommand.ChangeCanExecute();
+                }
             }
         }
 
@@ -84,7 +87,7 @@
         {
             get => _validateCommand ??= _validateCommand = new Command(async () =>
             {
-                await _launchBetCommandHandler.Handle(new LaunchBetCommand(Guid.NewGuid(), _description, _endDate.Add(_endTime), _coins));
+                await _launchBetCommandHandler.Handle(new LaunchBetCommand(Guid.NewGuid(), _description, _endDate, _coins));
                 await _navigationService.NavigateToAsync($"//{nameof(HomeView)}", null);
             }, () => CheckValideCommand());
         }

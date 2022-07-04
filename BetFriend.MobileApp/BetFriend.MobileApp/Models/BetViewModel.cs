@@ -18,7 +18,7 @@ namespace BetFriend.MobileApp.Models
                     new ObservableCollection<MemberViewModel>();
             Coins = bet.Coins;
             Description = bet.Description;
-            EndDate = bet.EndDate.ToLocalTime().ToLongDateString();
+            EndDate = bet.EndDate.ToString("f");
             CreatorUsername = bet.Creator.Username;
         }
 
