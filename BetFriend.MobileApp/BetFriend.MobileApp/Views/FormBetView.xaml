@@ -2,11 +2,17 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms" 
+             xmlns:converter="clr-namespace:BetFriend.MobileApp.Converters"
              xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
              xmlns:control="clr-namespace:BetFriend.MobileApp.Controls" 
              xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              xmlns:resources="clr-namespace:BetFriend.MobileApp.Resources"
              x:Class="BetFriend.MobileApp.Views.FormBetView">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="ColorConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
   <ContentView.Content>
         <StackLayout
                 Margin="{core:OnPlatformOrientationThickness PhonePortrait='20,32',
@@ -26,13 +32,13 @@
                 <StackLayout>
                     <border:SfBorder
                         BackgroundColor="{DynamicResource Gray-White}"
-                        BorderColor="{Binding Source={x:Reference DescriptionEntry}, Path=IsFocused,  Converter={StaticResource ColorConverter}, ConverterParameter=3}"
-                        Style="{StaticResource SfBorderStyle}">
+                        BorderColor="{Binding Source={x:Reference DescriptionEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        >
                         <control:BorderlessEntry
                             x:Name="DescriptionEntry"
                             Placeholder="{Static resources:Resource.TextBetDescription}"
-                            PlaceholderColor="{StaticResource Gray-700}"
-                            Style="{StaticResource EditorStyle}"
+                            PlaceholderColor="{DynamicResource Gray-700}"
+                            Style="{DynamicResource EditorStyle}"
                             Text="{Binding Description}"
                             TextColor="Black" Keyboard="Default" />
                     </border:SfBorder>
@@ -41,16 +47,16 @@
                     <Label
                         FontSize="14"
                         HorizontalOptions="Center"
-                        Style="{StaticResource LabelStyle}"
+                        Style="{DynamicResource LabelStyle}"
                         Text="{Static resources:Resource.DateEndToBet}"
-                        TextColor="{StaticResource Gray-Black}" />
-                    <DatePicker Date="{Binding EndDate}" MinimumDate="{Binding MinimumDate}" />
-                    <TimePicker Time="{Binding EndTime}" />
+                        TextColor="{DynamicResource Gray-Black}" />
+                    <DatePicker Date="{Binding EndDate}" MinimumDate="{Binding MinimumDate}" TextColor="{DynamicResource Gray-Black}" />
+                    <TimePicker Time="{Binding EndTime}" TextColor="{DynamicResource Gray-Black}"  />
                 </StackLayout>
 
                 <StackLayout>
                     <Slider Maximum="360" Value="{Binding Coins}" />
-                    <Label>
+                    <Label TextColor="{DynamicResource Gray-700}" >
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Text="Jetons : " />
@@ -65,7 +71,7 @@
                         HorizontalTextAlignment="Center"
                         Margin="0,16"
                         Command="{Binding ValidateCommand}"
-                        Style="{StaticResource SfButtonStyle}"
+                        Style="{DynamicResource SfButtonStyle}"
                         Text="{Static resources:Resource.Validate}" />
                 </StackLayout>
 

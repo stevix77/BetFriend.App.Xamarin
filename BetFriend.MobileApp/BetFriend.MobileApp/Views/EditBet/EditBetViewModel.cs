@@ -2,8 +2,10 @@
 using BetFriend.Domain.Bets.Usecases.UpdateBet;
 using BetFriend.MobileApp.Models;
 using BetFriend.MobileApp.Navigation;
+using BetFriend.MobileApp.Views.DetailBet;
 using GalaSoft.MvvmLight;
 using System;
+using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace BetFriend.MobileApp.Views.EditBet
@@ -22,12 +24,12 @@ namespace BetFriend.MobileApp.Views.EditBet
             _updateBetCommandHandler = updateBetCommandHandler;
             _navigationService = navigationService;
         }
-        public string Id { get; internal set; }
+
         private string _description;
         public string Description
         {
             get => _description;
-            internal set
+            set
             {
                 if (Set(() => Description, ref _description, value))
                 {
@@ -36,8 +38,30 @@ namespace BetFriend.MobileApp.Views.EditBet
                 }
             }
         }
-        public int Coins { get; internal set; }
-        public DateTime EndDate { get; internal set; }
+        private int _coins;
+        public int Coins 
+        {
+            get => _coins;
+            set
+            {
+                if (Set(() => Coins, ref _coins, value))
+                    RaisePropertyChanged(nameof(Coins));
+            }
+        }
+
+        private DateTime _endDate;
+        public DateTime EndDate 
+        {
+            get => _endDate;
+            set
+            {
+                if(Set(() => EndDate, ref _endDate, value))
+                {
+                    RaisePropertyChanged(nameof(EndDate));
+                    ValidateCommand.ChangeCanExecute();
+                }
+            }
+        }
         public DateTime MinimumDate { get; } = DateTime.Now;
 
         private TimeSpan _endTime;
@@ -49,6 +73,7 @@ namespace BetFriend.MobileApp.Views.EditBet
                 if (Set(() => EndTime, ref _endTime, value))
                 {
                     RaisePropertyChanged(nameof(EndTime));
+                    EndDate = EndDate.Add(value);
                 }
             }
         }
@@ -60,9 +85,13 @@ namespace BetFriend.MobileApp.Views.EditBet
             {
                 await _updateBetCommandHandler.Handle(new UpdateBetCommand(_bet.ToBetOutput(),
                                                                            _description,
-                                                                           EndDate.Add(_endTime),
-                                                                           Coins));
-                await _navigationService.GoBack();
+                                                                           _endDate,
+                                                                           _coins));
+                await _navigationService.NavigateToAsync(nameof(DetailBetView),
+                                                            new Dictionary<string, object>()
+                                                            {
+                                                                { "betid", _bet.Id }
+                                                            });
             }, () => CanValideCommand());
         }
 
@@ -72,11 +101,13 @@ namespace BetFriend.MobileApp.Views.EditBet
             get => _bet; 
             internal set
             {
-                _bet = value;
-                Description = value.Description;
-                Coins = value.Coins;
-                EndDate = DateTime.Parse(value.EndDate);
-                EndTime = EndDate.TimeOfDay;
+                if(Set(() => Bet, ref _bet, value))
+                {
+                    Description = value.Description;
+                    Coins = value.Coins;
+                    EndDate = DateTime.Parse(value.EndDate);
+                    EndTime = EndDate.TimeOfDay;
+                }
             }
         }
 

@@ -3,7 +3,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:BetFriend.MobileApp.Views"
              x:Class="BetFriend.MobileApp.Views.EditBet.EditBetView">
+    <NavigationPage.TitleView>
+        <StackLayout>
+            <Label Text="Édition du pari" />
+        </StackLayout>
+    </NavigationPage.TitleView>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
-        <controls:FormBetView />
+        <ScrollView HorizontalOptions="Center">
+            <ScrollView.VerticalOptions>
+                <OnIdiom x:TypeArguments="LayoutOptions"
+                         Default="CenterAndExpand"
+                         Phone="FillAndExpand"/>
+            </ScrollView.VerticalOptions>
+
+            <controls:FormBetView />
+
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
