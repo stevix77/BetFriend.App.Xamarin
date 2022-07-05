@@ -2,10 +2,53 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:BetFriend.MobileApp.Views.InProgressBet"
+             xmlns:converter="clr-namespace:BetFriend.MobileApp.Converters"
+             xmlns:cards="clr-namespace:Syncfusion.XForms.Cards;assembly=Syncfusion.Cards.XForms"
              x:Class="BetFriend.MobileApp.Views.Home.HomeView">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary.MergedDictionaries>
+            <converter:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
-        <StackLayout VerticalOptions="CenterAndExpand">
-            <controls:InProgressBetsView />
+        <StackLayout >
+            <SearchBar Text="{Binding SearchText}" 
+                       SearchCommand="{Binding SearchCommand}" 
+                       SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
+                       x:Name="searchBar"/>
+            <StackLayout VerticalOptions="CenterAndExpand" IsVisible="{Binding IsSearchMode, Converter={StaticResource InverseBooleanConverter}}">
+                <controls:InProgressBetsView />
+            </StackLayout>
+            <StackLayout IsVisible="{Binding IsSearchMode}">
+                <ListView ItemsSource="{Binding Members}" HasUnevenRows="True"
+                      SelectionMode="None" VerticalScrollBarVisibility="Never" 
+                  HorizontalScrollBarVisibility="Never"
+                  Margin="{OnIdiom Default='10,10,10,10'}" 
+                  HorizontalOptions="FillAndExpand" BackgroundColor="Transparent" 
+                  SeparatorVisibility="{OnPlatform Default='Default',
+                                                   iOS='None'}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Padding="0,0,0,2">
+                                    <cards:SfCardView>
+                                        <Label Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2" Text="{Binding Username}" Margin="5" VerticalOptions="Center"
+                                        FontSize="Body" TextColor="{StaticResource Gray-700}"
+                                               HorizontalOptions="Start"
+                                        LineHeight="{OnPlatform Android=1.25,
+                                                                Default=1}" />
+                                    </cards:SfCardView>
+                                </StackLayout>
+
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
