@@ -12,6 +12,7 @@
         public HomeView()
         {
             InitializeComponent();
+            BindingContext = ViewModelLocator.Resolve<HomeViewModel>();
         }
 
         protected override async void OnAppearing()

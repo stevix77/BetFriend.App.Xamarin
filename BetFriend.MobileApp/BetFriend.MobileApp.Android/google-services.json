@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "619881615641",
+    "firebase_url": "https://betfriend-dev.firebaseio.com",
+    "project_id": "betfriend-dev",
+    "storage_bucket": "betfriend-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619881615641:android:ad5c44cd843dcf29c2b588",
+        "android_client_info": {
+          "package_name": "com.stevix.BetFriend"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619881615641-7jso6pn8pvstq3d419r4lbo6lbbimjg5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAc4Qc97NN_vkcNa5YRA7CKMH31dt7EaW8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619881615641-7jso6pn8pvstq3d419r4lbo6lbbimjg5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
