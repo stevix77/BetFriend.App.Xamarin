@@ -6,36 +6,36 @@ namespace BetFriend.MobileApp.Views.Home
 {
     public class SearchVM : ViewModelBase
     {
-        public SearchVM(Guid id, string username, bool isFollow)
+        public SearchVM(Guid id, string username, bool hasSubscribed)
         {
             UserId = id;
             Username = username;
-            IsFollow = isFollow;
+            HasSubscribed = hasSubscribed;
         }
         public Guid UserId { get; set; }
         public string Username { get; set; }
 
-        private bool _isFollow;
-        public bool IsFollow 
+        private bool _hasSubscribed;
+        public bool HasSubscribed
         {
-            get => _isFollow; 
+            get => _hasSubscribed; 
             set
             {
-                if (Set(() => IsFollow, ref _isFollow, value))
+                if (Set(() => HasSubscribed, ref _hasSubscribed, value))
                 {
-                    RaisePropertyChanged(nameof(IsFollow));
-                    RaisePropertyChanged(nameof(BtnFollowText));
+                    RaisePropertyChanged(nameof(HasSubscribed));
+                    RaisePropertyChanged(nameof(BtnSubscribeText));
                 }
             }
         }
-        public string BtnFollowText { get => IsFollow ? Resources.Resource.UnFollow : Resources.Resource.Follow; }
+        public string BtnSubscribeText { get => HasSubscribed ? Resources.Resource.UnSubscribe : Resources.Resource.Subscribe; }
 
-        private Command _followCommand;
-        public Command FollowCommand
+        private Command _subscribeCommand;
+        public Command SubscribeCommand
         {
-            get => _followCommand ??= new Command(async () =>
+            get => _subscribeCommand ??= new Command(async () =>
             {
-                IsFollow = !IsFollow;
+                HasSubscribed = !HasSubscribed;
             });
         }
     }

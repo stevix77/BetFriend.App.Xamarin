@@ -216,9 +216,6 @@
   <data name="Fail" xml:space="preserve">
     <value>Fail</value>
   </data>
-  <data name="Follow" xml:space="preserve">
-    <value>Follow</value>
-  </data>
   <data name="Friends" xml:space="preserve">
     <value>Friends</value>
   </data>
@@ -369,6 +366,9 @@
   <data name="StatusPending" xml:space="preserve">
     <value>Status : Pending</value>
   </data>
+  <data name="Subscribe" xml:space="preserve">
+    <value>Subscribe</value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>Success</value>
   </data>
@@ -414,8 +414,8 @@
   <data name="TitleBetUsersPage" xml:space="preserve">
     <value>Bet with</value>
   </data>
-  <data name="UnFollow" xml:space="preserve">
-    <value>UnFollow</value>
+  <data name="UnSubscribe" xml:space="preserve">
+    <value>Unsubscribe</value>
   </data>
   <data name="UserExisting" xml:space="preserve">
     <value>This user already existing</value>
