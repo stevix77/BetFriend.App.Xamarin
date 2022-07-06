@@ -34,7 +34,7 @@
                   SeparatorVisibility="{OnPlatform Default='Default',
                                                    iOS='None'}">
                     <ListView.Behaviors>
-                        <local:EventToCommandBehavior Command="{Binding ItemSelected}" />
+                        <local:EventToCommandBehavior Command="{Binding SearchItemCommand}" />
                     </ListView.Behaviors>
                     <ListView.ItemTemplate>
                         <DataTemplate>
@@ -50,9 +50,9 @@
                                             <buttons:SfButton
                                                 HorizontalTextAlignment="Center"
                                                 Margin="0,16"
-                                                Command="{Binding FollowCommand}"
+                                                Command="{Binding SubscribeCommand}"
                                                 Style="{DynamicResource SfButtonStyle}"
-                                                Text="{Binding BtnFollowText}" />
+                                                Text="{Binding BtnSubscribeText}" />
                                         </StackLayout>
                                     </cards:SfCardView>
                                 </StackLayout>

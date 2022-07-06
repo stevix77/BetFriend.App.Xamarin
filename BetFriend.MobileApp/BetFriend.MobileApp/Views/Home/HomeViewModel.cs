@@ -59,6 +59,16 @@ namespace BetFriend.MobileApp.Views.Home
             return value.Length >= 3;
         }
 
+        private Command _searchItemCommand;
+
+        public Command SearchItemCommand
+        {
+            get => _searchItemCommand ??= new Command(async () =>
+            {
+
+            });
+        }
+
         private Command _searchCommand;
         public Command SearchCommand
         {
