@@ -5,6 +5,7 @@
     using Microsoft.Extensions.Configuration;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
+    using System;
     using System.Threading.Tasks;
 
     public class UserRepository : IUserRepository
@@ -27,6 +28,11 @@
             });
             var token = await _httpService.PostAsync<string>($"{_host}{REGISTER_URL}", jsonUser).ConfigureAwait(false);
             return token;
+        }
+
+        public Task SubscribeAsync(Guid subscriptionId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

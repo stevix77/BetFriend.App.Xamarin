@@ -1,4 +1,6 @@
-﻿using GalaSoft.MvvmLight;
+﻿using BetFriend.Domain.Users;
+using BetFriend.Domain.Users.Usecases.Subscribe;
+using GalaSoft.MvvmLight;
 using System;
 using Xamarin.Forms;
 
@@ -35,7 +37,9 @@ namespace BetFriend.MobileApp.Views.Home
         {
             get => _subscribeCommand ??= new Command(async () =>
             {
-                HasSubscribed = !HasSubscribed;
+                var currentUser = ViewModelLocator.Resolve<IAuthenticationService>().User;
+                await ViewModelLocator.Resolve<ISubscribeMemberCommandHandler>().Handle(new SubscribeMemberCommand(currentUser, UserId));
+                HasSubscribed = currentUser.Subscriptions.Contains(UserId);
             });
         }
     }
