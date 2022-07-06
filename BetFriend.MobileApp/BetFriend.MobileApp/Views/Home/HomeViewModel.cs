@@ -65,10 +65,10 @@ namespace BetFriend.MobileApp.Views.Home
             get => _searchCommand ??= new Command<string>(async (text) =>
             {
                 if (CanSearch(text))
-                    Members = new ObservableCollection<MemberViewModel>(_fakemembers);
+                    Members = new ObservableCollection<SearchVM>(_fakemembers);
             });
         }
-        public ObservableCollection<MemberViewModel> Members 
+        public ObservableCollection<SearchVM> Members 
         {
             get => _members; 
             set
@@ -78,17 +78,17 @@ namespace BetFriend.MobileApp.Views.Home
             }
         }
 
-        private ObservableCollection<MemberViewModel> _members = new ObservableCollection<MemberViewModel>();
-        private IEnumerable<MemberViewModel> _fakemembers = new List<MemberViewModel>
+        private ObservableCollection<SearchVM> _members = new ObservableCollection<SearchVM>();
+        private IEnumerable<SearchVM> _fakemembers = new List<SearchVM>
         {
-            new MemberViewModel(Guid.NewGuid(), Guid.NewGuid().ToString()),
-            new MemberViewModel(Guid.NewGuid(), Guid.NewGuid().ToString()),
-            new MemberViewModel(Guid.NewGuid(), Guid.NewGuid().ToString()),
-            new MemberViewModel(Guid.NewGuid(), Guid.NewGuid().ToString()),
-            new MemberViewModel(Guid.NewGuid(), Guid.NewGuid().ToString()),
-            new MemberViewModel(Guid.NewGuid(), Guid.NewGuid().ToString()),
-            new MemberViewModel(Guid.NewGuid(), Guid.NewGuid().ToString()),
-            new MemberViewModel(Guid.NewGuid(), Guid.NewGuid().ToString())
+            new SearchVM(Guid.NewGuid(), Guid.NewGuid().ToString(), false),
+            new SearchVM(Guid.NewGuid(), Guid.NewGuid().ToString(), false),
+            new SearchVM(Guid.NewGuid(), Guid.NewGuid().ToString(), false),
+            new SearchVM(Guid.NewGuid(), Guid.NewGuid().ToString(), true),
+            new SearchVM(Guid.NewGuid(), Guid.NewGuid().ToString(), true),
+            new SearchVM(Guid.NewGuid(), Guid.NewGuid().ToString(), false),
+            new SearchVM(Guid.NewGuid(), Guid.NewGuid().ToString(), true),
+            new SearchVM(Guid.NewGuid(), Guid.NewGuid().ToString(), false)
         };
     }
 }

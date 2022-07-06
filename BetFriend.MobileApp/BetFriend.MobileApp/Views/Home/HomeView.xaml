@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              xmlns:controls="clr-namespace:BetFriend.MobileApp.Views.InProgressBet"
              xmlns:converter="clr-namespace:BetFriend.MobileApp.Converters"
              xmlns:cards="clr-namespace:Syncfusion.XForms.Cards;assembly=Syncfusion.Cards.XForms"
+             xmlns:local="clr-namespace:BetFriend.MobileApp.Behaviors"
              x:Class="BetFriend.MobileApp.Views.Home.HomeView">
 
     <ContentPage.Resources>
@@ -31,19 +33,29 @@
                   HorizontalOptions="FillAndExpand" BackgroundColor="Transparent" 
                   SeparatorVisibility="{OnPlatform Default='Default',
                                                    iOS='None'}">
+                    <ListView.Behaviors>
+                        <local:EventToCommandBehavior Command="{Binding ItemSelected}" />
+                    </ListView.Behaviors>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
                                 <StackLayout Padding="0,0,0,2">
                                     <cards:SfCardView>
-                                        <Label Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="2" Text="{Binding Username}" Margin="5" VerticalOptions="Center"
-                                        FontSize="Body" TextColor="{StaticResource Gray-700}"
-                                               HorizontalOptions="Start"
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label Text="{Binding Username}" Margin="5" VerticalOptions="Center"
+                                        FontSize="Body" TextColor="{StaticResource Gray-700}" 
+                                        HorizontalOptions="Start" 
                                         LineHeight="{OnPlatform Android=1.25,
-                                                                Default=1}" />
+                                                       Default=1}" />
+                                            <buttons:SfButton
+                                                HorizontalTextAlignment="Center"
+                                                Margin="0,16"
+                                                Command="{Binding FollowCommand}"
+                                                Style="{DynamicResource SfButtonStyle}"
+                                                Text="{Binding BtnFollowText}" />
+                                        </StackLayout>
                                     </cards:SfCardView>
                                 </StackLayout>
-
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>

@@ -216,6 +216,9 @@
   <data name="Fail" xml:space="preserve">
     <value>Échec</value>
   </data>
+  <data name="Follow" xml:space="preserve">
+    <value>S'abonner</value>
+  </data>
   <data name="Friends" xml:space="preserve">
     <value>Amis</value>
   </data>
@@ -410,6 +413,9 @@
   </data>
   <data name="TitleBetUsersPage" xml:space="preserve">
     <value>Parier avec</value>
+  </data>
+  <data name="UnFollow" xml:space="preserve">
+    <value>Se désabonner</value>
   </data>
   <data name="UserExisting" xml:space="preserve">
     <value>Cet utilisateur existe déjà</value>
