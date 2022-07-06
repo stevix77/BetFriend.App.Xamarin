@@ -19,7 +19,7 @@ namespace BetFriend.MobileApp.Resources {
     // à l'aide d'un outil, tel que ResGen ou Visual Studio.
     // Pour ajouter ou supprimer un membre, modifiez votre fichier .ResX, puis réexécutez ResGen
     // avec l'option /str ou régénérez votre projet VS.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resource {
@@ -354,6 +354,15 @@ namespace BetFriend.MobileApp.Resources {
         public static string Fail {
             get {
                 return ResourceManager.GetString("Fail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à S&apos;abonner.
+        /// </summary>
+        public static string Follow {
+            get {
+                return ResourceManager.GetString("Follow", resourceCulture);
             }
         }
         
@@ -939,6 +948,15 @@ namespace BetFriend.MobileApp.Resources {
         public static string TitleBetUsersPage {
             get {
                 return ResourceManager.GetString("TitleBetUsersPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Se désabonner.
+        /// </summary>
+        public static string UnFollow {
+            get {
+                return ResourceManager.GetString("UnFollow", resourceCulture);
             }
         }
         
