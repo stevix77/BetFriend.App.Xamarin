@@ -1,7 +1,6 @@
 ﻿using BetFriend.Domain.Users;
 using BetFriend.Domain.Users.Dto;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace BetFriend.MobileApp.UnitTests.Implems
@@ -10,7 +9,13 @@ namespace BetFriend.MobileApp.UnitTests.Implems
     {
         private readonly string _userId;
         private readonly string _username;
-        private ICollection<Guid> _subscription;
+        private readonly ICollection<Guid> _subscription;
+        private readonly UserOutput _currentUser;
+
+        public InMemoryAuthenticationService(UserOutput currentUser)
+        {
+            _currentUser = currentUser;
+        }
 
         public InMemoryAuthenticationService(string userId, string username)
         {
@@ -24,7 +29,7 @@ namespace BetFriend.MobileApp.UnitTests.Implems
 
         public string Token => throw new System.NotImplementedException();
 
-        public UserOutput User => throw new NotImplementedException();
+        public UserOutput User => _currentUser;
 
         public void SetToken(string token)
         {

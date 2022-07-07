@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              xmlns:controls="clr-namespace:BetFriend.MobileApp.Views.InProgressBet"
+             xmlns:home="clr-namespace:BetFriend.MobileApp.Views.Home"
              xmlns:converter="clr-namespace:BetFriend.MobileApp.Converters"
              xmlns:cards="clr-namespace:Syncfusion.XForms.Cards;assembly=Syncfusion.Cards.XForms"
              xmlns:local="clr-namespace:BetFriend.MobileApp.Behaviors"
@@ -47,10 +48,11 @@
                                         HorizontalOptions="Start" 
                                         LineHeight="{OnPlatform Android=1.25,
                                                        Default=1}" />
-                                            <buttons:SfButton
+                                            <buttons:SfButton HorizontalOptions="EndAndExpand"
                                                 HorizontalTextAlignment="Center"
-                                                Margin="0,16"
-                                                Command="{Binding SubscribeCommand}"
+                                                Margin="5,3"
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type home:HomeViewModel}}, Path=SubscribeCommand}"
+                                                CommandParameter="{Binding}"
                                                 Style="{DynamicResource SfButtonStyle}"
                                                 Text="{Binding BtnSubscribeText}" />
                                         </StackLayout>
