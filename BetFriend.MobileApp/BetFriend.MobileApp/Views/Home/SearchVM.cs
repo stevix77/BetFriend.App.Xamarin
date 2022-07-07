@@ -1,26 +1,23 @@
-﻿using BetFriend.Domain.Users;
-using BetFriend.Domain.Users.Usecases.Subscribe;
-using GalaSoft.MvvmLight;
+﻿using GalaSoft.MvvmLight;
 using System;
-using Xamarin.Forms;
 
 namespace BetFriend.MobileApp.Views.Home
 {
     public class SearchVM : ViewModelBase
     {
-        public SearchVM(Guid id, string username, bool hasSubscribed)
+        public SearchVM(Guid userId, string username, bool hasSubscribed)
         {
-            UserId = id;
+            UserId = userId;
             Username = username;
             HasSubscribed = hasSubscribed;
         }
-        public Guid UserId { get; set; }
-        public string Username { get; set; }
+        public Guid UserId { get; }
+        public string Username { get; }
 
         private bool _hasSubscribed;
         public bool HasSubscribed
         {
-            get => _hasSubscribed; 
+            get => _hasSubscribed;
             set
             {
                 if (Set(() => HasSubscribed, ref _hasSubscribed, value))
@@ -30,17 +27,12 @@ namespace BetFriend.MobileApp.Views.Home
                 }
             }
         }
-        public string BtnSubscribeText { get => HasSubscribed ? Resources.Resource.UnSubscribe : Resources.Resource.Subscribe; }
-
-        private Command _subscribeCommand;
-        public Command SubscribeCommand
+        public string BtnSubscribeText
         {
-            get => _subscribeCommand ??= new Command(async () =>
-            {
-                var currentUser = ViewModelLocator.Resolve<IAuthenticationService>().User;
-                await ViewModelLocator.Resolve<ISubscribeMemberCommandHandler>().Handle(new SubscribeMemberCommand(currentUser, UserId));
-                HasSubscribed = currentUser.Subscriptions.Contains(UserId);
-            });
+            get => HasSubscribed ?
+                Resources.Resource.UnSubscribe :
+                Resources.Resource.Subscribe;
         }
+
     }
 }

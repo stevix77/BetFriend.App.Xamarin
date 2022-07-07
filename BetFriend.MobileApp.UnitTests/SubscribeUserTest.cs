@@ -19,8 +19,8 @@ namespace BetFriend.MobileApp.UnitTests
             var userToSubscribe = new UserOutput { Id = Guid.NewGuid(), Username = "username" };
             var currentUser = new UserOutput { Id = Guid.NewGuid(), Username = "stevix" };
             var repository = new InMemoryUserRepository(new List<UserOutput> { userToSubscribe });
-            var handler = new SubscribeMemberCommandHandler(repository);
-            var command = new SubscribeMemberCommand(currentUser, userToSubscribe.Id);
+            var handler = new SubscribeMemberCommandHandler(repository, new InMemoryAuthenticationService(currentUser));
+            var command = new SubscribeMemberCommand(userToSubscribe.Id);
             await handler.Handle(command);
             Assert.Contains(currentUser.Subscriptions, x => x == userToSubscribe.Id);
         }
@@ -32,8 +32,8 @@ namespace BetFriend.MobileApp.UnitTests
             var currentUser = new UserOutput { Id = Guid.NewGuid(), Username = "stevix" };
             currentUser.Subscriptions.Add(userToSubscribe.Id);
             var repository = new InMemoryUserRepository(new List<UserOutput> { userToSubscribe });
-            var handler = new SubscribeMemberCommandHandler(repository);
-            var command = new SubscribeMemberCommand(currentUser, userToSubscribe.Id);
+            var handler = new SubscribeMemberCommandHandler(repository, new InMemoryAuthenticationService(currentUser));
+            var command = new SubscribeMemberCommand(userToSubscribe.Id);
             await handler.Handle(command);
             Assert.Empty(currentUser.Subscriptions);
         }

@@ -10,8 +10,6 @@
     public class InMemoryUserRepository : IUserRepository
     {
         private readonly string _token;
-
-        public User CurrentUser { get; private set; }
         private readonly ICollection<User> _users;
         private readonly List<UserOutput> _userOutputs;
 
@@ -19,6 +17,8 @@
         {
             _users = users ?? new List<User>();
             _token = token;
+            _userOutputs = new List<UserOutput>();
+            _userOutputs.AddRange(users.Select(x => new UserOutput { Id = Guid.NewGuid(), Username = x.Username }));
         }
 
         public InMemoryUserRepository(List<UserOutput> userOutputs)
@@ -32,7 +32,6 @@
                              || x.Email == user.Email))
                 return Task.FromResult(string.Empty);
             _users.Add(user);
-            CurrentUser = user;
             return Task.FromResult(_token);
         }
 

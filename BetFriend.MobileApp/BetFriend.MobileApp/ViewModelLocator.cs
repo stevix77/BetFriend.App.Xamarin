@@ -98,7 +98,18 @@ namespace BetFriend.MobileApp
                     }
                 }
             }, x.GetRequiredService<IAuthenticationService>()));
-            serviceCollection.AddScoped<IUserRepository>(x => new InMemoryUserRepository("token"));
+            serviceCollection.AddScoped<IUserRepository>(x => new InMemoryUserRepository("token", new List<User>
+            {
+                new User("toto", "toto@test.fr", ""),
+                new User("toto1", "toto4@test.fr", ""),
+                new User("toto2", "toto1@test.fr", ""),
+                new User("toto3", "toto2@test.fr", ""),
+                new User("toto4", "toto3@test.fr", ""),
+                new User("toto5", "toto34@test.fr", ""),
+                new User("toto6", "toto5@test.fr", ""),
+                new User("toto7", "toto7@test.fr", ""),
+                new User("toto9", "toto9@test.fr", ""),
+            }));
             serviceCollection.AddScoped<IMessenger, Messenger>();
             serviceCollection.AddScoped<INavigationService, ShellNavigationService>();
             serviceCollection.AddScoped<IRetrieveBetQueryHandler, RetrieveBetQueryHandler>();
