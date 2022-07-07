@@ -1,6 +1,9 @@
 ﻿using BetFriend.Domain.Bets.Usecases.SearchUsers;
 using BetFriend.Domain.Users;
 using BetFriend.Domain.Users.Usecases.Subscribe;
+using BetFriend.MobileApp.Events;
+using BetFriend.MobileApp.Navigation;
+using BetFriend.MobileApp.Views.DetailUser;
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
@@ -16,14 +19,25 @@ namespace BetFriend.MobileApp.Views.Home
         private readonly ISearchUsersQueryHandler _searchUsersQueryHandler;
         private readonly IAuthenticationService _authenticationService;
         private readonly ISubscribeMemberCommandHandler _subscribeMemberCommandHandler;
+        private readonly INavigationService _navigationService;
 
         public HomeViewModel(ISearchUsersQueryHandler searchUsersQueryHandler,
                             IAuthenticationService authenticationService,
-                            ISubscribeMemberCommandHandler subscribeMemberCommandHandler)
+                            ISubscribeMemberCommandHandler subscribeMemberCommandHandler,
+                            INavigationService navigationService)
         {
             _searchUsersQueryHandler = searchUsersQueryHandler;
             _authenticationService = authenticationService;
             _subscribeMemberCommandHandler = subscribeMemberCommandHandler;
+            _navigationService = navigationService;
+            MessengerInstance.Register<UserSubscribed>(this, (userSubscribed) => UpdateSearch(userSubscribed));
+        }
+
+        private void UpdateSearch(UserSubscribed userSubscribed)
+        {
+            var search = Members.FirstOrDefault(x => x.UserId == userSubscribed.UserId);
+            if (search != null)
+                search.HasSubscribed = userSubscribed.HasSubscribed;
         }
 
         private bool _isSearchMode = false;
@@ -84,9 +98,26 @@ namespace BetFriend.MobileApp.Views.Home
 
         public Command SearchItemCommand
         {
-            get => _searchItemCommand ??= new Command(async () =>
+            get => _searchItemCommand ??= new Command(async (obj) =>
             {
-
+                if (obj.GetType() == typeof(SelectedItemChangedEventArgs))
+                {
+                    await _navigationService.NavigateToAsync(nameof(DetailUserView),
+                                                            new Dictionary<string, object>()
+                                                            {
+                                                                { "userid", (((SelectedItemChangedEventArgs)obj).SelectedItem as SearchVM).UserId },
+                                                                { "hassubscribed", (((SelectedItemChangedEventArgs)obj).SelectedItem as SearchVM).HasSubscribed }
+                                                            });
+                }
+                else if (obj.GetType() == typeof(ItemTappedEventArgs))
+                {
+                    await _navigationService.NavigateToAsync(nameof(DetailUserView),
+                                                            new Dictionary<string, object>()
+                                                            {
+                                                                { "userid", (((ItemTappedEventArgs)obj).Item as SearchVM).UserId },
+                                                                { "hassubscribed", (((ItemTappedEventArgs)obj).Item as SearchVM).HasSubscribed }
+                                                            });
+                }
             });
         }
 
@@ -114,7 +145,7 @@ namespace BetFriend.MobileApp.Views.Home
             return _authenticationService.User.Subscriptions.Contains(id);
         }
 
-        private ObservableCollection<SearchVM> _members = new ObservableCollection<SearchVM>();
+        private readonly ObservableCollection<SearchVM> _members = new ObservableCollection<SearchVM>();
         public ObservableCollection<SearchVM> Members
         {
             get => _members;
