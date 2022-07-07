@@ -18,7 +18,7 @@
             _users = users ?? new List<User>();
             _token = token;
             _userOutputs = new List<UserOutput>();
-            _userOutputs.AddRange(users.Select(x => new UserOutput { Id = Guid.NewGuid(), Username = x.Username }));
+            _userOutputs.AddRange(_users.Select(x => new UserOutput { Id = Guid.NewGuid(), Username = x.Username }));
         }
 
         public InMemoryUserRepository(List<UserOutput> userOutputs)
