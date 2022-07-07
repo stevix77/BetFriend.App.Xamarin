@@ -1,18 +1,21 @@
-﻿using BetFriend.MobileApp.Models;
+﻿using BetFriend.Domain.Bets.Usecases.SearchUsers;
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace BetFriend.MobileApp.Views.Home
 {
     public class HomeViewModel : ViewModelBase
     {
-        public HomeViewModel()
-        {
+        private readonly ISearchUsersQueryHandler _searchUsersQueryHandler;
 
+        public HomeViewModel(ISearchUsersQueryHandler searchUsersQueryHandler)
+        {
+            _searchUsersQueryHandler = searchUsersQueryHandler;
         }
 
         private bool _isSearchMode = false;
@@ -21,7 +24,7 @@ namespace BetFriend.MobileApp.Views.Home
             get => _isSearchMode;
             set
             {
-                if(Set(() => IsSearchMode, ref _isSearchMode, value))
+                if (Set(() => IsSearchMode, ref _isSearchMode, value))
                 {
                     RaisePropertyChanged(nameof(IsSearchMode));
                     if (!value)
@@ -36,7 +39,7 @@ namespace BetFriend.MobileApp.Views.Home
             get => _searchText;
             set
             {
-                if(Set(() => SearchText, ref _searchText, value))
+                if (Set(() => SearchText, ref _searchText, value))
                 {
                     RaisePropertyChanged(nameof(SearchText));
                     IsSearchMode = !string.IsNullOrEmpty(value);
@@ -75,12 +78,21 @@ namespace BetFriend.MobileApp.Views.Home
             get => _searchCommand ??= new Command<string>(async (text) =>
             {
                 if (CanSearch(text))
-                    Members = new ObservableCollection<SearchVM>(_fakemembers);
+                    await SearchUsers(text);
             });
         }
-        public ObservableCollection<SearchVM> Members 
+
+        private async Task SearchUsers(string text)
         {
-            get => _members; 
+            var users = await _searchUsersQueryHandler.Handle(new SearchUsersQuery(text));
+            Members = new ObservableCollection<SearchVM>(users.Select(x => new SearchVM(x.Id,
+                                                                                        x.Username,
+                                                                                        false)));
+        }
+
+        public ObservableCollection<SearchVM> Members
+        {
+            get => _members;
             set
             {
                 if (Set(() => Members, ref _members, value))

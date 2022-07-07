@@ -26,7 +26,7 @@ namespace BetFriend.MobileApp.UnitTests
         }
 
         [Fact]
-        public async Task ShouldNotSubscribeWhenAlreadySubscribed()
+        public async Task ShouldUnSubscribeWhenAlreadySubscribed()
         {
             var userToSubscribe = new UserOutput { Id = Guid.NewGuid(), Username = "username" };
             var currentUser = new UserOutput { Id = Guid.NewGuid(), Username = "stevix" };
@@ -35,7 +35,7 @@ namespace BetFriend.MobileApp.UnitTests
             var handler = new SubscribeMemberCommandHandler(repository);
             var command = new SubscribeMemberCommand(currentUser, userToSubscribe.Id);
             await handler.Handle(command);
-            Assert.Single(currentUser.Subscriptions);
+            Assert.Empty(currentUser.Subscriptions);
         }
     }
 }
