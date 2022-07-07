@@ -42,7 +42,7 @@
         private Command _itemSelected;
         public Command ItemSelected
         {
-            get => _itemSelected ?? (_itemSelected = new Command(async (obj) =>
+            get => _itemSelected ??= new Command(async (obj) =>
             {
                 if (obj.GetType() == typeof(SelectedItemChangedEventArgs))
                 {
@@ -60,7 +60,7 @@
                                                                 { "betid", (((ItemTappedEventArgs)obj).Item as BetVM).Id }
                                                             });
                 }
-            }));
+            });
         }
 
         public async Task LoadBets()

@@ -3,6 +3,7 @@
     using BetFriend.Domain.Abstractions;
     using BetFriend.Domain.Users;
     using BetFriend.MobileApp.Views.DetailBet;
+    using BetFriend.MobileApp.Views.DetailUser;
     using BetFriend.MobileApp.Views.EditBet;
     using BetFriend.MobileApp.Views.Home;
     using BetFriend.MobileApp.Views.LaunchBet;
@@ -19,6 +20,7 @@
             Routing.RegisterRoute(nameof(HomeView), typeof(HomeView));
             Routing.RegisterRoute(nameof(DetailBetView), typeof(DetailBetView));
             Routing.RegisterRoute(nameof(EditBetView), typeof(EditBetView));
+            Routing.RegisterRoute(nameof(DetailUserView), typeof(DetailUserView));
             Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
         }
 
