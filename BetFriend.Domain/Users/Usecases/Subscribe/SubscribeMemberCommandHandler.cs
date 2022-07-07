@@ -17,7 +17,11 @@ namespace BetFriend.Domain.Users.Usecases.Subscribe
             {
                 await _userRepository.SubscribeAsync(command.SubscriptionId);
                 command.CurrentUser.Subscriptions.Add(command.SubscriptionId);
+                return;
             }
+
+            await _userRepository.UnsubscribeAsync(command.SubscriptionId);
+            command.CurrentUser.Subscriptions.Remove(command.SubscriptionId);
         }
     }
 }

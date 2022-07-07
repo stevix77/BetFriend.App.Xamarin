@@ -1,11 +1,13 @@
 ﻿namespace BetFriend.Infrastructure.Repositories.Http
 {
     using BetFriend.Domain.Users;
+    using BetFriend.Domain.Users.Dto;
     using BetFriend.Infrastructure.Abstractions;
     using Microsoft.Extensions.Configuration;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public class UserRepository : IUserRepository
@@ -31,6 +33,16 @@
         }
 
         public Task SubscribeAsync(Guid subscriptionId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UnsubscribeAsync(Guid subscriptionId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<UserOutput>> SearchAsync(string query)
         {
             throw new NotImplementedException();
         }

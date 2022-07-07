@@ -40,5 +40,15 @@
         {
             return Task.CompletedTask;
         }
+
+        public Task UnsubscribeAsync(Guid subscriptionId)
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task<IEnumerable<UserOutput>> SearchAsync(string query)
+        {
+            return Task.FromResult<IEnumerable<UserOutput>>(_userOutputs);
+        }
     }
 }

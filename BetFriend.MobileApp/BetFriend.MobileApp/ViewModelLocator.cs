@@ -5,6 +5,7 @@ using BetFriend.Domain.Bets.GetBetsInProgress;
 using BetFriend.Domain.Bets.LaunchBet;
 using BetFriend.Domain.Bets.RetrieveBet;
 using BetFriend.Domain.Bets.Usecases.AnswerBet;
+using BetFriend.Domain.Bets.Usecases.SearchUsers;
 using BetFriend.Domain.Bets.Usecases.UpdateBet;
 using BetFriend.Domain.Users;
 using BetFriend.Domain.Users.Usecases;
@@ -108,6 +109,7 @@ namespace BetFriend.MobileApp
             serviceCollection.AddScoped<IRegisterCommandHandler, RegisterCommandHandler>();
             serviceCollection.AddScoped<ISignInCommandHandler, SignInCommandHandler>();
             serviceCollection.AddScoped<ISubscribeMemberCommandHandler, SubscribeMemberCommandHandler>();
+            serviceCollection.AddScoped<ISearchUsersQueryHandler, SearchUsersQueryHandler>();
             serviceCollection.AddScoped<RegisterPresenter>();
             serviceCollection.AddScoped<SignInPresenter>();
             serviceCollection.AddScoped<IRegisterPresenter>(x => x.GetRequiredService<RegisterPresenter>());
@@ -148,6 +150,7 @@ namespace BetFriend.MobileApp
             serviceCollection.AddScoped<IRegisterCommandHandler, RegisterCommandHandler>();
             serviceCollection.AddScoped<ISignInCommandHandler, SignInCommandHandler>();
             serviceCollection.AddScoped<ISubscribeMemberCommandHandler, SubscribeMemberCommandHandler>();
+            serviceCollection.AddScoped<ISearchUsersQueryHandler, SearchUsersQueryHandler>();
             serviceCollection.AddScoped<RegisterPresenter>();
             serviceCollection.AddScoped<SignInPresenter>();
             serviceCollection.AddScoped<IRegisterPresenter>(x => x.GetRequiredService<RegisterPresenter>());
