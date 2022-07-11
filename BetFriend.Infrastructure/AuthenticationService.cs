@@ -15,6 +15,13 @@
         public string UserId { get; private set; }
         public string Username { get; private set; }
         private List<Guid> _subscriptions;
+        private decimal _coins;
+
+        public AuthenticationService()
+        {
+            _subscriptions = new List<Guid>();
+            _coins = new Random().Next(100, 3600);
+        }
 
         public void AddSubscription(Guid subscriptionId)
         {
@@ -51,5 +58,13 @@
             Username = null;
             _subscriptions = null;
         }
+
+        public void SetInfo(decimal coins, IEnumerable<Guid> subscriptions)
+        {
+            _coins = coins;
+            _subscriptions.AddRange(subscriptions);
+        }
+
+        public decimal GetCoins() => _coins;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using BetFriend.Domain.Abstractions;
 using BetFriend.Domain.Bets.Usecases.UpdateBet;
+using BetFriend.Domain.Users;
 using BetFriend.MobileApp.Models;
 using BetFriend.MobileApp.Navigation;
 using BetFriend.MobileApp.Views.DetailBet;
@@ -15,14 +16,17 @@ namespace BetFriend.MobileApp.Views.EditBet
         private readonly IDateTimeProvider _dateTimeProvider;
         private readonly IUpdateBetCommandHandler _updateBetCommandHandler;
         private readonly INavigationService _navigationService;
+        private readonly IAuthenticationService _authenticationService;
 
         public EditBetViewModel(IDateTimeProvider dateTimeProvider,
                                 IUpdateBetCommandHandler updateBetCommandHandler, 
-                                INavigationService navigationService)
+                                INavigationService navigationService,
+                                IAuthenticationService authenticationService)
         {
             _dateTimeProvider = dateTimeProvider;
             _updateBetCommandHandler = updateBetCommandHandler;
             _navigationService = navigationService;
+            _authenticationService = authenticationService;
         }
 
         private string _description;

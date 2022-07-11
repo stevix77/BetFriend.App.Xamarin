@@ -12,6 +12,9 @@ namespace BetFriend.Domain.Users.Dto
 
         public UserOutput(User user)
         {
+            if (user == null)
+                return;
+
             Id = user.Id;
             Username = user.Username;
             Subscriptions = user.Subscriptions;

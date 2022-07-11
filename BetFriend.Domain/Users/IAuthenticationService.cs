@@ -13,5 +13,7 @@ namespace BetFriend.Domain.Users
         void AddSubscription(Guid subscriptionId);
         void RemoveSubscription(Guid subscriptionId);
         void SetToken(string token);
+        void SetInfo(decimal coins, IEnumerable<Guid> subscriptions);
+        decimal GetCoins();
     }
 }
