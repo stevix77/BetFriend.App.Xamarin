@@ -28,5 +28,16 @@ namespace BetFriend.MobileApp.UnitTests
             Assert.Equal(user.Coins, infos.Coins);
             Assert.Equal(user.Subscriptions, infos.Subscriptions);
         }
+
+        [Fact]
+        public async Task ShouldReturnInfoEmptyWhenUserIsNotExists()
+        {
+            var repository = new InMemoryUserRepository("token");
+            var handler = new GetInfoQueryHandler(repository);
+            var query = new GetInfoQuery();
+            var infos = await handler.Handle(query);
+            Assert.Equal(InfoOutput.Empty.Coins, infos.Coins);
+            Assert.Equal(InfoOutput.Empty.Subscriptions, infos.Subscriptions);
+        }
     }
 }

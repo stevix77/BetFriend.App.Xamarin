@@ -25,7 +25,7 @@ namespace BetFriend.Domain.Users
         public string Username { get => _username; }
         public string Email { get => _email; }
         public string Password { get => _password; }
-        public decimal Coins { get; set; }
+        public decimal Coins { get => _coins; set => _coins = value; }
         public IReadOnlyCollection<Guid> Subscriptions { get => _subscriptions; }
 
         public void AddSubscription(Guid subscriptionId)

@@ -2,6 +2,7 @@
 {
     using BetFriend.Domain.Abstractions;
     using BetFriend.Domain.Bets.LaunchBet;
+    using BetFriend.Domain.Users;
     using BetFriend.MobileApp.Navigation;
     using BetFriend.MobileApp.Views.Home;
     using GalaSoft.MvvmLight;
@@ -17,15 +18,18 @@
         private readonly ILaunchBetCommandHandler _launchBetCommandHandler;
         private readonly INavigationService _navigationService;
         private readonly IDateTimeProvider _dateTimeProvider;
+        private readonly IAuthenticationService _authenticationService;
 
         public LaunchBetViewModel(IMessenger messenger,
                                   ILaunchBetCommandHandler launchBetCommandHandler,
                                   INavigationService navigationService,
-                                  IDateTimeProvider dateTimeProvider) : base(messenger)
+                                  IDateTimeProvider dateTimeProvider,
+                                  IAuthenticationService authenticationService) : base(messenger)
         {
             _launchBetCommandHandler = launchBetCommandHandler;
             _navigationService = navigationService;
             _dateTimeProvider = dateTimeProvider;
+            _authenticationService = authenticationService;
         }
 
         private string _description;
@@ -52,6 +56,8 @@
                     RaisePropertyChanged(nameof(Coins));
             }
         }
+
+        public decimal MaxCoins { get => _authenticationService.GetCoins(); }
 
         public DateTime MinimumDate { get; } = DateTime.Now;
 

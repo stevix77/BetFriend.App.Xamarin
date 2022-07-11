@@ -2,11 +2,13 @@
 {
     using BetFriend.Domain.Abstractions;
     using BetFriend.Domain.Users;
+    using BetFriend.Domain.Users.Usecases.GetInfo;
     using BetFriend.MobileApp.Views.Home;
     using BetFriend.MobileApp.Views.SignIn;
     using Microsoft.AppCenter;
     using Microsoft.AppCenter.Analytics;
     using Microsoft.AppCenter.Crashes;
+    using System.Threading.Tasks;
     using Xamarin.Forms;
 
     public partial class App : Application
@@ -45,9 +47,21 @@
             if (string.IsNullOrEmpty(token))
                 return new SignInPage();
             SetToken(token);
+            Task.Run(async() =>
+            {
+                var info = await ViewModelLocator.Resolve<IGetInfoQueryHandler>().Handle(new());
+                if (info != InfoOutput.Empty)
+                    SetInfo(info);
+            });
             var appShell = new AppShell();
             appShell.GoToAsync($"//{nameof(HomeView)}").Wait();
             return appShell;
+        }
+
+        private void SetInfo(InfoOutput info)
+        {
+            var authenticationService = ViewModelLocator.Resolve<IAuthenticationService>();
+            authenticationService.SetInfo(info.Coins, info.Subscriptions);
         }
 
         private void SetToken(string token)

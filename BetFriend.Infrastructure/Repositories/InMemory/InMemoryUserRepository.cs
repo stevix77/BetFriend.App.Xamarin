@@ -47,6 +47,9 @@
 
         public Task<UserOutput> GetUserAsync()
         {
+            if(_currentUser is null)
+                return Task.FromResult<UserOutput>(null);
+
             return Task.FromResult(new UserOutput(_currentUser));
         }
     }

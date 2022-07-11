@@ -1,5 +1,4 @@
 ﻿using BetFriend.Domain.Users;
-using BetFriend.Domain.Users.Dto;
 using System;
 using System.Collections.Generic;
 
@@ -10,6 +9,7 @@ namespace BetFriend.MobileApp.UnitTests.Implems
         private readonly string _userId;
         private readonly string _username;
         private readonly ICollection<Guid> _subscription;
+        private decimal _coins;
 
         public InMemoryAuthenticationService(User currentUser)
         {
@@ -28,13 +28,15 @@ namespace BetFriend.MobileApp.UnitTests.Implems
         public string UserId { get => _userId; }
         public string Username { get => _username; }
 
-        public string Token => throw new System.NotImplementedException();
+        public string Token => throw new NotImplementedException();
 
 
         public void AddSubscription(Guid subscriptionId)
         {
             _subscription.Add(subscriptionId);
         }
+
+        public decimal GetCoins() => _coins;
 
         public IReadOnlyCollection<Guid> GetSubscriptions()
         {
@@ -44,6 +46,13 @@ namespace BetFriend.MobileApp.UnitTests.Implems
         public void RemoveSubscription(Guid subscriptionId)
         {
             _subscription.Remove(subscriptionId);
+        }
+
+        public void SetInfo(decimal coins, IEnumerable<Guid> subscriptions)
+        {
+            foreach (var subscription in subscriptions)
+                _subscription.Add(subscription);
+            _coins = coins;
         }
 
         public void SetToken(string token)

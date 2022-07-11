@@ -55,7 +55,7 @@
                 </StackLayout>
 
                 <StackLayout>
-                    <Slider Maximum="360" Value="{Binding Coins}" />
+                    <Slider Maximum="{Binding MaxCoins}" Value="{Binding Coins}" />
                     <Label TextColor="{DynamicResource Gray-700}" >
                         <Label.FormattedText>
                             <FormattedString>
