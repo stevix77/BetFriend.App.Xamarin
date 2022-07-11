@@ -19,23 +19,24 @@ namespace BetFriend.MobileApp.UnitTests
             var userToSubscribe = new UserOutput { Id = Guid.NewGuid(), Username = "username" };
             var currentUser = new UserOutput { Id = Guid.NewGuid(), Username = "stevix" };
             var repository = new InMemoryUserRepository(new List<UserOutput> { userToSubscribe });
-            var handler = new SubscribeMemberCommandHandler(repository, new InMemoryAuthenticationService(currentUser));
+            var authenticationService = new InMemoryAuthenticationService(currentUser);
+            var handler = new SubscribeMemberCommandHandler(repository, authenticationService);
             var command = new SubscribeMemberCommand(userToSubscribe.Id);
             await handler.Handle(command);
-            Assert.Contains(currentUser.Subscriptions, x => x == userToSubscribe.Id);
+            Assert.Contains(authenticationService.GetSubscriptions(), x => x == userToSubscribe.Id);
         }
 
         [Fact]
         public async Task ShouldUnSubscribeWhenAlreadySubscribed()
         {
             var userToSubscribe = new UserOutput { Id = Guid.NewGuid(), Username = "username" };
-            var currentUser = new UserOutput { Id = Guid.NewGuid(), Username = "stevix" };
-            currentUser.Subscriptions.Add(userToSubscribe.Id);
+            var currentUser = new UserOutput { Id = Guid.NewGuid(), Username = "stevix", Subscriptions = new List<Guid> { userToSubscribe.Id } };
+            var authenticationService = new InMemoryAuthenticationService(currentUser);
             var repository = new InMemoryUserRepository(new List<UserOutput> { userToSubscribe });
-            var handler = new SubscribeMemberCommandHandler(repository, new InMemoryAuthenticationService(currentUser));
+            var handler = new SubscribeMemberCommandHandler(repository, authenticationService);
             var command = new SubscribeMemberCommand(userToSubscribe.Id);
             await handler.Handle(command);
-            Assert.Empty(currentUser.Subscriptions);
+            Assert.Empty(authenticationService.GetSubscriptions());
         }
     }
 }

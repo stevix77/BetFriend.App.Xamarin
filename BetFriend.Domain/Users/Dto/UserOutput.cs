@@ -7,6 +7,7 @@ namespace BetFriend.Domain.Users.Dto
     {
         public Guid Id { get; set; }
         public string Username { get; set; }
-        public ICollection<Guid> Subscriptions { get; } = new List<Guid>();
+        public IEnumerable<Guid> Subscriptions { get; set; } = new List<Guid>();
+        public int Coins { get; set; }
     }
 }

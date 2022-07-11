@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 
 namespace BetFriend.Domain.Users.Usecases.Subscribe
 {
@@ -15,15 +16,15 @@ namespace BetFriend.Domain.Users.Usecases.Subscribe
 
         public async Task Handle(SubscribeMemberCommand command)
         {
-            if (!_authenticationService.User.Subscriptions.Contains(command.SubscriptionId))
+            if (!_authenticationService.GetSubscriptions().Any(x => x == command.SubscriptionId))
             {
                 await _userRepository.SubscribeAsync(command.SubscriptionId);
-                _authenticationService.User.Subscriptions.Add(command.SubscriptionId);
+                _authenticationService.AddSubscription(command.SubscriptionId);
                 return;
             }
 
             await _userRepository.UnsubscribeAsync(command.SubscriptionId);
-            _authenticationService.User.Subscriptions.Remove(command.SubscriptionId);
+            _authenticationService.RemoveSubscription(command.SubscriptionId);
         }
     }
 }

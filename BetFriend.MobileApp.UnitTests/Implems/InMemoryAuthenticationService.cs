@@ -10,11 +10,12 @@ namespace BetFriend.MobileApp.UnitTests.Implems
         private readonly string _userId;
         private readonly string _username;
         private readonly ICollection<Guid> _subscription;
-        private readonly UserOutput _currentUser;
 
         public InMemoryAuthenticationService(UserOutput currentUser)
         {
-            _currentUser = currentUser;
+            _userId = currentUser.Id.ToString();
+            _username = currentUser.Username;
+            _subscription = new List<Guid>(currentUser.Subscriptions);
         }
 
         public InMemoryAuthenticationService(string userId, string username)
@@ -29,7 +30,21 @@ namespace BetFriend.MobileApp.UnitTests.Implems
 
         public string Token => throw new System.NotImplementedException();
 
-        public UserOutput User => _currentUser;
+
+        public void AddSubscription(Guid subscriptionId)
+        {
+            _subscription.Add(subscriptionId);
+        }
+
+        public IReadOnlyCollection<Guid> GetSubscriptions()
+        {
+            return new List<Guid>(_subscription);
+        }
+
+        public void RemoveSubscription(Guid subscriptionId)
+        {
+            _subscription.Remove(subscriptionId);
+        }
 
         public void SetToken(string token)
         {

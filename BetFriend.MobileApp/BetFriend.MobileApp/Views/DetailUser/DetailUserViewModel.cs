@@ -4,6 +4,7 @@ using BetFriend.MobileApp.Events;
 using GalaSoft.MvvmLight;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Xamarin.Forms;
 
@@ -58,7 +59,7 @@ namespace BetFriend.MobileApp.Views.DetailUser
             get => new Command(async () =>
             {
                 await _subscribeMemberCommandHandler.Handle(new SubscribeMemberCommand(UserId));
-                HasSubscribed = _authenticationService.User.Subscriptions.Contains(UserId);
+                HasSubscribed = _authenticationService.GetSubscriptions().Any(x => x == UserId);
                 MessengerInstance.Send(new UserSubscribed(UserId, HasSubscribed));
             });
         }
