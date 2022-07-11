@@ -90,7 +90,7 @@ namespace BetFriend.MobileApp.Views.Home
             get => _subscribeCommand ??= new Command<SearchVM>(async (search) =>
             {
                 await _subscribeMemberCommandHandler.Handle(new SubscribeMemberCommand(search.UserId));
-                search.HasSubscribed = _authenticationService.User.Subscriptions.Contains(search.UserId);
+                search.HasSubscribed = _authenticationService.GetSubscriptions().Contains(search.UserId);
             });
         }
 
@@ -142,7 +142,7 @@ namespace BetFriend.MobileApp.Views.Home
 
         private bool HasSubscribed(Guid id)
         {
-            return _authenticationService.User.Subscriptions.Contains(id);
+            return _authenticationService.GetSubscriptions().Contains(id);
         }
 
         private readonly ObservableCollection<SearchVM> _members = new ObservableCollection<SearchVM>();

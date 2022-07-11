@@ -1,5 +1,6 @@
 ﻿using BetFriend.Domain.Users.Dto;
 using System;
+using System.Collections.Generic;
 
 namespace BetFriend.Domain.Users
 {
@@ -8,7 +9,9 @@ namespace BetFriend.Domain.Users
         string Token { get; }
         string UserId { get; }
         string Username { get; }
-        UserOutput User { get; }
+        IReadOnlyCollection<Guid> GetSubscriptions();
+        void AddSubscription(Guid subscriptionId);
+        void RemoveSubscription(Guid subscriptionId);
         void SetToken(string token);
     }
 }
