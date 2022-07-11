@@ -11,7 +11,7 @@ namespace BetFriend.MobileApp.UnitTests.Implems
         private readonly string _username;
         private readonly ICollection<Guid> _subscription;
 
-        public InMemoryAuthenticationService(UserOutput currentUser)
+        public InMemoryAuthenticationService(User currentUser)
         {
             _userId = currentUser.Id.ToString();
             _username = currentUser.Username;

@@ -42,7 +42,7 @@
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<UserOutput>> SearchAsync(string query)
+        public Task<UserOutput> GetUserAsync()
         {
             throw new NotImplementedException();
         }

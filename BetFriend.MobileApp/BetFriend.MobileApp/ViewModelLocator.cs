@@ -5,7 +5,7 @@ using BetFriend.Domain.Bets.GetBetsInProgress;
 using BetFriend.Domain.Bets.LaunchBet;
 using BetFriend.Domain.Bets.RetrieveBet;
 using BetFriend.Domain.Bets.Usecases.AnswerBet;
-using BetFriend.Domain.Bets.Usecases.SearchUsers;
+using BetFriend.Domain.Bets.Usecases.SearchMembers;
 using BetFriend.Domain.Bets.Usecases.UpdateBet;
 using BetFriend.Domain.Users;
 using BetFriend.Domain.Users.Usecases;
@@ -30,12 +30,10 @@ using BetFriend.MobileApp.Views.LaunchBet;
 using BetFriend.MobileApp.Views.Register;
 using BetFriend.MobileApp.Views.SignIn;
 using GalaSoft.MvvmLight.Messaging;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RestSharp;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace BetFriend.MobileApp
 {
@@ -48,7 +46,7 @@ namespace BetFriend.MobileApp
             return _serviceProvider.GetService<T>();
         }
 
-        public static void RegisterInMemoryDependencies()
+        private static void RegisterInMemoryDependencies()
         {
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddScoped<IBetRepository>(x => new InMemoryBetRepository(new List<BetOutput>()
@@ -121,7 +119,7 @@ namespace BetFriend.MobileApp
             serviceCollection.AddScoped<IRegisterCommandHandler, RegisterCommandHandler>();
             serviceCollection.AddScoped<ISignInCommandHandler, SignInCommandHandler>();
             serviceCollection.AddScoped<ISubscribeMemberCommandHandler, SubscribeMemberCommandHandler>();
-            serviceCollection.AddScoped<ISearchUsersQueryHandler, SearchUsersQueryHandler>();
+            serviceCollection.AddScoped<ISearchMembersQueryHandler, SearchMembersQueryHandler>();
             serviceCollection.AddScoped<RegisterPresenter>();
             serviceCollection.AddScoped<SignInPresenter>();
             serviceCollection.AddScoped<IRegisterPresenter>(x => x.GetRequiredService<RegisterPresenter>());
@@ -142,16 +140,18 @@ namespace BetFriend.MobileApp
             _serviceProvider = serviceCollection.BuildServiceProvider();
         }
 
-        public static void RegisterDependencies()
+        private static void RegisterDependencies()
         {
             var serviceCollection = new ServiceCollection();
-            var configuration = new ConfigurationBuilder()
-#if RELEASE
-                .AddJsonStream(Assembly.GetAssembly(typeof(App)).GetManifestResourceStream("BetFriend.MobileApp.appsettings.release.json"))
-#endif
-                .Build();
 
-            serviceCollection.AddSingleton<IConfiguration>(configuration);
+#if RELEASE
+                var configuration = new ConfigurationBuilder();
+                configuration.AddJsonStream(Assembly.GetAssembly(typeof(App))
+                             .GetManifestResourceStream("BetFriend.MobileApp.appsettings.release.json"))
+                             .Build();
+                serviceCollection.AddSingleton<IConfiguration>(configuration);
+#endif
+
             serviceCollection.AddScoped<IBetRepository, BetRepository>();
             serviceCollection.AddScoped<IUserRepository, UserRepository>();
             serviceCollection.AddScoped<IMessenger, Messenger>();
@@ -163,7 +163,7 @@ namespace BetFriend.MobileApp
             serviceCollection.AddScoped<IRegisterCommandHandler, RegisterCommandHandler>();
             serviceCollection.AddScoped<ISignInCommandHandler, SignInCommandHandler>();
             serviceCollection.AddScoped<ISubscribeMemberCommandHandler, SubscribeMemberCommandHandler>();
-            serviceCollection.AddScoped<ISearchUsersQueryHandler, SearchUsersQueryHandler>();
+            serviceCollection.AddScoped<ISearchMembersQueryHandler, SearchMembersQueryHandler>();
             serviceCollection.AddScoped<RegisterPresenter>();
             serviceCollection.AddScoped<SignInPresenter>();
             serviceCollection.AddScoped<IRegisterPresenter>(x => x.GetRequiredService<RegisterPresenter>());
@@ -184,6 +184,15 @@ namespace BetFriend.MobileApp
             serviceCollection.AddSingleton<IDataStorage, EssentialsSecureStorage>();
             serviceCollection.AddScoped<IDateTimeProvider, DateTimeProvider>();
             _serviceProvider = serviceCollection.BuildServiceProvider();
+        }
+
+        internal static void Register()
+        {
+#if DEBUG
+            RegisterInMemoryDependencies();
+#else
+            RegisterDependencies();
+#endif
         }
     }
 }
