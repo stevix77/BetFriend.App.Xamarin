@@ -17,11 +17,7 @@
         {
             InitializeComponent();
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NDU3NTY2QDMxMzkyZTMxMmUzMFQ5a3FEem5ldkRvTzhVUndDS0ZhcXI3ZE9oaXVIRzF4UFVTeTdmcDFCV289");
-#if DEBUG
-            ViewModelLocator.RegisterInMemoryDependencies();
-#else
-            ViewModelLocator.RegisterDependencies();
-#endif
+            ViewModelLocator.Register();
             MainPage = InitMainPage();
         }
 

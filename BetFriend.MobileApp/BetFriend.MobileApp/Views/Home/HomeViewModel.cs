@@ -1,4 +1,4 @@
-﻿using BetFriend.Domain.Bets.Usecases.SearchUsers;
+﻿using BetFriend.Domain.Bets.Usecases.SearchMembers;
 using BetFriend.Domain.Users;
 using BetFriend.Domain.Users.Usecases.Subscribe;
 using BetFriend.MobileApp.Events;
@@ -16,12 +16,12 @@ namespace BetFriend.MobileApp.Views.Home
 {
     public class HomeViewModel : ViewModelBase
     {
-        private readonly ISearchUsersQueryHandler _searchUsersQueryHandler;
+        private readonly ISearchMembersQueryHandler _searchUsersQueryHandler;
         private readonly IAuthenticationService _authenticationService;
         private readonly ISubscribeMemberCommandHandler _subscribeMemberCommandHandler;
         private readonly INavigationService _navigationService;
 
-        public HomeViewModel(ISearchUsersQueryHandler searchUsersQueryHandler,
+        public HomeViewModel(ISearchMembersQueryHandler searchUsersQueryHandler,
                             IAuthenticationService authenticationService,
                             ISubscribeMemberCommandHandler subscribeMemberCommandHandler,
                             INavigationService navigationService)
@@ -133,7 +133,7 @@ namespace BetFriend.MobileApp.Views.Home
 
         private async Task SearchUsers(string text)
         {
-            var users = await _searchUsersQueryHandler.Handle(new SearchUsersQuery(text));
+            var users = await _searchUsersQueryHandler.Handle(new SearchMembersQuery(text));
             foreach (var user in users)
             {
                 Members.Add(new SearchVM(user.Id, user.Username, HasSubscribed(user.Id)));

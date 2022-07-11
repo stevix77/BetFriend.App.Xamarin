@@ -11,19 +11,17 @@
     {
         private readonly string _token;
         private readonly ICollection<User> _users;
-        private readonly List<UserOutput> _userOutputs;
+        private readonly User _currentUser;
 
         public InMemoryUserRepository(string token, List<User> users = null)
         {
             _users = users ?? new List<User>();
             _token = token;
-            _userOutputs = new List<UserOutput>();
-            _userOutputs.AddRange(_users.Select(x => new UserOutput { Id = Guid.NewGuid(), Username = x.Username }));
         }
 
-        public InMemoryUserRepository(List<UserOutput> userOutputs)
+        public InMemoryUserRepository(User userOutput)
         {
-            _userOutputs = userOutputs;
+            _currentUser = userOutput;
         }
 
         public Task<string> SaveAsync(User user)
@@ -37,17 +35,19 @@
 
         public Task SubscribeAsync(Guid subscriptionId)
         {
+            _currentUser.AddSubscription(subscriptionId);
             return Task.CompletedTask;
         }
 
         public Task UnsubscribeAsync(Guid subscriptionId)
         {
+            _currentUser.RemoveSubscription(subscriptionId);
             return Task.CompletedTask;
         }
 
-        public Task<IEnumerable<UserOutput>> SearchAsync(string query)
+        public Task<UserOutput> GetUserAsync()
         {
-            return Task.FromResult<IEnumerable<UserOutput>>(_userOutputs);
+            return Task.FromResult(new UserOutput(_currentUser));
         }
     }
 }
