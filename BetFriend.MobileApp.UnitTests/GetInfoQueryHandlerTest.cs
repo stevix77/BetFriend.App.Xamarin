@@ -19,9 +19,7 @@ namespace BetFriend.MobileApp.UnitTests
         {
             var id = Guid.NewGuid();
             var user = new User("stevix", "email", "pwd");
-            user.AddSubscription(Guid.Parse("4567d033-8dd4-4369-bc35-104b5bb17181"));
-            user.Coins = 400;
-            var repository = new InMemoryUserRepository(user);
+            var repository = new InMemoryUserRepository(user, 400, new List<Guid> { Guid.Parse("4567d033-8dd4-4369-bc35-104b5bb17181") });
             var handler = new GetInfoQueryHandler(repository);
             var query = new GetInfoQuery();
             var infos = await handler.Handle(query);

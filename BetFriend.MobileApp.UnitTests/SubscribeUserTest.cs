@@ -31,9 +31,8 @@ namespace BetFriend.MobileApp.UnitTests
         {
             var userToSubscribe = new UserOutput { Id = Guid.NewGuid(), Username = "username" };
             var currentUser = new User("stevix", "email", "pwd");
-            currentUser.AddSubscription(userToSubscribe.Id);
+            var repository = new InMemoryUserRepository(currentUser, subscriptions: new List<Guid> { userToSubscribe.Id });
             var authenticationService = new InMemoryAuthenticationService(currentUser);
-            var repository = new InMemoryUserRepository(currentUser);
             var handler = new SubscribeMemberCommandHandler(repository, authenticationService);
             var command = new SubscribeMemberCommand(userToSubscribe.Id);
             await handler.Handle(command);
