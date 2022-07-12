@@ -50,7 +50,7 @@
             Task.Run(async() =>
             {
                 var info = await ViewModelLocator.Resolve<IGetInfoQueryHandler>().Handle(new());
-                if (info != InfoOutput.Empty)
+                if (info != null)
                     SetInfo(info);
             });
             var appShell = new AppShell();

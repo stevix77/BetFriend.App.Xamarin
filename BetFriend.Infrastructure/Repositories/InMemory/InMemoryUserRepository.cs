@@ -19,9 +19,13 @@
             _token = token;
         }
 
-        public InMemoryUserRepository(User userOutput)
+        public InMemoryUserRepository(User user, decimal? coins = null, IEnumerable<Guid>? subscriptions = null)
         {
-            _currentUser = userOutput;
+            _currentUser = user;
+            _currentUser.Coins = coins.GetValueOrDefault();
+            if (subscriptions != null)
+                foreach (var item in subscriptions)
+                    _currentUser.AddSubscription(item);
         }
 
         public Task<string> SaveAsync(User user)

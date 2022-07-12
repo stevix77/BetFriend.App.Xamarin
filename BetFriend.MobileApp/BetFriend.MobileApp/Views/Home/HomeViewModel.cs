@@ -5,6 +5,7 @@ using BetFriend.MobileApp.Events;
 using BetFriend.MobileApp.Navigation;
 using BetFriend.MobileApp.Views.DetailUser;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

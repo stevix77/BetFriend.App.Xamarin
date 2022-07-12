@@ -49,6 +49,8 @@ namespace BetFriend.MobileApp
 
         private static void RegisterInMemoryDependencies()
         {
+            var id1 = Guid.NewGuid();
+            var id2 = Guid.NewGuid();
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddScoped<IBetRepository>(x => new InMemoryBetRepository(new List<BetOutput>()
             {
@@ -98,17 +100,21 @@ namespace BetFriend.MobileApp
                     }
                 }
             }, x.GetRequiredService<IAuthenticationService>()));
-            serviceCollection.AddScoped<IUserRepository>(x => new InMemoryUserRepository("token", new List<User>
+            serviceCollection.AddScoped<IUserRepository>(x => new InMemoryUserRepository(new User("stevix", "email", "pwd"), new Random().Next(1, 10000), new List<Guid>
             {
-                new User("toto", "toto@test.fr", ""),
-                new User("toto1", "toto4@test.fr", ""),
-                new User("toto2", "toto1@test.fr", ""),
-                new User("toto3", "toto2@test.fr", ""),
-                new User("toto4", "toto3@test.fr", ""),
-                new User("toto5", "toto34@test.fr", ""),
-                new User("toto6", "toto5@test.fr", ""),
-                new User("toto7", "toto7@test.fr", ""),
-                new User("toto9", "toto9@test.fr", ""),
+                id1,
+                id2
+            }));
+            serviceCollection.AddScoped<IMemberRepository>(x => new InMemoryMemberRepository(new() 
+            { 
+                new MemberOutput { Id = id1, Username = "toto1" },
+                new MemberOutput { Id = Guid.NewGuid(), Username = "toto4" },
+                new MemberOutput { Id = Guid.NewGuid(), Username = "toto6" },
+                new MemberOutput { Id = id2, Username = "toto3" },
+                new MemberOutput { Id = Guid.NewGuid(), Username = "toto5" },
+                new MemberOutput { Id = Guid.NewGuid(), Username = "toto7" },
+                new MemberOutput { Id = Guid.NewGuid(), Username = "toto9" },
+                new MemberOutput { Id = Guid.NewGuid(), Username = "toto10" },
             }));
             serviceCollection.AddScoped<IMessenger, Messenger>();
             serviceCollection.AddScoped<INavigationService, ShellNavigationService>();
