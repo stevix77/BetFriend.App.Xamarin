@@ -14,7 +14,7 @@ namespace BetFriend.Domain.Users.Usecases.GetInfo
         public async Task<InfoOutput> Handle(GetInfoQuery query)
         {
             var user = await _userRepository.GetUserAsync();
-            return user == null ? InfoOutput.Empty : new InfoOutput
+            return user == null ? null : new InfoOutput
             {
                 Coins = user.Coins,
                 Subscriptions = user.Subscriptions
