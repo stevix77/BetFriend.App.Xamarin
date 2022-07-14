@@ -4,6 +4,8 @@
              xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              xmlns:converters="clr-namespace:BetFriend.MobileApp.Converters"
              xmlns:icons="clr-namespace:BetFriend.MobileApp.Themes"
+             xmlns:local="clr-namespace:BetFriend.MobileApp.Views.DetailBet"
+             xmlns:sfPopup="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
              xmlns:resources="clr-namespace:BetFriend.MobileApp.Resources"
              xmlns:sfavatar="clr-namespace:Syncfusion.XForms.AvatarView;assembly=Syncfusion.Core.XForms"
              x:Class="BetFriend.MobileApp.Views.DetailBet.DetailBetView">
@@ -15,9 +17,33 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <ContentPage.Content>
+
+    <sfPopup:SfPopupLayout IsOpen="True" StaysOpen="True">
+        <sfPopup:SfPopupLayout.PopupView>
+            <sfPopup:PopupView ShowCloseButton="True">
+                <sfPopup:PopupView.HeaderTemplate>
+                    <DataTemplate x:Name="header">
+                        <StackLayout>
+                            <Label Text="Login failed" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </sfPopup:PopupView.HeaderTemplate>
+                <sfPopup:PopupView.ContentTemplate>
+                    <DataTemplate x:Name="content">
+                        <StackLayout>
+                            <Label Text="Incorrect credentials" VerticalOptions="Center"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </sfPopup:PopupView.ContentTemplate>
+            </sfPopup:PopupView>
+        </sfPopup:SfPopupLayout.PopupView>
+        
+    </sfPopup:SfPopupLayout>
+    
+    <!--<ContentPage.Content>
         <ScrollView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never">
             <StackLayout Spacing="5" Margin="8, 5">
+                
                 <StackLayout Orientation="Horizontal" Margin="1, 5">
                     <Label Style="{StaticResource LabelStyle}" TextColor="{StaticResource Gray-Black}" HorizontalOptions="CenterAndExpand" FontSize="Title">
                         <Label.FormattedText>
@@ -29,7 +55,7 @@
                     </Label>
                 </StackLayout>
 
-                <!-- dates -->
+                --><!-- dates --><!--
                 <StackLayout Spacing="5" >
                     <StackLayout Orientation="Horizontal" MinimumHeightRequest="35" >
                         <Image BackgroundColor="Transparent">
@@ -43,7 +69,7 @@
                     </StackLayout>
                 </StackLayout>
 
-                <!-- Réponses -->
+                --><!-- Réponses --><!--
                 <StackLayout>
                     <Label FontSize="Subtitle"  TextColor="{StaticResource Gray-Black}">
                         <Label.FormattedText>
@@ -99,8 +125,23 @@
                         </CollectionView>
                     </StackLayout>
                 </StackLayout>
+                
+                --><!-- Coins --><!--
+                <StackLayout>
+                    <Label Margin="5, 0"
+                           TextColor="{StaticResource Gray-Black}"
+                           FontSize="Subtitle">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Static resources:Resource.LblTokens}" />
+                                <Span Text=":" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label Text="{Binding Bet.Coins}" Margin="10, 0" TextColor="{StaticResource Gray-700}" />
+                </StackLayout>
 
-                <!-- Description -->
+                --><!-- Description --><!--
                 <StackLayout>
                     <Label Margin="5, 0"
                            TextColor="{StaticResource Gray-Black}"
@@ -114,7 +155,7 @@
                     </Label>
                     <Label Text="{Binding Bet.Description}" Margin="10, 0" TextColor="{StaticResource Gray-700}" />
                 </StackLayout>
-                <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand">
+                <StackLayout VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand" Orientation="Horizontal">
                     <buttons:SfButton
                             BackgroundColor="{DynamicResource Gray-200}"
                             CornerRadius="32"
@@ -127,8 +168,20 @@
                             VerticalOptions="StartAndExpand"
                             WidthRequest="50"
                             IsVisible="{Binding IsEditCommandVisible}"/>
+                    <buttons:SfButton
+                            BackgroundColor="{DynamicResource Gray-200}"
+                            CornerRadius="32"
+                            Command="{Binding CloseCommand}"
+                            FontSize="30"
+                            HeightRequest="50"
+                            FontFamily="{DynamicResource MaterialFontFamily}"
+                            Text="{Static icons:MaterialDesignIcons.CloseBoxOutline}"
+                            TextColor="{DynamicResource Orange}"
+                            VerticalOptions="StartAndExpand"
+                            WidthRequest="50"
+                            IsVisible="{Binding IsCloseCommandVisible}"/>
                 </StackLayout>
             </StackLayout>
         </ScrollView>
-    </ContentPage.Content>
+    </ContentPage.Content>-->
 </ContentPage>

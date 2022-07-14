@@ -47,6 +47,8 @@ namespace BetFriend.MobileApp.Views.DetailBet
 
         public bool IsEditCommandVisible => !IsNotBetCreator();
 
+        public bool IsCloseCommandVisible => !IsNotBetCreator();
+
         public string IconJoinCommand
         {
             get => MaterialDesignIcons.Plus;
@@ -98,6 +100,14 @@ namespace BetFriend.MobileApp.Views.DetailBet
             });
         }
 
+        public Command CloseCommand
+        {
+            get => new Command(async () =>
+            {
+                
+            });
+        }
+
         private async Task Leave()
         {
             var command = new AnswerBetCommand(_bet.ToBetOutput(), false);
@@ -121,6 +131,7 @@ namespace BetFriend.MobileApp.Views.DetailBet
             RaisePropertyChanged(nameof(IsJoinCommandVisible));
             RaisePropertyChanged(nameof(IconLeaveCommand));
             RaisePropertyChanged(nameof(IsLeaveCommandVisible));
+            RaisePropertyChanged(nameof(IsCloseCommandVisible));
             JoinBetCommand.ChangeCanExecute();
             LeaveBetCommand.ChangeCanExecute();
         }

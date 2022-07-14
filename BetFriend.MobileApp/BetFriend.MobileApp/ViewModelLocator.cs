@@ -152,16 +152,11 @@ namespace BetFriend.MobileApp
         private static void RegisterDependencies()
         {
             var serviceCollection = new ServiceCollection();
-
-
-#if RELEASE
-                var configuration = new Microsoft.Extensions.Configuration.ConfigurationBuilder()
+            var configuration = new Microsoft.Extensions.Configuration.ConfigurationBuilder()
                                      .AddJsonStream(System.Reflection.Assembly.GetAssembly(typeof(App))
                                      .GetManifestResourceStream("BetFriend.MobileApp.appsettings.release.json"))
                                      .Build();
             serviceCollection.AddSingleton<Microsoft.Extensions.Configuration.IConfiguration>(configuration);
-#endif
-
             serviceCollection.AddScoped<IBetRepository, BetRepository>();
             serviceCollection.AddScoped<IUserRepository, UserRepository>();
             serviceCollection.AddScoped<IMessenger, Messenger>();
