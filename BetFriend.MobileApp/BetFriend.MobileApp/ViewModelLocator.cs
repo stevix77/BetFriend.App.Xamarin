@@ -22,6 +22,7 @@ using BetFriend.Infrastructure.Repositories.Http;
 using BetFriend.Infrastructure.Repositories.InMemory;
 using BetFriend.Infrastructure.Storage;
 using BetFriend.MobileApp.Navigation;
+using BetFriend.MobileApp.Views.CloseBet;
 using BetFriend.MobileApp.Views.DetailBet;
 using BetFriend.MobileApp.Views.DetailUser;
 using BetFriend.MobileApp.Views.EditBet;
@@ -144,6 +145,7 @@ namespace BetFriend.MobileApp
             serviceCollection.AddSingleton<EditBetViewModel>();
             serviceCollection.AddSingleton<HomeViewModel>();
             serviceCollection.AddSingleton<DetailUserViewModel>();
+            serviceCollection.AddSingleton<CloseBetViewModel>();
             serviceCollection.AddSingleton<IDataStorage, EssentialsSecureStorage>();
             serviceCollection.AddSingleton<IDateTimeProvider, DateTimeProvider>();
             _serviceProvider = serviceCollection.BuildServiceProvider();

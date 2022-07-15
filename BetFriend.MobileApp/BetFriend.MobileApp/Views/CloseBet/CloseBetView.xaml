@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:converters="clr-namespace:BetFriend.MobileApp.Converters"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms" 
+             xmlns:control="clr-namespace:BetFriend.MobileApp.Controls" 
+             xmlns:icons="clr-namespace:BetFriend.MobileApp.Themes"
+             xmlns:converter="clr-namespace:BetFriend.MobileApp.Converters"
+             xmlns:resources="clr-namespace:BetFriend.MobileApp.Resources"
+             x:Class="BetFriend.MobileApp.Views.CloseBet.CloseBetView">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="ColorConverter" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Style="{StaticResource LabelStyle}" TextColor="{StaticResource Gray-Black}" HorizontalOptions="CenterAndExpand" FontSize="Title">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Static resources:Resource.Success}" />
+                                <Span Text=" ?" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Switch IsToggled="{Binding IsSuccess}" />
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="Send a proof"/>
+                    <buttons:SfButton
+                            BackgroundColor="{DynamicResource Gray-200}"
+                            CornerRadius="32"
+                            Command="{Binding PickImageCommand}"
+                            FontSize="30"
+                            HeightRequest="50"
+                            FontFamily="{DynamicResource MaterialFontFamily}"
+                            Text="{Static icons:MaterialDesignIcons.FileImage}"
+                            TextColor="{DynamicResource Orange}"
+                            VerticalOptions="StartAndExpand"
+                            WidthRequest="50"/>
+                    <Image Source="{Binding ImgSource}" />
+                </StackLayout>
+
+                <StackLayout>
+                    <Label Text="Commentaire (facultatif)"/>
+                    <border:SfBorder
+                        BackgroundColor="{DynamicResource Gray-White}"
+                        BorderColor="{Binding Source={x:Reference DescriptionEntry}, Path=IsFocused, Converter={StaticResource ColorConverter}, ConverterParameter=3}"
+                        >
+                        <control:BorderlessEntry
+                            x:Name="DescriptionEntry"
+                            PlaceholderColor="{DynamicResource Gray-700}"
+                            Style="{DynamicResource EditorStyle}"
+                            Text="{Binding Description}"
+                            TextColor="Black" Keyboard="Default" />
+                    </border:SfBorder>
+                </StackLayout>
+                
+                <StackLayout>
+                    <buttons:SfButton
+                        HorizontalTextAlignment="Center"
+                        Margin="0,16"
+                        Command="{Binding ValidateCommand}"
+                        Style="{DynamicResource SfButtonStyle}"
+                        Text="{Static resources:Resource.Validate}" />
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

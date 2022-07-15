@@ -1,10 +1,10 @@
 ﻿using BetFriend.Domain.Bets.RetrieveBet;
 using BetFriend.Domain.Bets.Usecases.AnswerBet;
 using BetFriend.Domain.Users;
-using BetFriend.MobileApp.Dialog;
 using BetFriend.MobileApp.Models;
 using BetFriend.MobileApp.Navigation;
 using BetFriend.MobileApp.Themes;
+using BetFriend.MobileApp.Views.CloseBet;
 using BetFriend.MobileApp.Views.EditBet;
 using GalaSoft.MvvmLight;
 using System;
@@ -105,7 +105,11 @@ namespace BetFriend.MobileApp.Views.DetailBet
         {
             get => new Command(async () =>
             {
-
+                await _navigationService.NavigateToAsync(nameof(CloseBetView),
+                                                            new Dictionary<string, object>()
+                                                            {
+                                                                { "betid", _bet.Id }
+                                                            });
             });
         }
 

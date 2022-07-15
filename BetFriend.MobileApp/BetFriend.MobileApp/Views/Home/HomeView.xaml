@@ -6,20 +6,19 @@
              xmlns:home="clr-namespace:BetFriend.MobileApp.Views.Home"
              xmlns:converter="clr-namespace:BetFriend.MobileApp.Converters"
              xmlns:cards="clr-namespace:Syncfusion.XForms.Cards;assembly=Syncfusion.Cards.XForms"
+             xmlns:resources="clr-namespace:BetFriend.MobileApp.Resources"
              xmlns:local="clr-namespace:BetFriend.MobileApp.Behaviors"
              x:Class="BetFriend.MobileApp.Views.Home.HomeView">
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-            </ResourceDictionary.MergedDictionaries>
             <converter:InverseBooleanConverter x:Key="InverseBooleanConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     
     <ContentPage.Content>
-        <StackLayout >
-            <SearchBar Text="{Binding SearchText}" 
+        <StackLayout>
+            <SearchBar Text="{Binding SearchText}" Keyboard="Text" Placeholder="{Static resources:Resource.Search}"
                        SearchCommand="{Binding SearchCommand}" 
                        SearchCommandParameter="{Binding Text, Source={x:Reference searchBar}}"
                        x:Name="searchBar"/>

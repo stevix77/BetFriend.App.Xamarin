@@ -12,7 +12,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles.xaml" />
+                <ResourceDictionary Source="../Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <converter:BooleanToColorConverter x:Key="ColorConverter" />
         </ResourceDictionary>

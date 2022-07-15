@@ -11,7 +11,7 @@
         <ResourceDictionary>
             <converters:DateToStringConverter x:Key="dateToString" />
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles.xaml" />
+                <ResourceDictionary Source="../Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
