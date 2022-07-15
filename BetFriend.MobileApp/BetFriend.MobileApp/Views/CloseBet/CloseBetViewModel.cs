@@ -1,4 +1,5 @@
-﻿using BetFriend.MobileApp.Navigation;
+﻿using BetFriend.MobileApp.Events;
+using BetFriend.MobileApp.Navigation;
 using GalaSoft.MvvmLight;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -44,6 +45,7 @@ namespace BetFriend.MobileApp.Views.CloseBet
             get => new Command(async () =>
             {
                 await _navigationService.GoBack();
+                MessengerInstance.Send(new BetOver(BetId, IsSuccess, Description));
             });
         }
 
@@ -51,7 +53,7 @@ namespace BetFriend.MobileApp.Views.CloseBet
         {
             get => new Command(async () =>
             {
-                var result = await MediaPicker.PickPhotoAsync();
+                var result = await MediaPicker.CapturePhotoAsync();
                 var stream = await result.OpenReadAsync();
                 ImgSource = ImageSource.FromStream(() => stream);
                 RaisePropertyChanged(nameof(ImgSource));
