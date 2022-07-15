@@ -1,6 +1,7 @@
 ﻿using BetFriend.Domain.Bets.RetrieveBet;
 using BetFriend.Domain.Bets.Usecases.AnswerBet;
 using BetFriend.Domain.Users;
+using BetFriend.MobileApp.Dialog;
 using BetFriend.MobileApp.Models;
 using BetFriend.MobileApp.Navigation;
 using BetFriend.MobileApp.Themes;
@@ -104,7 +105,7 @@ namespace BetFriend.MobileApp.Views.DetailBet
         {
             get => new Command(async () =>
             {
-                
+
             });
         }
 

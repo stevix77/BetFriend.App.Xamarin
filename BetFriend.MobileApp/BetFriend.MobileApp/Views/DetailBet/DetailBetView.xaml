@@ -4,8 +4,6 @@
              xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              xmlns:converters="clr-namespace:BetFriend.MobileApp.Converters"
              xmlns:icons="clr-namespace:BetFriend.MobileApp.Themes"
-             xmlns:local="clr-namespace:BetFriend.MobileApp.Views.DetailBet"
-             xmlns:sfPopup="clr-namespace:Syncfusion.XForms.PopupLayout;assembly=Syncfusion.SfPopupLayout.XForms"
              xmlns:resources="clr-namespace:BetFriend.MobileApp.Resources"
              xmlns:sfavatar="clr-namespace:Syncfusion.XForms.AvatarView;assembly=Syncfusion.Core.XForms"
              x:Class="BetFriend.MobileApp.Views.DetailBet.DetailBetView">
@@ -17,30 +15,8 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
-
-    <sfPopup:SfPopupLayout IsOpen="True" StaysOpen="True">
-        <sfPopup:SfPopupLayout.PopupView>
-            <sfPopup:PopupView ShowCloseButton="True">
-                <sfPopup:PopupView.HeaderTemplate>
-                    <DataTemplate x:Name="header">
-                        <StackLayout>
-                            <Label Text="Login failed" HorizontalTextAlignment="Center"/>
-                        </StackLayout>
-                    </DataTemplate>
-                </sfPopup:PopupView.HeaderTemplate>
-                <sfPopup:PopupView.ContentTemplate>
-                    <DataTemplate x:Name="content">
-                        <StackLayout>
-                            <Label Text="Incorrect credentials" VerticalOptions="Center"/>
-                        </StackLayout>
-                    </DataTemplate>
-                </sfPopup:PopupView.ContentTemplate>
-            </sfPopup:PopupView>
-        </sfPopup:SfPopupLayout.PopupView>
-        
-    </sfPopup:SfPopupLayout>
     
-    <!--<ContentPage.Content>
+    <ContentPage.Content>
         <ScrollView HorizontalScrollBarVisibility="Never" VerticalScrollBarVisibility="Never">
             <StackLayout Spacing="5" Margin="8, 5">
                 
@@ -55,7 +31,7 @@
                     </Label>
                 </StackLayout>
 
-                --><!-- dates --><!--
+               <!-- dates -->
                 <StackLayout Spacing="5" >
                     <StackLayout Orientation="Horizontal" MinimumHeightRequest="35" >
                         <Image BackgroundColor="Transparent">
@@ -69,7 +45,7 @@
                     </StackLayout>
                 </StackLayout>
 
-                --><!-- Réponses --><!--
+                <!--Réponses--> 
                 <StackLayout>
                     <Label FontSize="Subtitle"  TextColor="{StaticResource Gray-Black}">
                         <Label.FormattedText>
@@ -126,7 +102,7 @@
                     </StackLayout>
                 </StackLayout>
                 
-                --><!-- Coins --><!--
+                 <!--Coins--> 
                 <StackLayout>
                     <Label Margin="5, 0"
                            TextColor="{StaticResource Gray-Black}"
@@ -141,7 +117,7 @@
                     <Label Text="{Binding Bet.Coins}" Margin="10, 0" TextColor="{StaticResource Gray-700}" />
                 </StackLayout>
 
-                --><!-- Description --><!--
+                 <!--Description--> 
                 <StackLayout>
                     <Label Margin="5, 0"
                            TextColor="{StaticResource Gray-Black}"
@@ -183,5 +159,5 @@
                 </StackLayout>
             </StackLayout>
         </ScrollView>
-    </ContentPage.Content>-->
+    </ContentPage.Content>
 </ContentPage>
